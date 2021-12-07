@@ -84,7 +84,6 @@ class BondobostoAppController extends Controller
      */
     public function show(BondobostoApp $bondobostoApp, $id)
     {
-        $application = BondobostoApp::find($id);
         return view('admin.contents.acland.application', compact('application'));
     }
 

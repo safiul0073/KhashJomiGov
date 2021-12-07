@@ -20,11 +20,6 @@
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     @include('admin.static.css')
-    <style>
-        body {
-            font-family: 'SolaimanLipi', Arial, sans-serif !important;
-        }
-    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
