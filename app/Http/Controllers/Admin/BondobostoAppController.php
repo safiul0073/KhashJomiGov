@@ -44,36 +44,37 @@ class BondobostoAppController extends Controller
     public function store(BondobostoRequest $request, BondobostoDataService $service)
     {
 
-        $attributes = [
-            'app_class' => $service->dataExecute($request->app_class),
-            'avater' => $service->fileExequtes($request->file('avater')),
-            'main_name' => $request->main_name,
-            'main_age' => $request->main_age,
-            'main_fathers_name' => $request->main_fathers_name,
-            'main_fathers_mortal' => $request->main_fathers_mortal,
-            'main_village' => $request->main_village,
-            'main_union_id' => $request->main_union,
-            'main_upzila_id' => $request->main_upzila,
-            'main_zila' => $request->main_zila,
-            'main_f_or_m_name' => $request->main_f_or_m_name,
-            'main_f_or_m_age' => $request->main_f_or_m_age,
-            'shodosso_names' => $service->dataExecute($request->name),
-            'shodosso_ages' => $service->dataExecute($request->age),
-            'shodosso_relations' => $service->dataExecute($request->relation),
-            'shodosso_whatdos' => $service->dataExecute($request->whatdo),
-            'shodosso_comments' => $service->dataExecute($request->comment),
-            'dorkhastokarir_barir_biboron' => $request->dorkhastokarir_barir_biboron,
-            'dorkhastokarir_present_biboron' => $request->dorkhastokarir_present_biboron,
-            'dorkhastokarir_khas_jomir_biboron' => $request->dorkhastokarir_khas_jomir_biboron,
-            'dorkhastokarir_khas_dakhil_biboron' => $request->dorkhastokarir_khas_dakhil_biboron,
-            'dorkhastokarir_nodi_vangon_biborn' => $request->dorkhastokarir_nodi_vangon_biborn,
-            'dorkhastokarir_shohidorpongo_person_biboron' => $request->dorkhastokarir_shohidorpongo_person_biboron,
-            'vumihi_muktijudda_sonod' => $service->fileExequtes($request->file('vumihi_muktijudda_sonod')),
-            'vumihi_commission_sonod' => $service->fileExequtes($request->file('vumihi_commission_sonod')),
-            'vumihin_others_sonod' => $service->fileExequtes($request->file('vumihin_others_sonod')),
-        ];
-        BondobostoApp::create($attributes);
-        return back()->withSuccess('Successfully Application created!');
+            $attributes = [
+                'app_class' => $service->dataExecute($request->app_class),
+                'avater' => $service->fileExequtes($request->file('avater')),
+                'main_name' => $request->main_name,
+                'main_age' => $request->main_age,
+                'main_fathers_name' => $request->main_fathers_name,
+                'main_fathers_mortal' => $request->main_fathers_mortal,
+                'main_village' => $request->main_village,
+                'main_union_id' => $request->main_union,
+                'main_upzila_id' => $request->main_upzila,
+                'main_zila' => $request->main_zila,
+                'main_f_or_m_name' => $request->main_f_or_m_name,
+                'main_f_or_m_age' => $request->main_f_or_m_age,
+                'shodosso_names' => $service->dataExecute($request->name),
+                'shodosso_ages' => $service->dataExecute($request->age),
+                'shodosso_relations' => $service->dataExecute($request->relation),
+                'shodosso_whatdos' => $service->dataExecute($request->whatdo),
+                'shodosso_comments' => $service->dataExecute($request->comment),
+                'dorkhastokarir_barir_biboron' => $request->dorkhastokarir_barir_biboron,
+                'dorkhastokarir_present_biboron' => $request->dorkhastokarir_present_biboron,
+                'dorkhastokarir_khas_jomir_biboron' => $request->dorkhastokarir_khas_jomir_biboron,
+                'dorkhastokarir_khas_dakhil_biboron' => $request->dorkhastokarir_khas_dakhil_biboron,
+                'dorkhastokarir_nodi_vangon_biborn' => $request->dorkhastokarir_nodi_vangon_biborn,
+                'dorkhastokarir_shohidorpongo_person_biboron' => $request->dorkhastokarir_shohidorpongo_person_biboron,
+                'vumihi_muktijudda_sonod' => $request->hasFile('vumihi_muktijudda_sonod')? $service->fileExequtes($request->file('vumihi_muktijudda_sonod')): null,
+                'vumihi_commission_sonod' => $request->hasFile('vumihi_commission_sonod')?$service->fileExequtes($request->file('vumihi_commission_sonod')) : null,
+                'vumihin_others_sonod' => $request->hasFile('vumihin_others_sonod')? $service->fileExequtes($request->file('vumihin_others_sonod')): null,
+            ];
+            $b = BondobostoApp::create($attributes);
+            if (!$b) return redirect()->back()->with('error','Unable to create!');
+        return redirect()->back()->with('success','Successfully Application created!');
     }
 
     /**
@@ -116,9 +117,9 @@ class BondobostoAppController extends Controller
      * @param  \App\Models\BondobostoApp  $bondobostoApp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BondobostoApp $bondobostoApp)
+    public function destroy($id)
     {
-        //
+        dd($id);
     }
 
     public function docShow (Request $request) {

@@ -26,7 +26,7 @@ class BondobostoRequest extends FormRequest
             'main_f_or_m_name.required' => 'The Name field is required.',
             'main_f_or_m_age.required' => 'The Age field is required.',
             'dorkhastokarir_barir_biboron.required' => ' দরখাস্ত কারীর নিজের বসত বাড়ির বিবরণ field is required.',
-            'vumihi_muktijudda_sonod.required' => 'যথাযথ কর্তৃপক্ষ কর্তৃক প্রদত্ত মুক্তিযুদ্দা সনদ field is required.',
+            'main_fathers_mortal.required' => ' দরখাস্তকারীর পিতা/স্বামীর জীবিত/মৃত field is required.',
             'vumihi_commission_sonod.required' => 'ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ field is required.',
 
         ];
@@ -57,10 +57,10 @@ class BondobostoRequest extends FormRequest
             'dorkhastokarir_khas_jomir_biboron' => 'nullable | string',
             'dorkhastokarir_khas_dakhil_biboron' => 'nullable | string',
             'dorkhastokarir_nodi_vangon_biborn' => 'nullable| string',
-            'dorkhastokarir_shohidorpongo_person_biboron' => 'required| string',
-            'vumihi_muktijudda_sonod' => 'required|max:10000|mimes:doc,docx,pdf,jpeg,jpg,png',
+            'dorkhastokarir_shohidorpongo_person_biboron' => 'nullable| string',
+            'vumihi_muktijudda_sonod' => 'nullable|max:10000|mimes:doc,docx,pdf,jpeg,jpg,png',
             'vumihi_commission_sonod' => 'required|max:10000|mimes:doc,docx,pdf,jpeg,jpg,png',
-            'vumihin_others_sonod.*' => 'required|max:10000|mimes:doc,docx,pdf,jpeg,jpg,png',
+            'vumihin_others_sonod.*' => 'nullable|max:10000|mimes:doc,docx,pdf,jpeg,jpg,png',
         ];
     }
 }

@@ -16,21 +16,22 @@
                  <td>{{$key+1}}</td>
                  <td>{{$application->main_name}}</td>
                  <td>{{$application->main_fathers_name}}</td>
-                 <td>{{$application->main_village}}, {{$application->union->name}}, {{$application->upa_zila}}</td>
+                 <td>{{$application->main_village}}, {{$application->union->name}}, {{$application->upa_zila->name}}</td>
                  <td><img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                  <td>
                      @if ($application->accept_id)
                         @if ($application->accept_id == 2 && $application->return_id == auth()->user()->role_id)
-                            <a href="{{route('application.show', $application->id)}}" class="btn btn-sm btn-primary">Show</a>
+                            <a href="{{route('show.app', $application->id)}}" class="btn btn-sm btn-primary">Show</a>
                             <a href="{{route("ac-land.to.uno",$application->id)}}" class="btn btn-sm btn-info">সেন্ড UNO</a>
                         @else
                             <p>Uno কে সেন্ড করা হয়েছে</p>
                         @endif
-
                      @else
-                     <a href="{{route('application.show', $application->id)}}" class="btn btn-sm btn-primary">Show</a>
-                     <a href="{{route('application.edit', $application->id)}}" class="btn btn-sm btn-primary">Edit</a>i class="far fa-edit"></i></a>
-                     <a href="{{route('application.delete', $application->id)}}" class="btn btn-sm btn-primary">Delete</a>i class="far fa-edit"></i></a>
+                     <div class="d-flex flex-column">
+                        <a href="{{route('show.app', $application->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
+                        <a href="{{route('application.edit', $application->id)}}" class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
+                        <a href="{{route('application.destroy', $application->id)}}" class="btn btn-sm btn-outline-danger"><i class="fas fa-ban"></i></a>
+                     </div>
                      @endif
 
                  </td>

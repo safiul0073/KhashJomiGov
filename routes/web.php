@@ -6,6 +6,7 @@ use App\Http\Controllers\AdcRevinewController;
 use App\Http\Controllers\Admin\BondobostoAppController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DcController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TowshilderController;
 use App\Http\Controllers\UnoController;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,8 @@ Route::get('/', [DashboardController::class, 'index']);
 
 Auth::routes();
 Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/dhorkhasto/{id}', [HomeController::class, 'showApplication'])->name('show.app');
     // Ac Land Section Here..
     Route::get('/ac-land', [AcLandController::class, 'index'])->name('ac-land');
     Route::get('ac-land-to/{id}', [AcLandController::class, 'sendToTowShil'])->name('ac-land.to.towshilder');
@@ -58,7 +60,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 
 // application frontend Secton here
-Route::resource('/application', BondobostoAppController::class);
+Route::resource('application', BondobostoAppController::class);
 
 // geting unions using ajax request for application form..
 Route::get('get-unions/{id}', [BondobostoAppController::class, 'getUnion'])->name('get.union');

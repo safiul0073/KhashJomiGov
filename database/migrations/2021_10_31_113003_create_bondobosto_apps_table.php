@@ -18,9 +18,9 @@ class CreateBondobostoAppsTable extends Migration
             $table->unsignedBigInteger('accept_id')->nullable();
             $table->unsignedBigInteger('return_id')->nullable();
             $table->string('app_class');
-            $table->string('avater');
-            $table->string('vumihi_muktijudda_sonod');
-            $table->string('vumihi_commission_sonod');
+            $table->string('avater')->nullable();
+            $table->string('vumihi_muktijudda_sonod')->nullable();
+            $table->string('vumihi_commission_sonod')->nullable();
             $table->string('vumihin_others_sonod')->nullable();
             $table->string('main_name')->nullable();
             $table->string('main_age')->nullable();

@@ -1,22 +1,23 @@
 @extends('layouts.app')
 @section('title', 'Applications')
 @section('contents')
-<section class="container">
+
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xl-8 col-lg-9 col-md-10 col-12 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <h1>Applications</h1>
-                    @if(isset($form) && $errors->any())
-                        @foreach($errors->all() as $error)
-                            <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                                {{ $error }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endforeach
+                    @include('layouts.partial.flash-alert')
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
+
                 </div>
                 <div class="card-body">
                     <form method="post" class=" action="{{route('application.store')}}" enctype="multipart/form-data">
@@ -96,7 +97,7 @@
                                 </div>
                                 <div class="form-check row">
                                     <div class="col-md-5">
-                                        <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ:</p>
+                                        <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ*:</p>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="file" name="vumihi_commission_sonod" value="{{old('vumihi_commission_sonod')}}"
@@ -167,9 +168,9 @@
                                 <label  for="">৩।  দরখাস্তকারীর পিতা/স্বামীর নাম: </label>
                             </div>
                             <div class="col-md-7">
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
                                     <input type="text" class="form-control @error('main_fathers_name') is-invalid @enderror"
-                                            name="main_fathers_name" value="{{old('main_fathers_name')}}"
+                                            name="main_fathers_name" value="{{ old('main_fathers_name') }}"
                                             placeholder="মোঃ কামাল">
                                     @error('main_fathers_name')
                                             <div class="invalid-feedback">
@@ -188,25 +189,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-4"for="">৪।  দরখাস্তকারীর জন্মস্থান/ঠিকানা*: </label>
+                        <div class="form-group ">
+                            <label for="" >৪।  দরখাস্তকারীর জন্মস্থান/ঠিকানা*: </label>
 
-                            <div class="col--md-9">
-                                <div class="from-group row mt-1">
+                                <div class="from-group row">
                                     <div class="col-md-5">
-                                        <label class="" for="">জেলাঃ</label>
+                                        <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">জেলাঃ</label>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-3 col-lg-3 col-xl-3">
                                         <select name="main_zila" class="form-control ml-2" placeholder=""id="">
                                             <option value="লালমনিরহাট">লালমনিরহাট</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="from-group row mt-1">
+                                <div class="from-group row">
                                     <div class="col-md-5">
-                                        <label class="" for="">উপজেলাঃ</label>
+                                        <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">উপজেলাঃ</label>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-3 col-lg-3 col-xl-3">
                                         <select name="main_upzila" class="form-control ml-2" id="main_upzila">
                                             @foreach ($upa_zilas as $item)
                                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -216,25 +216,25 @@
                                     </div>
 
                                 </div>
-                                <div class="from-group row mt-1">
+                                <div class="from-group row">
                                     <div class="col-md-5">
-                                        <label class="" for="">ইউনিয়নঃ</label>
+                                        <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">ইউনিয়নঃ</label>
                                     </div>
-                                    <div class="col-md-7 setUnion">
+                                    <div class="col-md-3 col-lg-3 col-xl-3 setUnion">
 
                                     </div>
 
                                 </div>
-                                    <div class="from-group row mt-1">
+                                    <div class="from-group row">
                                         <div class="col-md-5">
-                                            <label  for="">গ্রামঃ</label>
+                                            <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">গ্রামঃ</label>
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
                                             <input  name="main_village" type="text" class="form-control ml-2" placeholder="">
                                         </div>
 
                                     </div>
-                            </div>
+
 
                         </div>
                         <div class="form-group row">
@@ -360,7 +360,6 @@
             </div>
         </div>
     </div>
-</section>
 
 @endsection
 
