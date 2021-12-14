@@ -40,6 +40,14 @@
                       </p>
                     </a>
                   </li>
+                  <li class="nav-item ">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user') ? 'active' : '' }}">
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                        ব্যবহারকারী
+                      </p>
+                    </a>
+                  </li>
                   @endcan
                   @can('isTowshildeer', auth()->user())
                   <li class="nav-item ">

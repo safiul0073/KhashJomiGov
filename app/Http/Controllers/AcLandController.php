@@ -13,21 +13,37 @@ class AcLandController extends Controller
             $tab = 'home';
 
         }
-
+        $applications_count = BondobostoApp::where('accept_id', null)->count();
+        $applications_grohon2 = BondobostoApp::where('return_id', 3)->count();
+        $applications_preron2 = BondobostoApp::where('accept_id', 3)->count();
+        $applications_preron1 = BondobostoApp::where('accept_id', 2)->count();
+        $applications_grohon1 = BondobostoApp::where('return_id', auth()->user()->role_id)->where('accept_id', 2)->count();
         if ($tab == 'home') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('accept_id', null)->latest()->get();
+
         }else if($tab == 'get1') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('return_id', auth()->user()->role_id)->where('accept_id', 2)->latest()->get();
+
         }else if ($tab == 'get2') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('return_id', 3)->latest()->get();
+
         }else if($tab == 'put1') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('accept_id', 2)->latest()->get();
+
         }else if($tab == 'put2') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('accept_id', 3)->latest()->get();
+
         }
 
 
-        return view('admin.contents.acland.index', compact('applications', 'tab'));
+        return view('admin.contents.acland.index', compact('applications',
+                                                           'tab',
+                                                           'applications_count',
+                                                           'applications_grohon1',
+                                                           'applications_grohon2',
+                                                           'applications_preron1',
+                                                           'applications_preron2',
+                                                        ));
     }
 
     public function sendToTowShil ($id) {

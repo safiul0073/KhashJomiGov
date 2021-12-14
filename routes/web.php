@@ -9,6 +9,7 @@ use App\Http\Controllers\DcController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TowshilderController;
 use App\Http\Controllers\UnoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,10 @@ Route::get('/', [DashboardController::class, 'index']);
 Auth::routes();
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    // user section here
+    Route::resource('user', UserController::class);
+
     Route::get('/dhorkhasto/{id}', [HomeController::class, 'showApplication'])->name('show.app');
     Route::get('/app-edit/{id}', [HomeController::class, 'editApplication'])->name('edit.app');
     // Ac Land Section Here..
