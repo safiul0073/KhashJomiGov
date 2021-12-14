@@ -30,38 +30,63 @@
 
                                         <div class="ml-5">
                                             <div class="form-check mt-2">
-                                                <input class="form-check-input" name="app_class[]" value="দুঃস্থ মুক্তিযুদ্দা পরিবার" type="checkbox">
+                                                @if(find_class_app($application->explodedData('app_class'),"দুঃস্থ মুক্তিযুদ্দা পরিবার") == 1)
+                                                       <input class="form-check-input" name="app_class[]"
+                                                        selected
+                                                       value="দুঃস্থ মুক্তিযুদ্দা পরিবার" type="checkbox">
+                                                 @else
+                                                 <input class="form-check-input" name="app_class[]"  value="দুঃস্থ মুক্তিযুদ্দা পরিবার" type="checkbox">
+                                                 @endif
                                                 <label class="form-check-label ml-4">দুঃস্থ মুক্তিযুদ্দা পরিবার।</label>
                                             </div>
                                             <div class="form-check mt-2">
-                                                <input class="form-check-input" name="app_class[]" value="নদী ভাঙা পরিবার" type="checkbox">
+                                                @if(find_class_app($application->explodedData('app_class'),"নদী ভাঙা পরিবার") == 1)
+                                                       <input class="form-check-input" name="app_class[]"
+                                                        selected
+                                                       value="নদী ভাঙা পরিবার" type="checkbox">
+                                                 @else
+                                                 <input class="form-check-input" name="app_class[]"  value="নদী ভাঙা পরিবার" type="checkbox">
+                                                 @endif
                                                 <label class="form-check-label ml-4">নদী ভাঙা পরিবার।</label>
                                             </div>
                                             <div class="form-check mt-2">
-                                                <input class="form-check-input" name="app_class[]" value="সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার" type="checkbox">
+                                                @if(find_class_app($application->explodedData('app_class'),"সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার") == 1)
+                                                       <input class="form-check-input" name="app_class[]"
+                                                        selected
+                                                       value="সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার" type="checkbox">
+                                                 @else
+                                                 <input class="form-check-input" name="app_class[]"  value="সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার" type="checkbox">
+                                                 @endif
                                                 <label class="form-check-label ml-4">সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার।</label>
                                             </div>
                                             <div class="form-check mt-2">
-                                                <input class="form-check-input" name="app_class[]" value="কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার" type="checkbox">
+                                                @if(find_class_app($application->explodedData('app_class'),"কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার") == 1)
+                                                       <input class="form-check-input" name="app_class[]"
+                                                        selected
+                                                       value="কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার" type="checkbox">
+                                                 @else
+                                                 <input class="form-check-input" name="app_class[]"  value="কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার" type="checkbox">
+                                                 @endif
                                                 <label class="form-check-label ml-4">কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার</label>
                                             </div>
                                             <div class="form-check mt-2">
-                                                <input class="form-check-input" name="app_class[]" value="অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার" type="checkbox">
+                                                @if(find_class_app($application->explodedData('app_class'),"অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার") == 1)
+                                                       <input class="form-check-input" name="app_class[]"
+                                                        selected
+                                                       value="অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার" type="checkbox">
+                                                 @else
+                                                 <input class="form-check-input" name="app_class[]"  value="অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার" type="checkbox">
+                                                 @endif
                                                 <label class="form-check-label ml-4">অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার</label>
                                             </div>
                                             <div class="form-check mt-2">
-                                                @forelse ($application->explodedData('app_class') as $item)
-                                                    @if($item == "অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার")
-                                                        <input class="form-check-input" name="app_class[]"  selected  value="অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার" type="checkbox">
-                                                    @else
-                                                      $temp = 1
-                                                    @endif
-                                                @empty
-
-                                                @endforelse ($application->explodedData('app_class') as $item)
-
-                                                @endforeach
-
+                                                @if(find_class_app($application->explodedData('app_class'),"অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার") == 1)
+                                                       <input class="form-check-input" name="app_class[]"
+                                                        selected
+                                                       value="অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার" type="checkbox">
+                                                 @else
+                                                 <input class="form-check-input" name="app_class[]"  value="অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার" type="checkbox">
+                                                 @endif
                                                 <label class="form-check-label ml-4">অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার।</label>
                                             </div>
                                             @error('app_class')
@@ -97,7 +122,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" value="{{$application->}}" name="vumihi_muktijudda_sonod" class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
+                                        <input type="file"  name="vumihi_muktijudda_sonod" class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
                                         @error('vumihi_muktijudda_sonod')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -111,7 +136,7 @@
                                         <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ*:</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="file" name="vumihi_commission_sonod" value="{{$application->}}"
+                                        <input type="file" name="vumihi_commission_sonod"
                                                 class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
                                         @error('vumihi_commission_sonod')
                                             <div class="invalid-feedback">
@@ -127,7 +152,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="vumihin_others_sonod[]" multiple="multiple" value="{{$application->}}"
+                                        <input type="file" name="vumihin_others_sonod[]" multiple="multiple"
                                                 class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
                                         @error('vumihin_others_sonod')
                                             <div class="invalid-feedback">
@@ -241,7 +266,7 @@
                                             <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">গ্রামঃ</label>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                            <input  name="main_village" value="{{$application->}}" type="text" class="form-control ml-2" placeholder="">
+                                            <input  name="main_village" value="{{$application->main_village}}" type="text" class="form-control ml-2" placeholder="">
                                         </div>
 
                                     </div>
@@ -255,7 +280,7 @@
                             <div class="col-md-7">
                                 <div class="col-md-6">
                                     <input type="text" class="form-control @error('main_f_or_m_name') is-invalid @enderror"
-                                            name="main_f_or_m_name" value="{{$application->}}"
+                                            name="main_f_or_m_name" value="{{$application->main_f_or_m_name}}"
                                             placeholder="মোঃ কামাল">
                                     @error('main_f_or_m_name')
                                             <div class="invalid-feedback">
@@ -269,7 +294,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <input type="number" class="form-control @error('main_f_or_m_age') is-invalid @enderror"
-                                                name="main_f_or_m_age" value="{{$application->}}">
+                                                name="main_f_or_m_age" value="{{$application->main_f_or_m_age}}">
                                         @error('main_f_or_m_age')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -298,29 +323,32 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
+
+                                    @foreach ($application->familyMembers() as $key => $item)
                                     <tr>
                                         <td class="text-center">
-                                            1
+                                            {{ $key+1 }}
                                         </td>
                                         <td>
-                                            <input name="name[][name]" class="form-control" type="text">
+                                            <input value="{{$item['name']}}" name="name[][name]" class="form-control" type="text">
                                         </td>
                                         <td>
-                                            <input style="width: 60px;" class="form-control" name="age[][age]" min=1 type="number">
+                                            <input value="{{$item['age']}}" style="width: 60px;" class="form-control" name="age[][age]" min=1 type="number">
                                         </td>
                                         <td>
-                                            <input style="width: 100px;" class="form-control" name="relation[][relation]" type="text">
+                                            <input value="{{$item['relation']}}" style="width: 100px;" class="form-control" name="relation[][relation]" type="text">
                                         </td>
                                         <td>
-                                            <input name="whatdo[][whatdo]" class="form-control" type="text">
+                                            <input value="{{$item['whatdos']}}" name="whatdo[][whatdo]" class="form-control" type="text">
                                         </td>
                                         <td>
-                                            <input name="comment[][comment]" class="form-control" type="text">
+                                            <input value="{{$item['comment']}}" name="comment[][comment]" class="form-control" type="text">
                                         </td>
                                         <td>
                                             <a id="delete" class="btn btn-sm btn-secondary rounded" >-</a>
                                         </td>
                                     </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -329,7 +357,7 @@
                         <div class="form-group">
                             <label for="">৭।  দরখাস্ত কারীর নিজের বসত বাড়ির বিবরণ*: </label>
                             <textarea name="dorkhastokarir_barir_biboron"
-                                        class="form-control @error('dorkhastokarir_barir_biboron') is-invalid @enderror">{{$application->}}</textarea>
+                                        class="form-control @error('dorkhastokarir_barir_biboron') is-invalid @enderror">{{$application->dorkhastokarir_barir_biboron}}</textarea>
                             @error('dorkhastokarir_barir_biboron')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -339,7 +367,7 @@
                         <div class="form-group">
                             <label for="">৮।  নিজের বসতবাটি না থাকিলে পরিবার যেখানে বাস করে উহার বিবরণ (বর্তমান ঠিকানা)*: </label>
                             <textarea name="dorkhastokarir_present_biboron"
-                            class="form-control @error('dorkhastokarir_present_biboron') is-invalid @enderror">{{$application->}}</textarea>
+                            class="form-control @error('dorkhastokarir_present_biboron') is-invalid @enderror">{{$application->dorkhastokarir_present_biboron}}</textarea>
                             @error('dorkhastokarir_present_biboron')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -348,23 +376,23 @@
                         </div>
                         <div class="form-group">
                             <label for="">৯।  দরখাস্তকারী অথবা তাহার পিতা/মাতা/পর্বে কোনো খাস কৃষি জমি পাইয়া থাকিলে উহার বিবরণ: </label>
-                            <textarea name="dorkhastokarir_khas_jomir_biboron" class="form-control">{{$application->}}</textarea>
+                            <textarea name="dorkhastokarir_khas_jomir_biboron" class="form-control">{{$application->dorkhastokarir_khas_jomir_biboron}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="">১০।  খাস জমির জন্য কোনো জায়গা দরখাস্ত দাখিল করিলে উহার বিবরণ: </label>
-                            <textarea name="dorkhastokarir_khas_dakhil_biboron" class="form-control">{{$application->}}</textarea>
+                            <textarea name="dorkhastokarir_khas_dakhil_biboron" class="form-control">{{$application->dorkhastokarir_khas_dakhil_biboron}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="">১১।  নদী ভাঙ্গা পরিবার হইলে কবে কোথায় নদী ভাঙিয়াছিল  এবং সেই জায়গার কোনো দলিল দস্তাবেজ থাকিলে উহার বিবরণ (প্রয়োজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
-                            <textarea name="dorkhastokarir_nodi_vangon_biborn" id="summernote" class="form-control">{{$application->}}</textarea>
+                            <textarea name="dorkhastokarir_nodi_vangon_biborn" id="summernote" class="form-control">{{$application->dorkhastokarir_nodi_vangon_biborn}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
-                            <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote" class="form-control">{{$application->}}</textarea>
+                            <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote" class="form-control">{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <button id="getValue" type="submit" class="btn btn-primary">Save</button>
+                            <button id="getValue" type="submit" class="btn btn-primary">Updated</button>
                         </div>
                     </form>
                 </div>

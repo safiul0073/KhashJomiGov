@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                       <a class="btn btn-info" href="{{url('doc-show?file='.$application->vumihi_muktijudda_sonod)}}">File Open</a>
+                                       <a class="btn btn-sm btn-info" href="{{url('doc-show?file='.$application->vumihi_muktijudda_sonod)}}">File Open</a>
                                     </div>
 
                                 </div>
@@ -72,7 +72,7 @@
                                         <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ:</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-info" href="{{url('doc-show?file='.$application->vumihi_commission_sonod)}}" >File Open</a>
+                                        <a class="btn btn-sm btn-info" href="{{url('doc-show?file='.$application->vumihi_commission_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -82,7 +82,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a class="btn btn-info" href="{{url('doc-show?file='.$application->vumihin_others_sonod)}}" >File Open</a>
+                                        <a class="btn btn-sm btn-info" href="{{url('doc-show?file='.$application->vumihin_others_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
