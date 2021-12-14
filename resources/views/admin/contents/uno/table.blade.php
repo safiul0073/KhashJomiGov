@@ -22,7 +22,11 @@
                      @if ($item->accept_id == 4 && $item->return_id == null)
                      <p>Sended to Dc Office</p>
                      @else
-                     <a href="{{route('application.show', $item->id)}}" class="btn btn-sm btn-primary">Show</a>
+                     <div class="d-flex flex-column">
+                        <a href="{{route('show.app', $item->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
+                        <a href="{{route('application.edit', $item->id)}}" class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
+                        <a href="{{route('application.destroy', $item->id)}}" class="btn btn-sm btn-outline-danger"><i class="fas fa-ban"></i></a>
+                    </div>
                      @endif
 
                  </td>

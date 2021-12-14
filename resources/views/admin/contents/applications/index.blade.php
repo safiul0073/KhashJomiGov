@@ -73,7 +73,6 @@
                                 </div>
                             </div>
                             </div>
-
                         </div>
 
                         <div class="form-group my-2">
@@ -232,10 +231,7 @@
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <input  name="main_village" type="text" class="form-control ml-2" placeholder="">
                                         </div>
-
                                     </div>
-
-
                         </div>
                         <div class="form-group row">
                             <div class="col-md-5">

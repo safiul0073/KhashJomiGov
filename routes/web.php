@@ -12,16 +12,6 @@ use App\Http\Controllers\UnoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', [DashboardController::class, 'index']);
 
@@ -29,6 +19,7 @@ Auth::routes();
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/dhorkhasto/{id}', [HomeController::class, 'showApplication'])->name('show.app');
+    Route::get('/app-edit/{id}', [HomeController::class, 'editApplication'])->name('edit.app');
     // Ac Land Section Here..
     Route::get('/ac-land', [AcLandController::class, 'index'])->name('ac-land');
     Route::get('ac-land-to/{id}', [AcLandController::class, 'sendToTowShil'])->name('ac-land.to.towshilder');

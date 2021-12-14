@@ -96,7 +96,7 @@ class BondobostoAppController extends Controller
      */
     public function edit(BondobostoApp $bondobostoApp)
     {
-        //
+        return view('')
     }
 
     /**

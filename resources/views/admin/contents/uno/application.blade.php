@@ -199,7 +199,7 @@
                         @if ($application->accept_id == 4 && $application->return_id == null)
                         <p>Sended to Dc Office</p>
                         @else
-                        <a href="{{route("uno.to.dc",$application->id)}}" class="btn btn-sm btn-info">সেন্ড Dc Office</a>
+                        <a href="" id="send" class="btn btn-sm btn-info">সেন্ড Dc Office</a>
                         @endif
                 </div>
             </div>
@@ -207,13 +207,48 @@
     </div>
     </div>
 </section>
+
+<div class="modal fade" id="delete-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@lang('Send This Application To Any')</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+            </div>
+            <form method="get" action="{{route("uno.to.dc",$application->id)}}">
+                @csrf
+                <div class="modal-body">
+                    <div class="row mx-3 my-3">
+                        @foreach ($users as $item)
+                        <div style="height:70px; margin-bottom:5px;" class="col-3 ">
+                            <div class="w-100 h-100 d-flex m-1 bg-success rounded-lg shadow-lg justify-content-center align-items-center">
+                                <p>{{ $item->name }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">@lang('Close')
+                    </button>
+                    <button type="submit" class="btn btn-success">@lang('Send')</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 @endsection
 
 @push('js')
   <script>
 
-
+      $(document).on('click', '#send', function (e) {
+                    e.preventDefault();
+                    $('#delete-modal').modal();
+            })
       $(document).ready(function () {
         var tableBody = $('#tableBody')
         var i = 1;
