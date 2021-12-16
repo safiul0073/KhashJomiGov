@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-class BondobostoDataService {
+class FileService {
 
     public function dataExecute($datas) {
         $values = [];

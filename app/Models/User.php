@@ -20,6 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'avatar',
+        'phone',
         'email',
         'role_id',
         'password',
@@ -43,9 +45,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function role () {
+    // role belongsTo user
+    public function role()
+    {
         return $this->belongsTo(Role::class);
+    }
+    public function AppSends () {
+        return $this->hasMany(AppSend::class, 'user_id', 'id');
     }
 
     public function isAcLand () {

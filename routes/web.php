@@ -27,7 +27,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/app-edit/{id}', [HomeController::class, 'editApplication'])->name('edit.app');
     // Ac Land Section Here..
     Route::get('/ac-land', [AcLandController::class, 'index'])->name('ac-land');
-    Route::get('ac-land-to/{id}', [AcLandController::class, 'sendToTowShil'])->name('ac-land.to.towshilder');
+    Route::put('ac-land-to-any/{id}', [AcLandController::class, 'sendToAny'])->name('ac-land.to.any');
     Route::get('ac-land-to-uno/{id}', [AcLandController::class, 'sendToUno'])->name('ac-land.to.uno');
 
     // Towswhilder Section Here..

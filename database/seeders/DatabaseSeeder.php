@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(1)->create();
-        // \App\Models\Role::generateRole();
+        \App\Models\Role::generateRole();
+        \App\Models\UpaZila::generateUpaZila();
+        \App\Models\Union::generateUnions();
         \App\Models\User::generateUser();
     }
 }

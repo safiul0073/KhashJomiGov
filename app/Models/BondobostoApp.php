@@ -19,8 +19,13 @@ class BondobostoApp extends Model
         return $this->belongsTo(UpaZila::class, 'main_upzila_id', 'id');
     }
 
+    // BondobostoApp has many AppSend
+    public function app_sends () {
+        return $this->hasMany(AppSend::class, 'bondobosto_app_id', 'id');
+    }
+
     public function explodedData ($attribute) {
-        
+
         return explode(',', $this->$attribute);
     }
 
@@ -54,11 +59,11 @@ class BondobostoApp extends Model
         }
         for($i=0; $i<count($ar1); $i++) {
             $familys[] = [
-                'name' => $ar1[$i]['name']??'',
-                'age' => $ar2[$i]['age']??'',
-                'relation' => $ar3[$i]['relation']??'',
-                'whatdos' => $ar4[$i]['whatdos']??'',
-                'comment' => $ar5[$i]['comment']??'',
+                'name' => trim($ar1[$i]['name'])??'',
+                'age' => trim($ar2[$i]['age'])??'',
+                'relation' => trim($ar3[$i]['relation'])??'',
+                'whatdos' => trim($ar4[$i]['whatdos'])??'',
+                'comment' => trim($ar5[$i]['comment'])??'',
             ];
         }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BondobostoApp;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 
 class AcLandController extends Controller
@@ -46,10 +47,33 @@ class AcLandController extends Controller
                                                         ));
     }
 
-    public function sendToTowShil ($id) {
+    public function sendToAny (Request $request, $id) {
 
-        BondobostoApp::find($id)->update(['accept_id' => 2]);
-        return back()->withSuccess('success', 'তৌশিলদার কে সেন্ড করা হয়েছে');
+        $this->validate($request, [
+            'receive' => 'required|numeric|exists:roles,id',
+            'openion' => 'required|string',
+            'content' => 'nullable|string',
+            'file' => 'nullable| mimes:jpeg,bmp,png,jpg,pdf,docx,doc,xlsx,xls,ppt,pptx,txt:max:10000',
+        ]);
+        $service = new FileService();
+
+        $application = BondobostoApp::findOrFail($id);
+
+        if(!$application) return redirect()->back()->with('error', 'something went wrong');
+
+        $application->accept_id =  $request->receive;
+        $application->save();
+
+        if (!$application) return redirect()->back()->with('error', 'something went wrong');
+
+        $application->app_sends()->updateOrCreate(
+            ['user_id' => auth()->user()->id],[
+             'openion' => $request->openion,
+             'content' => $request->content,
+             'file' => $request->hasFile('file')?$service->fileExequtes($request->file('file')): null,
+        ]);
+
+        return redirect()->back()->withSuccess('সেন্ড করা হয়েছে');
     }
 
     public function sendToUno ($id) {

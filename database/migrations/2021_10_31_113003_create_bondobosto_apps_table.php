@@ -15,9 +15,9 @@ class CreateBondobostoAppsTable extends Migration
     {
         Schema::create('bondobosto_apps', function (Blueprint $table) {
             $table->id();
+            $table->string('app_class');
             $table->unsignedBigInteger('accept_id')->nullable();
             $table->unsignedBigInteger('return_id')->nullable();
-            $table->string('app_class');
             $table->string('avater')->nullable();
             $table->string('vumihi_muktijudda_sonod')->nullable();
             $table->string('vumihi_commission_sonod')->nullable();
@@ -43,6 +43,7 @@ class CreateBondobostoAppsTable extends Migration
             $table->longText('dorkhastokarir_khas_dakhil_biboron')->nullable();
             $table->longText('dorkhastokarir_nodi_vangon_biborn')->nullable();
             $table->longText('dorkhastokarir_shohidorpongo_person_biboron')->nullable();
+            $table->tinyInteger('status')->comment('not checked == 0 or checked ==1')->default(0);
             $table->timestamps();
         });
     }

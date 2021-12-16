@@ -32,7 +32,7 @@
                                             <div class="form-check mt-2">
                                                 @if(find_class_app($application->explodedData('app_class'),"দুঃস্থ মুক্তিযুদ্দা পরিবার") == 1)
                                                        <input class="form-check-input" name="app_class[]"
-                                                        selected
+                                                       checked
                                                        value="দুঃস্থ মুক্তিযুদ্দা পরিবার" type="checkbox">
                                                  @else
                                                  <input class="form-check-input" name="app_class[]"  value="দুঃস্থ মুক্তিযুদ্দা পরিবার" type="checkbox">
@@ -42,7 +42,7 @@
                                             <div class="form-check mt-2">
                                                 @if(find_class_app($application->explodedData('app_class'),"নদী ভাঙা পরিবার") == 1)
                                                        <input class="form-check-input" name="app_class[]"
-                                                        selected
+                                                       checked
                                                        value="নদী ভাঙা পরিবার" type="checkbox">
                                                  @else
                                                  <input class="form-check-input" name="app_class[]"  value="নদী ভাঙা পরিবার" type="checkbox">
@@ -52,7 +52,7 @@
                                             <div class="form-check mt-2">
                                                 @if(find_class_app($application->explodedData('app_class'),"সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার") == 1)
                                                        <input class="form-check-input" name="app_class[]"
-                                                        selected
+                                                       checked
                                                        value="সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার" type="checkbox">
                                                  @else
                                                  <input class="form-check-input" name="app_class[]"  value="সক্ষম পুত্রসহ বিধবা/স্বামী পরিতেক্ত পরিবার" type="checkbox">
@@ -62,7 +62,7 @@
                                             <div class="form-check mt-2">
                                                 @if(find_class_app($application->explodedData('app_class'),"কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার") == 1)
                                                        <input class="form-check-input" name="app_class[]"
-                                                        selected
+                                                        checked
                                                        value="কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার" type="checkbox">
                                                  @else
                                                  <input class="form-check-input" name="app_class[]"  value="কৃষি জমি নাই ও বাস্তবাটিহিন পরিবার" type="checkbox">
@@ -72,7 +72,7 @@
                                             <div class="form-check mt-2">
                                                 @if(find_class_app($application->explodedData('app_class'),"অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার") == 1)
                                                        <input class="form-check-input" name="app_class[]"
-                                                        selected
+                                                        checked
                                                        value="অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার" type="checkbox">
                                                  @else
                                                  <input class="form-check-input" name="app_class[]"  value="অনধিক ০.০১ একর জমি আছে কিন্তু কৃষি জমি নাই এমন কৃষি নির্বর পরিবার" type="checkbox">
@@ -82,10 +82,10 @@
                                             <div class="form-check mt-2">
                                                 @if(find_class_app($application->explodedData('app_class'),"অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার") == 1)
                                                        <input class="form-check-input" name="app_class[]"
-                                                        selected
+                                                        checked
                                                        value="অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার" type="checkbox">
                                                  @else
-                                                 <input class="form-check-input" name="app_class[]"  value="অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার" type="checkbox">
+                                                    <input class="form-check-input" name="app_class[]"  value="অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার" type="checkbox">
                                                  @endif
                                                 <label class="form-check-label ml-4">অধিগ্রহনের ফলে ভূমিহীন হইয়া পরিয়াছে এমন পরিবার।</label>
                                             </div>
@@ -99,6 +99,7 @@
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
                                         <label for="">Image:</label>
+                                        <img src="{{URL::to($application->avater)}}" style="height: 120px; width:100px;" class="card-img-top" alt="...">
                                         <input name="avater" value="{{old('avater')}}" class="form-control @error('avater') is-invalid @enderror" type="file">
                                         @error('avater')
                                             <div class="invalid-feedback">
@@ -114,7 +115,7 @@
 
                         <div class="form-group my-2">
                             <div class="">
-                                <label class="my-3" for="">   (খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
+                                <label class="my-3" for="">(খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
 
                                 <div class="form-check row">
                                     <div class="col-md-5">
@@ -122,12 +123,20 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file"  name="vumihi_muktijudda_sonod" class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
-                                        @error('vumihi_muktijudda_sonod')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                        <div class="col-md-6">
+                                            <input type="file"  name="vumihi_muktijudda_sonod" class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
+                                            @error('vumihi_muktijudda_sonod')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        @if ($application->vumihi_muktijudda_sonod)
+                                        <div class="col-md-6">
+                                            <a class="btn btn-sm btn-success" href="{{url('doc-show?file='.$application->vumihi_muktijudda_sonod)}}">View File</a>
+                                        </div>
+                                        @endif
+
                                     </div>
 
                                 </div>
@@ -216,11 +225,11 @@
                                 </div>
 
                                 <div class="form-check col-md-3">
-                                    <input class="form-check-input isMortal" value="জীবিত" @if($application->main_fathers_mortal == "জীবিত") ckecked="checked" @endif name="main_fathers_mortal"  type="checkbox">
+                                    <input class="form-check-input isMortal" value="জীবিত" @if($application->main_fathers_mortal == "জীবিত") checked @endif name="main_fathers_mortal"  type="checkbox">
                                     <label class="form-check-label ml-4">জীবিত</label>
                                 </div>
                                 <div class="form-check col-md-3" >
-                                    <input class="form-check-input isMortal" @if($application->main_fathers_mortal == "মৃত") ckecked="checked" @endif value="মৃত" name="main_fathers_mortal"  type="checkbox">
+                                    <input class="form-check-input isMortal" @if($application->main_fathers_mortal == "মৃত") checked @endif value="মৃত" name="main_fathers_mortal"  type="checkbox">
                                     <label class="form-check-label ml-4">মৃত</label>
                                 </div>
                             </div>
@@ -245,7 +254,7 @@
                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                         <select name="main_upzila" class="form-control ml-2" id="main_upzila">
                                             @foreach ($upa_zilas as $item)
-                                                <option @if($application->main_upzila== $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                                                <option @if($application->main_upzila_id== $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
                                             @endforeach
                                         </select>
 
@@ -257,7 +266,14 @@
                                         <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">ইউনিয়নঃ</label>
                                     </div>
                                     <div class="col-md-3 col-lg-3 col-xl-3 setUnion">
+                                        <select name="main_union" class="form-control ml-2" id="main_union">
 
+                                            @foreach ($unions as $item)
+                                                @if ($application->main_upzila_id == $item->upa_zila_id)
+                                                    <option @if($application->main_union_id == $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                 </div>
@@ -323,7 +339,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
-
+                                    {{-- {{dd($application->familyMembers())}} --}}
                                     @foreach ($application->familyMembers() as $key => $item)
                                     <tr>
                                         <td class="text-center">
@@ -333,7 +349,7 @@
                                             <input value="{{$item['name']}}" name="name[][name]" class="form-control" type="text">
                                         </td>
                                         <td>
-                                            <input value="{{$item['age']}}" style="width: 60px;" class="form-control" name="age[][age]" min=1 type="number">
+                                            <input value="{{$item['age']}}" style="width:60px;" class="form-control" name="age[][age]" min=1 type="number">
                                         </td>
                                         <td>
                                             <input value="{{$item['relation']}}" style="width: 100px;" class="form-control" name="relation[][relation]" type="text">

@@ -11,14 +11,25 @@ class Role extends Model
 
     protected $fillable = ['name'];
 
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    // AppSend has many role id
+    public function app_sends()
+    {
+        return $this->hasMany(AppSend::class);
+    }
     public static function generateRole() {
         $roles = [
-            ['name' => 'ac_land'],
-            ['name' => 'towshilder'],
-            ['name' => 'uno'],
-            ['name' => 'dc'],
-            ['name' => 'rdc'],
-            ['name' => 'rdc_revinew'],
+            ['name' => 'সহকারী কমিশনার (ভূমি)'],
+            ['name' => 'সার্ভেয়ার'],
+            ['name' => 'উপজেলা নির্বাহী অফিসার'],
+            ['name' => 'জেলা প্রশাসক, লালমনিরহাট'],
+            ['name' => 'অতিরিক্ত জেলা প্রশাসক (রাজস্ব),লালমনিরহাট'],
+            ['name' => 'ইউনিয়ন ভূমি সহকারী কর্মকর্তা'],
+            ['name' => 'অফিস সহকারী কাম-কম্পিউটার মুদ্রাক্ষরিক'],
         ];
 
         foreach ($roles as $role) {

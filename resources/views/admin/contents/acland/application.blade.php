@@ -1,6 +1,7 @@
 @extends('layouts.admin-app')
 @section('title', 'Applications')
-
+@section('css')
+@endsection
 @section('contents')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h1>Application</h1>
-
+                    @include('layouts.partial.flash-alert')
                 </div>
                 <div class="card-body">
 
@@ -44,8 +45,8 @@
 
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
-                                        <label for="">Image:</label>
-                                        <img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="...">
+
+                                        <img src="{{URL::to($application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                             </div>
@@ -195,19 +196,109 @@
                             <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
                         </div>
 
-                    @if ($application->return_id)
-                        @if ($application->accept_id == 2 && $application->return_id == auth()->user()->role_id)
-                            <a href="{{route("ac-land.to.uno",$application->id)}}" class="btn btn-sm btn-info">সেন্ড UNO</a>
-                        @else
-                            <p>Uno কে সেন্ড করা হয়েছে</p>
-                        @endif
-                    @else
-                        <a href="{{route("ac-land.to.towshilder",$application->id)}}" class="btn btn-sm btn-info">সেন্ড তৌশিলদার</a>
-                    @endif
 
 
                 </div>
             </div>
+            <br>
+            <br>
+
+            <h4 class="text-center">মন্তব্য সমূহ</h4>
+
+            <br>
+            <div class="row">
+                @foreach ($app_sends as $item)
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-danger">
+                                <h5 class="text-center">অনুচ্ছেদ 1. ১ রেজিস্টার -- ৩০-০৯-২০২১ ০৩:২৫:১৫</h5>
+                            </div>
+
+                            <div class="card-body row">
+                                <div class="col-12">
+                                    <p>{!! $item->content !!}</p>
+                                </div>
+                                <div class="col-lg-4 col-xl-4 col-md-6 col-12 d-flex flex-column justify-content-center align-items-center">
+                                    <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
+                                    <div class="w-100 text-center">
+                                        <p>{{$item->user->name}}, {{$item->user->role->name}},লালমনিরহাট রেজিস্টার</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <form action="{{route('ac-land.to.any', $application->id)}}" enctype="multipart/form-data" method="post">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                <div class="col-md-6">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    @foreach ($roles as $item)
+                                        <tr style="background-color: green;" class="text-white border-1">
+                                            <th>
+                                                <label for="">{{$item->name}}</label>
+                                            </th>
+                                            <th>
+                                                <input value="{{$item->id}}" name="receive" type="radio">
+                                            </th>
+                                        </tr>
+                                    @endforeach
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <select class="form-control @error('openion') is-invalid @enderror" name="openion" id="">
+                                    <option selected disabled value="">আপনার মতামত</option>
+                                    <option  value="জরুরি">জরুরি</option>
+                                    <option value="ব্যবস্থা নিন">ব্যবস্থা নিন</option>
+                                </select>
+                                @error('openion')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">মন্তব্য</label>
+                                <textarea class="form-control" name="content" id="summernote" >{{old('content')}}</textarea>
+                                @error('content')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="file" class="form-control" name="file">
+
+                                @error('file')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
+                                <a href="{{url('/')}}"  class="btn btn-info">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         </div>
     </div>
     </div>
@@ -217,33 +308,9 @@
 
 @push('js')
   <script>
-
-
       $(document).ready(function () {
-        var tableBody = $('#tableBody')
-        var i = 1;
-        $('#add').on('click', function (e) {
-          tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" type="text"></td><td ><input style="width: 50px;" name="age[][age]" min="1" type="number" ></td><td ><input style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input name="whatdo[][whatdo]" type="text" ></td> <td ><input name="comment[][comment]" type="text" ></td><td><a id="delete" class="btn btn-sm btn-secondary rounded" >-</a></td></tr>')
-        })
+        $('#summernote').summernote()
+      })
 
-        $(document).on('click', '#delete', function () {
-            $(this).parents('tr').remove();
-        })
-
-        $('.isMortal').click(function() {
-        $('.isMortal').not(this).prop('checked', false);
-    });
-
-        var data = [{
-            id: 1,
-            name: '',
-            age: '',
-            relation: '',
-            whatDo: '',
-            comment: '',
-        }];
-
-
-        })
   </script>
 @endpush

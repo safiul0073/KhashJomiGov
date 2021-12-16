@@ -62,7 +62,7 @@
                                     <li class="dropdown">
                                         <a href="http://vplease-lalmonirhat.gov.bd/#" class="dropdown-toggle" data-toggle="dropdown">লগ ইন </b></a>
                                       <ul class="dropdown-menu">
-                                        <li><a href="/login">জেলা প্রশাসক,  লালমনিরহাট</a></li>
+                                        <li><a href="/login">জেলা প্রশাসক, লালমনিরহাট</a></li>
                                         <li><a href="/login">অতিরিক্ত জেলা প্রশাসক (রাজস্ব),লালমনিরহাট
 </a></li>
                                         <li><a href="/login">উপজেলা নির্বাহী অফিসার</a></li>

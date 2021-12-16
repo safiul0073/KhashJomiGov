@@ -9,7 +9,7 @@ if (! function_exists('find_class_app')) {
         $finded = 0;
 
         foreach ($items as $item){
-            if($item == $string){
+            if(trim($item) == trim($string)){
                 $finded = 1;
             }
         }
