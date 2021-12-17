@@ -22,7 +22,7 @@ class HomeController extends Controller
 
     public function showApplication($id) {
         $application = BondobostoApp::with('app_sends')->findOrFail($id);
-        $roles = Role::get();
+        $roles = Role::all();
         $app_sends = AppSend::with('user')->where('bondobosto_app_id', $id)->get();
         switch (auth()->user()->role_id) {
             case 1:
@@ -51,26 +51,26 @@ class HomeController extends Controller
         $upa_zilas = UpaZila::with('unions')->get();
         $unions = Union::all();
         $application = BondobostoApp::findOrFail($id);
-        $users = User::select('id', 'name')->get();
+        $roles = Role::all();
 
         switch (auth()->user()->role_id) {
             case 1:
-                return view('admin.contents.acland.edit', compact('application','users','upa_zilas','unions','roles'));
+                return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 2:
-                return view('admin.contents.towshilder.edit', compact('application','users','upa_zilas','unions','roles'));
+                return view('admin.contents.towshilder.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 3:
-                return view('admin.contents.uno.edit', compact('application','users','upa_zilas','unions','roles'));
+                return view('admin.contents.uno.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 4:
-                return view('admin.contents.dc.edit', compact('application','users','upa_zilas','unions','roles'));
+                return view('admin.contents.dc.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 5:
-                return view('admin.contents.adc.edit', compact('application','users','upa_zilas','unions','roles'));
+                return view('admin.contents.adc.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             default:
-                return view('admin.contents.adc_revinew.edit', compact('application','users','upa_zilas','unions','roles'));
+                return view('admin.contents.adc_revinew.edit', compact('application','upa_zilas','unions','roles'));
                 break;
         }
     }

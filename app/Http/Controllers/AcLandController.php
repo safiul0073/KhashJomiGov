@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppSend;
 use App\Models\BondobostoApp;
 use App\Services\FileService;
 use Illuminate\Http\Request;
@@ -50,8 +51,8 @@ class AcLandController extends Controller
     public function sendToAny (Request $request, $id) {
 
         $this->validate($request, [
-            'receive' => 'required|numeric|exists:roles,id',
-            'openion' => 'required|string',
+            'receive' => 'nullable|numeric|exists:roles,id',
+            'openion' => 'nullable|string',
             'content' => 'nullable|string',
             'file' => 'nullable| mimes:jpeg,bmp,png,jpg,pdf,docx,doc,xlsx,xls,ppt,pptx,txt:max:10000',
         ]);
@@ -61,24 +62,30 @@ class AcLandController extends Controller
 
         if(!$application) return redirect()->back()->with('error', 'something went wrong');
 
-        $application->accept_id =  $request->receive;
-        $application->save();
+        if($request->receive){
+            $application->accept_id =  $request->receive;
+            $application->save();
+            if (!$application) return redirect()->back()->with('error', 'something went wrong');
+        }
 
-        if (!$application) return redirect()->back()->with('error', 'something went wrong');
-
-        $application->app_sends()->updateOrCreate(
-            ['user_id' => auth()->user()->id],[
-             'openion' => $request->openion,
-             'content' => $request->content,
-             'file' => $request->hasFile('file')?$service->fileExequtes($request->file('file')): null,
-        ]);
+        if($request->openion){
+            if($request->hasFile('file')){
+                $app_send = AppSend::where('bondobosto_app_id',$application->id)->where('user_id', auth()->id())->first();
+                // check if file is already uploaded
+                 if ($app_send && file_exists(public_path($app_send->file))) {
+                    unlink(public_path($app_send->file));
+                 }
+            }
+            $application->app_sends()->updateOrCreate(
+                ['user_id' => auth()->user()->id],[
+                 'openion' => $request->openion,
+                 'content' => $request->content,
+                 'file' => $request->hasFile('file')?$service->fileExequtes($request->file('file')): null,
+            ]);
+            return redirect()->back()->withSuccess('আপনার মতামত সফলভাবে পাঠিয়েছে');
+        }
 
         return redirect()->back()->withSuccess('সেন্ড করা হয়েছে');
     }
 
-    public function sendToUno ($id) {
-
-        BondobostoApp::find($id)->update(['accept_id' => 3, 'return_id' => null]);
-        return back()->withSuccess('success', 'Uno কে সেন্ড করা হয়েছে');
-    }
 }
