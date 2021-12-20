@@ -64,6 +64,12 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User created successfully');
     }
 
+    public function show ($id)
+    {
+        $user = User::with('role')->findOrFail($id);
+        return view('admin.contents.users.show', compact('user'));
+    }
+
 
     public function update(Request $request, User $user)
     {
@@ -86,8 +92,8 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('avater')) {
-            if (File::exists(public_path($user->avater))) {
-                unlink(public_path($user->avater));
+            if ($user->avater && File::exists(public_path($user->avater))) {
+                File::delete(public_path($user->avater));
             }
             $avaterfullName = $this->service->fileExequtes($request->file('avater'));
         } else {
@@ -95,8 +101,8 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('sign')) {
-            if (File::exists($user->sign)) {
-                File::delete($user->sign);
+            if ($user->sign && File::exists(public_path($user->sign))) {
+                File::delete(public_path($user->sign));
             }
             $sign = $this->service->fileExequtes($request->file('sign'));
         }else {

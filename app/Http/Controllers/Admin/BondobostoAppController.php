@@ -9,6 +9,7 @@ use App\Models\Union;
 use App\Models\UpaZila;
 use App\Services\FileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BondobostoAppController extends Controller
 {
@@ -175,25 +176,24 @@ class BondobostoAppController extends Controller
     public function destroy($id)
     {
         $b = BondobostoApp::find($id);
-        if (file_exists($b->avater)) {
-            unlink($b->avater);
+
+        if ($b->avater && File::exists(public_path($b->avater))) {
+            File::delete(public_path($b->avater));
         }
-        if (file_exists($b->vumihi_muktijudda_sonod)) {
-            unlink($b->vumihi_muktijudda_sonod);
+        if ($b->vumihi_muktijudda_sonod && File::exists(public_path($b->vumihi_muktijudda_sonod))) {
+            File::delete(public_path($b->vumihi_muktijudda_sonod));
         }
-        if (file_exists($b->vumihi_commission_sonod)) {
-            unlink($b->vumihi_commission_sonod);
+        if ($b->vumihi_commission_sonod && File::exists(public_path($b->vumihi_commission_sonod))) {
+            File::delete(public_path($b->vumihi_commission_sonod));
         }
-        if (file_exists($b->vumihin_others_sonod)) {
-            unlink($b->vumihin_others_sonod);
+        if ($b->vumihin_others_sonod && File::exists(public_path($b->vumihin_others_sonod))) {
+            File::delete(public_path($b->vumihin_others_sonod));
         }
-        if (file_exists($b->vumihin_others_sonod)) {
-            unlink($b->vumihin_others_sonod);
-        }
+
         if ($b->app_sends()) {
             foreach ($b->app_sends() as $item) {
-                if (file_exists($item->file)) {
-                    unlink($item->file);
+                if ($item->file && File::exists(public_path($item->file))) {
+                    File::delete(public_path($item->file));
                 }
             }
         }

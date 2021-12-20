@@ -17,11 +17,11 @@ class DcController extends Controller
             $tab = 'get1';
 
         }
-        $grohonData = $service->queryCount(auth()->user()->role_id, 3);
+        $grohonData = $service->queryCount(auth()->user()->role_id, null);
         $preronData =$service->queryCount(5,auth()->user()->role_id);
 
         if($tab == 'get1') {
-            $applications = $service->queryData(auth()->user()->role_id, 3);
+            $applications = $service->queryData(auth()->user()->role_id, null);
         }else if($tab == 'put1') {
             $applications = $service->queryData(5, auth()->user()->role_id);
         }

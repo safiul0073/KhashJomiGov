@@ -5,6 +5,7 @@ use App\Http\Controllers\AdcController;
 use App\Http\Controllers\AdcRevinewController;
 use App\Http\Controllers\Admin\BondobostoAppController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AppSendController;
 use App\Http\Controllers\DcController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -57,6 +58,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/adc_revinew', [AdcRevinewController::class, 'index'])->name('adc-revinew');
     Route::put('adc-revinew-to-acland/{id}', [AdcRevinewController::class, 'sendToAny'])->name('adc_revinew.to.acland');
 
+    // showing app_sends single page data
+    Route::get('app-sends/{id}', [AppSendController::class, 'appSends'])->name('app.sends');
 });
 
 // application frontend Secton here

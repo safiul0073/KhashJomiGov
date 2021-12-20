@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\FileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -32,9 +33,15 @@ class ProfileController extends Controller
         $user->phone = $params['phone'];
         $service = new FileService();
         if ($request->hasFile('avater')) {
+            if ($user->avater && File::exists(public_path($user->avater))) {
+                File::delete(public_path($user->avater));
+            }
             $user->avater = $service->fileExequtes($request->file('avater'));
         }
         if ($request->hasFile('sign')) {
+            if ($user->sign && File::exists(public_path($user->sign))) {
+                File::delete(public_path($user->sign));
+            }
             $user->sign = $service->fileExequtes($request->file('sign'));
         }
 
@@ -47,3 +54,4 @@ class ProfileController extends Controller
 
     }
 }
+
