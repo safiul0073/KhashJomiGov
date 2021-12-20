@@ -146,7 +146,7 @@
                                         </div>
                                         @if ($application->vumihi_muktijudda_sonod)
                                         <div class="col-md-6">
-                                            <a class="btn btn-sm btn-success" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}">View File</a>
+                                            <a class="btn btn-sm btn-success" href="{{url('doc-show?file='.$application->vumihi_muktijudda_sonod)}}">View File</a>
                                         </div>
                                         @endif
 

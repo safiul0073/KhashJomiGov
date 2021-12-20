@@ -1,6 +1,13 @@
-@extends('layouts.admin-app')
-@section('contents')
-<div class="content-wrapper">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>File View</title>
+    @include('admin.static.css')
+</head>
+<body>
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -14,6 +21,6 @@
             </div>
         </div>
     </div>
-
-</div>
-@endsection
+    @include('admin.static.js')
+</body>
+</html>

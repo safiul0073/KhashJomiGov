@@ -58,20 +58,26 @@ class HomeController extends Controller
                 return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 2:
-                return view('admin.contents.towshilder.edit', compact('application','upa_zilas','unions','roles'));
+
+                return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 3:
-                return view('admin.contents.uno.edit', compact('application','upa_zilas','unions','roles'));
+                return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 4:
-                return view('admin.contents.dc.edit', compact('application','upa_zilas','unions','roles'));
+                return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             case 5:
-                return view('admin.contents.adc.edit', compact('application','upa_zilas','unions','roles'));
+                return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
             default:
-                return view('admin.contents.adc_revinew.edit', compact('application','upa_zilas','unions','roles'));
+                return view('admin.contents.acland.edit', compact('application','upa_zilas','unions','roles'));
                 break;
         }
+    }
+
+    public function docShow (Request $request) {
+        $file = $request->doc;
+        return view('admin.contents.acland.doc', compact('file'));
     }
 }

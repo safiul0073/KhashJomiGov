@@ -95,16 +95,6 @@
                             <div class="card-header">
                                 <h1>Applications</h1>
                                 @include('layouts.partial.flash-alert')
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
                             </div>
                             <div class="card-body">
                                 <form method="post" class=" action="{{route('application.store')}}" enctype="multipart/form-data">

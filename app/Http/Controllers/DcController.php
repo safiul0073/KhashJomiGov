@@ -2,37 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppSend;
 use App\Models\BondobostoApp;
+use App\Services\FileService;
+use App\Services\QueryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class DcController extends Controller
 {
-    public function index (Request $request) {
+    public function index (Request $request,QueryService $service) {
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'get1';
 
         }
+        $grohonData = $service->queryCount(auth()->user()->role_id, 3);
+        $preronData =$service->queryCount(5,auth()->user()->role_id);
 
         if($tab == 'get1') {
-            $applications = BondobostoApp::with(['union','upa_zila'])
-                                           ->where("accept_id", auth()->user()->role_id)
-                                           ->where('return_id', null)
-                                           ->latest()
-                                           ->get();
+            $applications = $service->queryData(auth()->user()->role_id, 3);
         }else if($tab == 'put1') {
-            $applications = BondobostoApp::with(['union','upa_zila'])
-                                            ->where("accept_id", 5)
-                                            ->where('return_id', null)
-                                           ->latest()
-                                           ->get();
+            $applications = $service->queryData(5, auth()->user()->role_id);
         }
-        return view('admin.contents.dc.index', compact('applications', 'tab'));
+        return view('admin.contents.dc.index', compact('applications', 'tab', 'grohonData', 'preronData'));
     }
 
-    public function sendToToAdc ($id) {
+    public function sendToAny (Request $request, $id) {
+        
+        $this->validate($request, [
+            'receive' => 'required|numeric|exists:roles,id',
+            'onucched' => 'nullable|string',
+            'adesh' => 'nullable|string',
+            'file' => 'nullable| mimes:jpeg,bmp,png,jpg,pdf,docx,doc,xlsx,xls,ppt,pptx,txt:max:10000',
+        ]);
+        $service = new FileService();
+        $params = array();
+        $application = BondobostoApp::findOrFail($id);
 
-        BondobostoApp::find($id)->update(['accept_id' => 5, 'return_id' => null]);
-        return back()->withSuccess('ADC Office সেন্ড করা হয়েছে');
+        if(!$application) return redirect()->back()->with('error', 'something went wrong');
+
+        if($request->receive){
+            $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)
+                                          ->where('send_id',3)
+                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id,'status'=>0]);
+            if (!$h) return redirect()->back()->with('error', 'Already sended');
+        }
+
+        if($request->hasFile('file')){
+            $app_send = AppSend::where('bondobosto_app_id',$application->id)->where('user_id', auth()->id())->first();
+            // check if file is already uploaded
+            if ($app_send && File::exists($app_send->file)) {
+                File::delete($app_send->file);
+            }
+        }
+
+            if ($request->onucched) {
+                $params['onucched'] = $request->onucched;
+            }
+            if ($request->adesh) {
+                $params['adesh'] = $request->adesh;
+            }
+            if ($request->hasFile('file')) {
+                $params['file'] = $service->fileExequtes($request->file('file'));
+            }
+            $params['role_id'] = $request->receive;
+            $application->app_sends()->updateOrCreate(['user_id' => auth()->user()->id],$params);
+            return redirect()->back()->withSuccess('আপনার মতামত সফলভাবে পাঠিয়েছে & সেন্ড করা হয়েছে');
     }
+
 }

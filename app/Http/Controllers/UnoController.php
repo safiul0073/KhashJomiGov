@@ -2,37 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppSend;
 use App\Models\BondobostoApp;
+use App\Services\FileService;
+use App\Services\QueryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class UnoController extends Controller
 {
-    public function index (Request $request) {
+    public function index (Request $request,QueryService $service) {
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'get1';
 
         }
+        $grohonData = $service->queryCount(auth()->user()->role_id, 1);
+        $preronData =$service->queryCount(4,auth()->user()->role_id);
 
         if($tab == 'get1') {
-            $applications = BondobostoApp::with(['union','upa_zila'])
-                                           ->where("accept_id", auth()->user()->role_id)
-                                           ->where('return_id', null)
-                                           ->latest()
-                                           ->get();
+            $applications = $service->queryData(auth()->user()->role_id, 1);
         }else if($tab == 'put1') {
-            $applications = BondobostoApp::with(['union','upa_zila'])
-                                            ->where("accept_id", 4)
-                                            ->where('return_id', null)
-                                           ->latest()
-                                           ->get();
+            $applications = $service->queryData(4, auth()->user()->role_id);
         }
-        return view('admin.contents.uno.index', compact('applications', 'tab'));
+        return view('admin.contents.uno.index', compact('applications', 'tab','grohonData','preronData'));
     }
 
-    public function sendToToAcLand ($id) {
+    public function sendToAny (Request $request, $id) {
 
-        BondobostoApp::find($id)->update(['accept_id' => 4, 'return_id' => null]);
-        return back()->withSuccess('DC Office সেন্ড করা হয়েছে');
+        $this->validate($request, [
+            'receive' => 'required|numeric|exists:roles,id',
+            'onucched' => 'nullable|string',
+            'adesh' => 'nullable|string',
+            'file' => 'nullable| mimes:jpeg,bmp,png,jpg,pdf,docx,doc,xlsx,xls,ppt,pptx,txt:max:10000',
+        ]);
+        $service = new FileService();
+        $params = array();
+        $application = BondobostoApp::findOrFail($id);
+
+        if(!$application) return redirect()->back()->with('error', 'something went wrong');
+
+        if($request->receive){
+            $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)
+                                          ->where('send_id',1)
+                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id,'status'=>0]);
+            if (!$h) {
+                $application->app_roles()->create([
+                    'accept_id' => $request->receive,
+                    'send_id' => auth()->user()->role_id,
+                    'status' => 0,
+                ]);
+            }
+        }
+
+            if($request->hasFile('file')){
+                $app_send = AppSend::where('bondobosto_app_id',$application->id)->where('user_id', auth()->id())->where('role_id', $request->receive)->first();
+                // check if file is already uploaded
+                if ($app_send && File::exists($app_send->file)) {
+                    File::delete($app_send->file);
+                }
+            }
+
+            if ($request->onucched) {
+                $params['onucched'] = $request->onucched;
+            }
+            if ($request->adesh) {
+                $params['adesh'] = $request->adesh;
+            }
+            if ($request->hasFile('file')) {
+                $params['file'] = $service->fileExequtes($request->file('file'));
+            }
+            $params2 = array();
+            $params2['user_id'] = auth()->id();
+            $params2['role_id'] = $request->receive;
+            $application->app_sends()->updateOrCreate($params2,$params);
+            return redirect()->back()->withSuccess('আপনার মতামত সফলভাবে পাঠিয়েছে & সেন্ড করা হয়েছে');
     }
 }

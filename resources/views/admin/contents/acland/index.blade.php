@@ -22,10 +22,10 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{url('/admin/ac-land?tab=home')}}" class="btn @if($tab == "home" || $tab == null) btn-success @else btn-primary @endif">আবেদনকৃত ({{$applications_count}})</a>
-                <a href="{{url('/admin/ac-land?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ({{$applications_grohon1}})</a>
-                <a href="{{url('/admin/ac-land?tab=get2')}}" class="btn @if($tab == "get2" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ({{$applications_grohon2}})</a>
-                <a href="{{url('/admin/ac-land?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ({{$applications_preron1}})</a>
-                <a href="{{url('/admin/ac-land?tab=put2')}}" class="btn @if($tab == "put2" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ({{$applications_preron2}})</a>
+                <a href="{{url('/admin/ac-land?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা-1 ({{$applications_grohon1}})</a>
+                <a href="{{url('/admin/ac-land?tab=get2')}}" class="btn @if($tab == "get2" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা-2 ({{$applications_grohon2}})</a>
+                <a href="{{url('/admin/ac-land?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা-1 ({{$applications_preron1}})</a>
+                <a href="{{url('/admin/ac-land?tab=put2')}}" class="btn @if($tab == "put2" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা-2 ({{$applications_preron2}})</a>
             </div>
             <div class="card-body">
                 <div class="row">

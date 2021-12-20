@@ -42,13 +42,14 @@
                   </li>
                   <li class="nav-item ">
                     <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user') ? 'active' : '' }}">
-                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-users"></i>
                       <p>
                         ব্যবহারকারী
                       </p>
                     </a>
                   </li>
                   @endcan
+
                   @can('isTowshildeer', auth()->user())
                   <li class="nav-item ">
                     <a href="{{ route('towshilder') }}" class="nav-link {{ request()->routeIs('towshilder') ? 'active' : '' }}">
@@ -99,7 +100,14 @@
                     </a>
                   </li>
                   @endcan
-
+                  <li class="nav-item ">
+                    <a href="{{ route('profile.show',auth()->id()) }}" class="nav-link {{ request()->routeIs('profile.show') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user-circle"></i>
+                      <p>
+                        প্রোফাইল
+                      </p>
+                    </a>
+                  </li>
                   <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" class="nav-link">

@@ -17,10 +17,12 @@ class CreateAppSendsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('bondobosto_app_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('role_id');
             $table->string('file')->nullable();
             $table->string('openion')->nullable();
-            $table->longText('content')->nullable();
-            $table->longText('content2')->nullable();
+            $table->longText('montobbo')->nullable();
+            $table->longText('onucched')->nullable();
+            $table->longText('adesh')->nullable();
             $table->timestamps();
         });
     }

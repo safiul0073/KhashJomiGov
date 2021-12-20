@@ -21,14 +21,14 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="{{url('/admin/dc?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা (১)</a>
+                <a href="{{url('/admin/dc?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ({{$grohonData}})</a>
 
-                <a href="{{url('/admin/dc?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা (১)</a>
+                <a href="{{url('/admin/dc?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ({{$preronData}})</a>
 
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-8 col-lx-8 mx-auto">
+                    <div class="col-md-12">
 
                          @include('admin.contents.dc.table')
 

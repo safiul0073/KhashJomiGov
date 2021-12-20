@@ -21,8 +21,8 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="{{url('/admin/towshilder?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা</a>
-                <a href="{{url('/admin/towshilder?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা</a>
+                <a href="{{url('/admin/towshilder?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ( {{$grohonApps}} )</a>
+                <a href="{{url('/admin/towshilder?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ( {{$preronApp}} )</a>
             </div>
             <div class="card-body">
                 <div class="row">

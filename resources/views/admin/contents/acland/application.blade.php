@@ -56,7 +56,7 @@
 
                         <div class="form-group my-2">
                             <div class="">
-                                <label class="my-3" for="">   (খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
+                                <label class="my-3" for="">(খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
 
                                 <div class="form-check row">
                                     <div class="col-md-5">
@@ -64,7 +64,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                       <a class="btn btn-sm btn-info" href="{{url('doc-show?file='.$application->vumihi_muktijudda_sonod)}}">File Open</a>
+                                       <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -73,7 +73,7 @@
                                         <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ:</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-sm btn-info" href="{{url('doc-show?file='.$application->vumihi_commission_sonod)}}" >File Open</a>
+                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_commission_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -83,7 +83,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a class="btn btn-sm btn-info" href="{{url('doc-show?file='.$application->vumihin_others_sonod)}}" >File Open</a>
+                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihin_others_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -210,21 +210,27 @@
                 @foreach ($app_sends as $item)
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header bg-danger">
-                                <h5 class="text-center">অনুচ্ছেদ 1. ১ রেজিস্টার -- ৩০-০৯-২০২১ ০৩:২৫:১৫</h5>
+                            <div style="background-color: #f3aeae;" class="card-header text-danger">
+                                <h5 class="text-center">{!!$item->onucched!!}</h5>
                             </div>
 
-                            <div class="card-body row">
+                            <div class="card-body">
                                 <div class="col-12">
-                                    <p>{!! $item->content !!}</p>
+                                    {{-- <p>{!!$item->montobbo!!}</p> --}}
+                                    <p>{!! $item->adesh !!}</p>
                                 </div>
-                                <div class="col-lg-4 col-xl-4 col-md-6 col-12 d-flex flex-column justify-content-center align-items-center">
+                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
                                     <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
                                     <div class="w-100 text-center">
-                                        <p>{{$item->user->name}}, {{$item->user->role->name}},লালমনিরহাট রেজিস্টার</p>
+                                        {{-- <p>{{$item->user->name}}</p> --}}
+                                        <p>{{$item->user->role->name}}</p>
                                     </div>
                                 </div>
-
+                                @if ($item->file)
+                                    <div class="">
+                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -241,6 +247,7 @@
                             <table class="table">
                                 <thead>
                                     @foreach ($roles as $item)
+                                        @if ($item->id != auth()->user()->role_id)
                                         <tr style="background-color: green;" class="text-white border-1">
                                             <th>
                                                 <label for="">{{$item->name}}</label>
@@ -249,6 +256,7 @@
                                                 <input value="{{$item->id}}" name="receive" type="radio">
                                             </th>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </thead>
                             </table>
@@ -274,8 +282,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="">মন্তব্য</label>
-                                <textarea class="form-control" name="content" id="summernote" >{{old('content')}}</textarea>
-                                @error('content')
+                                <textarea class="form-control" name="montobbo" id="summernote" >{{old('content')}}</textarea>
+                                @error('montobbo')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

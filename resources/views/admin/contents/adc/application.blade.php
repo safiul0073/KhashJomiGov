@@ -1,6 +1,7 @@
 @extends('layouts.admin-app')
 @section('title', 'Applications')
-
+@section('css')
+@endsection
 @section('contents')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h1>Application</h1>
-
+                    @include('layouts.partial.flash-alert')
                 </div>
                 <div class="card-body">
 
@@ -44,8 +45,8 @@
 
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
-                                        <label for="">Image:</label>
-                                        <img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="...">
+
+                                        <img src="{{URL::to($application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +56,7 @@
 
                         <div class="form-group my-2">
                             <div class="">
-                                <label class="my-3" for="">   (খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
+                                <label class="my-3" for="">(খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
 
                                 <div class="form-check row">
                                     <div class="col-md-5">
@@ -63,7 +64,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                       <a class="btn btn-info" href="{{url('doc-show?file='.$application->vumihi_muktijudda_sonod)}}">File Open</a>
+                                       <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}">File Open</a>
                                     </div>
 
                                 </div>
@@ -72,7 +73,7 @@
                                         <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ:</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-info" href="{{url('doc-show?file='.$application->vumihi_commission_sonod)}}" >File Open</a>
+                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_commission_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -82,7 +83,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a class="btn btn-info" href="{{url('doc-show?file='.$application->vumihin_others_sonod)}}" >File Open</a>
+                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihin_others_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -196,13 +197,118 @@
                         </div>
 
 
-                        @if ($application->accept_id == 6)
-                            <p>Adc Revinew office সেন্ড করা হয়েছে</p>
-                        @else
-                            <a href="{{route("dc.to.adc_revinew",$application->id)}}" class="btn btn-sm btn-info">সেন্ড To Adc Revinew</a>
-                        @endif
+
                 </div>
             </div>
+            <br>
+            <br>
+
+            <h4 class="text-center">মন্তব্য সমূহ</h4>
+
+            <br>
+            <div class="row">
+                @foreach ($app_sends as $item)
+                <div class="col-md-6">
+                    <div class="card">
+                        <div style="background-color: #f3aeae;" class="card-header text-danger">
+                            <h5 class="text-center">{!!$item->onucched!!}</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="col-12">
+                                {{-- <p>{!!$item->montobbo!!}</p> --}}
+                                <p>{!! $item->adesh !!}</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                                    <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
+                                    <div class="w-100 text-center">
+                                        {{-- <p>{{$item->user->name}},</p> --}}
+                                        <p>{{$item->user->role->name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if ($item->file)
+                                <div class="">
+                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <form action="{{route('dc.to.adc_revinew', $application->id)}}" enctype="multipart/form-data" method="post">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        @foreach ($roles as $item)
+                                            @if ($item->id == 6)
+                                                <tr style="background-color: green;" class="text-white border-1">
+                                                    <th>
+                                                        <label for="">{{$item->name}}</label>
+                                                    </th>
+                                                    <th>
+                                                        <input value="{{$item->id}}" checked="checked" name="receive" type="radio">
+                                                    </th>
+                                                </tr>
+                                            @endif
+
+                                        @endforeach
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="">অনুচ্ছেদ</label>
+                                    <textarea class="form-control" name="onucched" id="summernote" >{{old('content')}}</textarea>
+                                    @error('onucched')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">আদেশ</label>
+                                    <textarea class="form-control" name="adesh" id="summernote" >{{old('content')}}</textarea>
+                                    @error('adesh')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="file">
+
+                                    @error('file')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
+                                    <a href="{{url('/admin')}}"  class="btn btn-info">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </form>
         </div>
     </div>
     </div>
@@ -212,33 +318,9 @@
 
 @push('js')
   <script>
-
-
       $(document).ready(function () {
-        var tableBody = $('#tableBody')
-        var i = 1;
-        $('#add').on('click', function (e) {
-          tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" type="text"></td><td ><input style="width: 50px;" name="age[][age]" min="1" type="number" ></td><td ><input style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input name="whatdo[][whatdo]" type="text" ></td> <td ><input name="comment[][comment]" type="text" ></td><td><a id="delete" class="btn btn-sm btn-secondary rounded" >-</a></td></tr>')
-        })
+        $('#summernote').summernote()
+      })
 
-        $(document).on('click', '#delete', function () {
-            $(this).parents('tr').remove();
-        })
-
-        $('.isMortal').click(function() {
-        $('.isMortal').not(this).prop('checked', false);
-    });
-
-        var data = [{
-            id: 1,
-            name: '',
-            age: '',
-            relation: '',
-            whatDo: '',
-            comment: '',
-        }];
-
-
-        })
   </script>
 @endpush

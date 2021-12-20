@@ -28,7 +28,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-8 col-lx-8 mx-auto">
+                    <div class="col-md-12">
 
                          @include('admin.contents.adc_revinew.table')
 

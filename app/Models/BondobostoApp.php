@@ -11,6 +11,10 @@ class BondobostoApp extends Model
 
     protected $guarded = [];
 
+    public function app_roles (){
+        return $this->hasMany(AppRole::class);
+    }
+
     public function union () {
         return $this->belongsTo(Union::class, 'main_union_id', 'id');
     }

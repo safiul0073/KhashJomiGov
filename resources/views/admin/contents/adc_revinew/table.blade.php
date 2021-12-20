@@ -11,24 +11,64 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($applications as $key => $item)
+            @foreach ($applications as $key => $application)
              <tr>
                  <td>{{$key+1}}</td>
-                 <td>{{$item->main_name}}</td>
-                 <td>{{$item->main_fathers_name}}</td>
-                 <td>{{$item->main_village}}, {{$item->union->name}}, {{$item->upa_zila->name}}</td>
-                 <td><img src="{{URL::to($item->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                 <td>{{$application->main_name}}</td>
+                 <td>{{$application->main_fathers_name}}</td>
+                 <td>{{$application->main_village}}, {{$application->union->name}}, {{$application->upa_zila->name}}</td>
+                 <td><img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                  <td>
 
                     <div class="d-flex flex-column">
-                        <a href="{{route('show.app', $item->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
-                        <a href="{{route('application.edit', $item->id)}}" class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
-                        <a href="{{route('application.destroy', $item->id)}}" class="btn btn-sm btn-outline-danger"><i class="fas fa-ban"></i></a>
-                    </div>
-                     {{-- <a href="{{route("ac-land.to",$item->id)}}" class="btn btn-sm btn-info">সেন্ড তৌশিলদার</a> --}}
-                 </td>
+                        <a href="{{route('show.app', $application->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
+                        <a href="{{route('edit.app', $application->id)}}" class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteApplication({{ $application->id}})"><i class="fas fa-ban"></i></button>
+                        <form id="delete-form-{{$application->id}}" action="{{route('application.destroy',$application->id)}}" method="POST" style="display: none;" >
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                     </div>
              </tr>
             @endforeach
         </tbody>
     </table>
 </div>
+@push('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript">
+    function deleteApplication(id){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            event.preventDefault();
+            document.getElementById('delete-form-'+id).submit();
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+            )
+        }
+        })
+    }
+</script>
+@endpush

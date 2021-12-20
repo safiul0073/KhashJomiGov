@@ -77,23 +77,9 @@ class BondobostoAppController extends Controller
         return redirect()->back()->with('success','Successfully Application created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\BondobostoApp  $bondobostoApp
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BondobostoApp $bondobostoApp, $id)
-    {
-        return view('admin.contents.acland.application', compact('application'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BondobostoApp  $bondobostoApp
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function edit(BondobostoApp $bondobostoApp)
     {
 
@@ -106,44 +92,45 @@ class BondobostoAppController extends Controller
      * @param  \App\Models\BondobostoApp  $bondobostoApp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BondobostoApp $bondobostoApp)
+    public function update(Request $request, BondobostoApp $application)
     {
+
         $service = new FileService();
 
         if ($request->hasFile('avater')) {
-            if (file_exists(public_path($bondobostoApp->avater))) {
-                unlink(public_path($bondobostoApp->avater));
+            if (file_exists(public_path($application->avater))) {
+                unlink(public_path($application->avater));
             }
             $avater = $service->fileExequtes($request->file('avater'));
         } else {
-            $avater = $bondobostoApp->avater;
+            $avater = $application->avater;
         }
 
         if ($request->hasFile('vumihi_muktijudda_sonod')) {
-            if (file_exists(public_path($bondobostoApp->vumihi_muktijudda_sonod))) {
-                unlink(public_path($bondobostoApp->vumihi_muktijudda_sonod));
+            if (file_exists(public_path($application->vumihi_muktijudda_sonod))) {
+                unlink(public_path($application->vumihi_muktijudda_sonod));
             }
             $vumihi_muktijudda_sonod = $service->fileExequtes($request->file('vumihi_muktijudda_sonod'));
         } else {
-            $vumihi_muktijudda_sonod = $bondobostoApp->vumihi_muktijudda_sonod;
+            $vumihi_muktijudda_sonod = $application->vumihi_muktijudda_sonod;
         }
 
         if ($request->hasFile('vumihi_commission_sonod')) {
-            if (file_exists(public_path($bondobostoApp->vumihi_commission_sonod))) {
-                unlink(public_path($bondobostoApp->vumihi_commission_sonod));
+            if (file_exists(public_path($application->vumihi_commission_sonod))) {
+                unlink(public_path($application->vumihi_commission_sonod));
             }
             $vumihi_commission_sonod = $service->fileExequtes($request->file('vumihi_commission_sonod'));
         } else {
-            $vumihi_commission_sonod = $bondobostoApp->vumihi_commission_sonod;
+            $vumihi_commission_sonod = $application->vumihi_commission_sonod;
         }
 
         if ($request->hasFile('vumihin_others_sonod')) {
-            if (file_exists(public_path($bondobostoApp->vumihin_others_sonod))) {
-                unlink(public_path($bondobostoApp->vumihin_others_sonod));
+            if (file_exists(public_path($application->vumihin_others_sonod))) {
+                unlink(public_path($application->vumihin_others_sonod));
             }
             $vumihin_others_sonod = $service->fileExequtes($request->file('vumihin_others_sonod'));
         } else {
-            $vumihin_others_sonod = $bondobostoApp->vumihin_others_sonod;
+            $vumihin_others_sonod = $application->vumihin_others_sonod;
         }
 
         $attributes = [
@@ -174,7 +161,7 @@ class BondobostoAppController extends Controller
             'vumihi_commission_sonod' => $vumihi_commission_sonod,
             'vumihin_others_sonod' => $vumihin_others_sonod,
         ];
-        $b = $bondobostoApp->update($attributes);
+        $b = $application->update($attributes);
         if (!$b) return redirect()->back()->with('error','Unable to update!');
         return redirect()->back()->with('success','Successfully Application updated!');
     }
@@ -188,18 +175,30 @@ class BondobostoAppController extends Controller
     public function destroy($id)
     {
         $b = BondobostoApp::find($id);
-        if (file_exists(public_path($b->avater))) {
-            unlink(public_path($b->avater));
+        if (file_exists($b->avater)) {
+            unlink($b->avater);
         }
-        if (file_exists(public_path($b->vumihi_muktijudda_sonod))) {
-            unlink(public_path($b->vumihi_muktijudda_sonod));
+        if (file_exists($b->vumihi_muktijudda_sonod)) {
+            unlink($b->vumihi_muktijudda_sonod);
         }
-        if (file_exists(public_path($b->vumihi_commission_sonod))) {
-            unlink(public_path($b->vumihi_commission_sonod));
+        if (file_exists($b->vumihi_commission_sonod)) {
+            unlink($b->vumihi_commission_sonod);
         }
-        if (file_exists(public_path($b->vumihin_others_sonod))) {
-            unlink(public_path($b->vumihin_others_sonod));
+        if (file_exists($b->vumihin_others_sonod)) {
+            unlink($b->vumihin_others_sonod);
         }
+        if (file_exists($b->vumihin_others_sonod)) {
+            unlink($b->vumihin_others_sonod);
+        }
+        if ($b->app_sends()) {
+            foreach ($b->app_sends() as $item) {
+                if (file_exists($item->file)) {
+                    unlink($item->file);
+                }
+            }
+        }
+        $b->app_roles()->delete();
+        $b->app_sends()->delete();
         $b->delete();
         if (!$b) return redirect()->back()->with('error','Unable to delete!');
         return redirect()->back()->with('success','Successfully Application deleted!');

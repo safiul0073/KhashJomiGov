@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Services\FileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -85,7 +86,7 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('avater')) {
-            if (file_exists(public_path($user->avater))) {
+            if (File::exists(public_path($user->avater))) {
                 unlink(public_path($user->avater));
             }
             $avaterfullName = $this->service->fileExequtes($request->file('avater'));
@@ -94,8 +95,8 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('sign')) {
-            if (file_exists($user->sign)) {
-                unlink(public_path($user->sign));
+            if (File::exists($user->sign)) {
+                File::delete($user->sign);
             }
             $sign = $this->service->fileExequtes($request->file('sign'));
         }else {

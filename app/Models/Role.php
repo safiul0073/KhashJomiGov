@@ -21,14 +21,19 @@ class Role extends Model
     {
         return $this->hasMany(AppSend::class);
     }
+
+    public function app_roles (){
+        return $this->hasMany(AppRole::class);
+    }
+    
     public static function generateRole() {
         $roles = [
             ['name' => 'সহকারী কমিশনার (ভূমি)'],
-            ['name' => 'সার্ভেয়ার'],
+            ['name' => 'ইউনিয়ন ভূমি সহকারী কর্মকর্তা'],
             ['name' => 'উপজেলা নির্বাহী অফিসার'],
             ['name' => 'জেলা প্রশাসক, লালমনিরহাট'],
             ['name' => 'অতিরিক্ত জেলা প্রশাসক (রাজস্ব),লালমনিরহাট'],
-            ['name' => 'ইউনিয়ন ভূমি সহকারী কর্মকর্তা'],
+            ['name' => 'রেভিনিউ ডেপুটি কালেক্টর'],
             ['name' => 'অফিস সহকারী কাম-কম্পিউটার মুদ্রাক্ষরিক'],
         ];
 
