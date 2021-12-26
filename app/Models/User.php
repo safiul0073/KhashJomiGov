@@ -13,17 +13,26 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
+    public static $DC = 4;
+    public static $ADC = 5;
+    public static $RDC = 6;
+
+    // UpaZila Role is ACland only 1
+    public static $AC_LAND = 1;
+    public static $UNO = 3;
+
+    // UNION Role is Towshilder only 2
+    public static $TOWSHILDER = 2;
+    
     protected $fillable = [
         'name',
         'avatar',
+        'sign',
         'phone',
         'email',
         'role_id',
+        'upa_zila_id',
+        'union_id',
         'password',
     ];
 

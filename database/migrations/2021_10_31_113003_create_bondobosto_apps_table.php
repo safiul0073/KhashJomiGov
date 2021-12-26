@@ -15,6 +15,8 @@ class CreateBondobostoAppsTable extends Migration
     {
         Schema::create('bondobosto_apps', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('upa_zila_id');
+            $table->unsignedBigInteger('union_id');
             $table->string('app_class');
             $table->string('avater')->nullable();
             $table->string('vumihi_muktijudda_sonod')->nullable();

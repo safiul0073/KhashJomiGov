@@ -45,7 +45,6 @@ class BondobostoAppController extends Controller
      */
     public function store(BondobostoRequest $request, FileService $service)
     {
-
             $attributes = [
                 'app_class' => $service->dataExecute($request->app_class),
                 'avater' => $service->fileExequtes($request->file('avater')),
@@ -99,14 +98,15 @@ class BondobostoAppController extends Controller
 
         $service = new FileService();
 
-        if ($request->hasFile('avater')) {
-            if (file_exists(public_path($application->avater))) {
-                unlink(public_path($application->avater));
-            }
-            $avater = $service->fileExequtes($request->file('avater'));
-        } else {
-            $avater = $application->avater;
-        }
+       $avater = $service->deleteFile($request,$application->avater,$request->file('avater'));
+        // if ($request->hasFile('avater')) {
+        //     if (file_exists(public_path($application->avater))) {
+        //         unlink(public_path($application->avater));
+        //     }
+        //     $avater = $service->fileExequtes($request->file('avater'));
+        // } else {
+        //     $avater = $application->avater;
+        // }
 
         if ($request->hasFile('vumihi_muktijudda_sonod')) {
             if (file_exists(public_path($application->vumihi_muktijudda_sonod))) {
