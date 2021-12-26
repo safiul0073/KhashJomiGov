@@ -1,0 +1,53 @@
+.header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	color: white;
+	background: #2bb063;
+}
+
+.down-header {
+	background: #999;
+}
+
+.mynavbar {
+	background: none;
+	margin-bottom: 0px;
+	border: none;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+.footer {
+	margin-top:  79px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: gray;
+	color: white;
+}
+
+.view-color {
+	background: gray;
+	color: white;
+	padding: 8px;
+}
+
+
+tr:nth-child(odd) td{
+	background: #355655;
+	color:#ffffff;
+}
+
+@media (max-width: 767px){
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+	    color: #ffffff;
+	}
+
+	tr:nth-child(odd) td{
+		background: #355655;
+		color:#ffffff;
+	}
+
+}
