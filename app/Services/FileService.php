@@ -1,5 +1,6 @@
 <?php
 namespace App\Services;
+use Illuminate\Http\Request;
 
 class FileService {
 
@@ -38,5 +39,18 @@ class FileService {
         }
 
         return $file_path;
+    }
+
+
+    public function deleteFile(Request $request, $file_path, $attribute) {
+
+        if ($request->hasFile($attribute)) {
+            if (file_exists(public_path($file_path))) {
+                unlink(public_path($file_path));
+            }
+            return $this->fileExequtes($request->file($attribute));
+        } else {
+            return $file_path;
+        }
     }
 }

@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('upa_zila_id')->nullable();
+            $table->unsignedBigInteger('union_id')->nullable();
             $table->string('email')->unique();
             $table->unsignedBigInteger('phone')->nullable();
             $table->string('avater')->default('default.png');
