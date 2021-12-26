@@ -45,11 +45,14 @@
                                          <td>{{$user->name}}</td>
                                          <td>{{$user->email}}</td>
                                          <td>{{$user->role?$user->role->name:''}}</td>
-                                         <td><img src="{{URL::to($user->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                                         <td><img src="{{$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                                          <td>
                                             <div class="d-flex flex-column">
                                                 <a href="{{route('user.show', $user->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
-                                                <a href="javascript:void(0)" id="show-update-modal" class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
+                                                <a href="javascript:void(0)"
+                                                    data-toggle="modal"
+                                                    data-target="#modal-default{{$user->id}}"
+                                                    class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
                                                 <button type="button" class="btn btn-outline-danger waves-effect" onclick="deleteCategory({{$user->id}})"><i class="fas fa-ban"></i></button>
                                                     <form id="delete-form-{{$user->id}}" action="{{route('user.destroy',$user->id)}}" method="POST" style="display: none;" >
                                                         @csrf
@@ -57,7 +60,7 @@
                                                     </form>
                                              </div>
                                          </td>
-                                         <div class="modal fade" id="update-modal">
+                                         <div class="modal fade" id="modal-default{{$user->id}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content bg-success">
                                                     <div class="modal-header ">
@@ -79,7 +82,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="phone">Phone Number</label>
-                                                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number">
+                                                                <input type="text" class="form-control" value="{{$user->phone}}" id="phone" name="phone" placeholder="Enter Phone Number">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="password">@lang('Password')</label>
@@ -231,10 +234,6 @@ function deleteCategory(id){
     $(document).on('click', '#showModal', function (e) {
                 e.preventDefault();
                 $('#create-modal').modal();
-        })
-    $(document).on('click', '#show-update-modal', function (e) {
-                e.preventDefault();
-                $('#update-modal').modal();
         })
 
 </script>

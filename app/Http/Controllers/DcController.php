@@ -18,18 +18,21 @@ class DcController extends Controller
 
         }
         $grohonData = $service->queryCount(auth()->user()->role_id, null);
-        $preronData =$service->queryCount(5,auth()->user()->role_id);
-
+        $preronData =$service->queryCount([5,1],auth()->user()->role_id);
+        $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
             $applications = $service->queryData(auth()->user()->role_id, null);
         }else if($tab == 'put1') {
-            $applications = $service->queryData(5, auth()->user()->role_id);
+            $applications = $service->queryData([5,1], auth()->user()->role_id);
+        }else if($tab == 'nothi') {
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
+
         }
-        return view('admin.contents.dc.index', compact('applications', 'tab', 'grohonData', 'preronData'));
+        return view('admin.contents.dc.index', compact('applications', 'tab', 'grohonData', 'preronData','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {
-        
+
         $this->validate($request, [
             'receive' => 'required|numeric|exists:roles,id',
             'onucched' => 'nullable|string',
@@ -45,9 +48,19 @@ class DcController extends Controller
         if($request->receive){
             $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)
                                           ->where('send_id',3)
-                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id,'status'=>0]);
-            if (!$h) return redirect()->back()->with('error', 'Already sended');
+                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id]);
+            if (!$h && $request->receive == 5) return redirect()->back()->with('error', 'Already sended');
+            $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)
+                                          ->where('send_id',6)
+                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id]);
+            if (!$h && $request->receive == 1) return redirect()->back()->with('error', 'Already sended');
+
         }
+
+        // if ($request->receive == 1) {
+        //     $application->status = 1;
+        //     $application->save();
+        // }
 
         if($request->hasFile('file')){
             $app_send = AppSend::where('bondobosto_app_id',$application->id)->where('user_id', auth()->id())->first();
@@ -66,8 +79,7 @@ class DcController extends Controller
             if ($request->hasFile('file')) {
                 $params['file'] = $service->fileExequtes($request->file('file'));
             }
-            $params['role_id'] = $request->receive;
-            $application->app_sends()->updateOrCreate(['user_id' => auth()->user()->id],$params);
+            $application->app_sends()->updateOrCreate(['user_id' => auth()->user()->id, 'role_id' => $request->receive],$params);
             return redirect()->back()->withSuccess('আপনার মতামত সফলভাবে পাঠিয়েছে & সেন্ড করা হয়েছে');
     }
 

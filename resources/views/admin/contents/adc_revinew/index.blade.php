@@ -21,10 +21,10 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="{{url('/admin/dc?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা</a>
+                <a href="{{url('/admin/adc_revinew?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ({{$grohonData}})</a>
 
-                {{-- <a href="{{url('/admin/dc?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা (১)</a> --}}
-
+                <a href="{{url('/admin/adc_revinew?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ({{$preronData}})</a>
+                <a href="{{url('/admin/adc_revinew?tab=nothi')}}" class="btn @if($tab == "nothi" || $tab == null) btn-success @else btn-primary @endif">নথি ({{$nothiCount}})</a>
             </div>
             <div class="card-body">
                 <div class="row">

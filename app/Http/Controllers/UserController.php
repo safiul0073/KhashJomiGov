@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PreviusUser;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\FileService;
@@ -74,52 +75,60 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
-        $this->validate($request, [
+        $params = $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'nullable|string|min:6',
-            'phone' => 'required|string|min:9',
+            'phone' => 'nullable|string|min:9',
             'role_id' => 'required|integer',
             'avater' => 'nullable|image|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:10000',
             'sign' => 'nullable|image|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:10000',
         ]);
-
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'phone' => $request->phone,
             'role_id' => $request->role_id,
         ]);
 
+        if($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
         if ($request->hasFile('avater')) {
-            if ($user->avater && File::exists(public_path($user->avater))) {
-                File::delete(public_path($user->avater));
-            }
             $avaterfullName = $this->service->fileExequtes($request->file('avater'));
-        } else {
-            $avaterfullName = 'default.png';
+            $user->avater = $avaterfullName;
         }
 
         if ($request->hasFile('sign')) {
-            if ($user->sign && File::exists(public_path($user->sign))) {
-                File::delete(public_path($user->sign));
-            }
             $sign = $this->service->fileExequtes($request->file('sign'));
-        }else {
-            $sign = null;
+            $user->sign = $sign;
         }
 
-        $user->avater = $avaterfullName;
-        $user->sign = $sign;
         $user->save();
-
         if (!$user) return redirect()->back()->with('error', 'Unable to update user');
         return redirect()->back()->with('success', 'User updated successfully');
     }
 
 
+
+
     public function destroy(User $user)
     {
+        $app_ids= array();
+        $id = 0;
+        foreach ($user->app_sends() as $app_id) {
+            if($id != $app_id->bondobosto_app_id) {
+                $app_ids[] = $app_id->bondobosto_app_id;
+                $id = $app_id->bondobosto_app_id;
+            }
+        }
+        PreviusUser::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'role_id' => $user->role_id,
+            'app_ids' => implode(',', $app_ids)
+        ]);
         $user->delete();
         if (!$user) return redirect()->back()->with('error', 'Unable to delete user');
         return redirect()->back()->with('success', 'User deleted successfully');

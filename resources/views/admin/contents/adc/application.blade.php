@@ -229,11 +229,16 @@
                                 </div>
                             </div>
 
-                            @if ($item->file)
-                                <div class="">
-                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                            <div class="row">
+                                @if ($item->file)
+                                    <div class="col-md-6">
+                                        <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                    </div>
+                                @endif
+                                <div class="col-md-6">
+                                    <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@
                 <a href="{{url('/admin/uno?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ({{$grohonData}})</a>
 
                 <a href="{{url('/admin/uno?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ({{$preronData}})</a>
-
+                <a href="{{url('/admin/uno?tab=nothi')}}" class="btn @if($tab == "nothi" || $tab == null) btn-success @else btn-primary @endif">নথি ({{$nothiCount}})</a>
             </div>
             <div class="card-body">
                 <div class="row">

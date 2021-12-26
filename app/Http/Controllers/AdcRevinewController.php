@@ -18,18 +18,21 @@ class AdcRevinewController extends Controller
         }
 
         $grohonData = $service->queryCount(auth()->user()->role_id, null);
-        $preronData =$service->queryCount(1,auth()->user()->role_id);
-
+        $preronData =$service->queryCount(4,auth()->user()->role_id);
+        $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
             $applications = $service->queryData(auth()->user()->role_id, null);
         }else if($tab == 'put1') {
-            $applications = $service->queryData(1, auth()->user()->role_id);
+            $applications = $service->queryData(4, auth()->user()->role_id);
+        }else if($tab == 'nothi') {
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
+
         }
-        return view('admin.contents.adc_revinew.index', compact('applications', 'tab', 'grohonData', 'preronData'));
+        return view('admin.contents.adc_revinew.index', compact('applications', 'tab', 'grohonData', 'preronData','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {
-        dd($request->all());
+
         $this->validate($request, [
             'receive' => 'required|numeric|exists:roles,id',
             'onucched' => 'nullable|string',
@@ -45,7 +48,7 @@ class AdcRevinewController extends Controller
         if($request->receive){
             $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)
                                           ->where('send_id',5)
-                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id,'status'=>0]);
+                                          ->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id]);
             if (!$h) return redirect()->back()->with('error', 'Already sended');
         }
 

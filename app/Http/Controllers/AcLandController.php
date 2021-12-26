@@ -18,8 +18,8 @@ class AcLandController extends Controller
 
         }
         $applications_count = BondobostoApp::where('status', 0)->count();
+        $nothiCount = BondobostoApp::where('status', 1)->count();
         $applications_grohon1 = $service->queryCount(auth()->user()->role_id, 2);
-
         $applications_preron2 = $service->queryCount(3,auth()->user()->role_id);
         $applications_preron1 = $service->queryCount(2,auth()->user()->role_id);
         $applications_grohon2 = $service->queryCount(auth()->user()->role_id, 3);
@@ -30,13 +30,22 @@ class AcLandController extends Controller
             $applications = $service->queryData(auth()->user()->role_id, 2);
 
         }else if ($tab == 'get2') {
-            $applications = $service->queryData(auth()->user()->role_id, 3);
+            $applications = $service->queryData(auth()->user()->role_id, 4);
+            foreach($applications as $app) {
+                $app->status = 1;
+                $app->save();
+                $applications[] = $app;
+            }
+
 
         }else if($tab == 'put1') {
             $applications = $service->queryData(2,auth()->user()->role_id);
 
         }else if($tab == 'put2') {
-            $applications = $service->queryData(6,auth()->user()->role_id);
+            $applications = $service->queryData([3,4,5,6],auth()->user()->role_id);
+
+        }else if($tab == 'nothi') {
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
 
         }
 
@@ -48,6 +57,7 @@ class AcLandController extends Controller
                                                            'applications_grohon2',
                                                            'applications_preron1',
                                                            'applications_preron2',
+                                                           'nothiCount'
                                                         ));
     }
 
@@ -66,16 +76,15 @@ class AcLandController extends Controller
         if(!$application) return redirect()->back()->with('error', 'something went wrong');
 
         if($request->receive){
-            $h = $application->app_roles()->updateOrCreate(['accept_id'=>$request->receive, 'send_id' => auth()->user()->role_id], ['status'=> 0]);
+            $h = $application->app_roles()->updateOrCreate(['accept_id'=>$request->receive, 'send_id' => auth()->user()->role_id], ['status'=> 2]);
             if (!$h) {
                 $application->app_roles()->create([
                     'accept_id' => $request->receive,
                     'send_id' => auth()->user()->role_id,
-                    'status' => 0,
+                    'status' => 2,
                 ]);
             }
         }
-
 
             if($request->hasFile('file')){
                 $app_send = AppSend::where('bondobosto_app_id',$application->id)->where('user_id', auth()->id())->where('role_id', $request->receive)->first();
@@ -97,6 +106,7 @@ class AcLandController extends Controller
                 $params2['user_id'] = auth()->id();
                 $params2['role_id'] = $request->receive;
                 $application->app_sends()->updateOrCreate($params2, $params);
+                $application->update(['status' => 2]);
             return redirect()->back()->withSuccess('আপনার মতামত সফলভাবে পাঠিয়েছে & সেন্ড করা হয়েছে');
 
     }

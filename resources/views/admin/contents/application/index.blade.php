@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>জিটাল অর্পিত সম্পত্তি লিজ নবায়ন, লালমনিরহাট</title>
-    {{-- @include('admin.static.css') --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="shortcut icon" href="https://vplease-lalmonirhat.gov.bd/public/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="{{asset('')}}assets/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset('')}}assets/styles.css">
-    <link rel="icon" type="image/png" href="http://vplease-lalmonirhat.gov.bd/">
-    {{-- <link rel="stylesheet" href="{{asset('')}}assets/dycalendar.css">
-    <link rel="stylesheet" href="{{asset('')}}assets/jquery-ui.css"> --}}
-    <link href="{{asset('')}}assets/font.css" rel="stylesheet">
+    <title>খাস কৃষি জমি বন্দোবস্ত, লালমনিরহাট</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="google-translate-customization" content="b6703fd8b1d84044-bd4dd2611d59f8dc-g6a8fe920a18c8f60-d">
+     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="css/dycalendar.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     <style type="text/css">
         body {
@@ -30,8 +29,8 @@
             <div class="row">
               <div class="site_logo col-md-6 col-sm-12" style="text-align:left;">
                              <img src="./assets/log.png"></div>
-              <div class="site_title col-md-6  col-sm-12 text" >
-                <h2 class="text-center"> ডিজিটাল অর্পিত সম্পত্তি লিজ নবায়ন, লালমনিরহাট </h2>
+              <div class="site_title col-md-6  col-sm-12 text" style="text-align:center;">
+                <h2 class="text-center"> খাস কৃষি জমি বন্দোবস্ত, লালমনিরহাট </h>
             </div>
 
             </div>
@@ -52,12 +51,11 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-
+</div>
                             <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div  class="navbar-collapse navbar-ex1-collapse collapse" aria-expanded="false" style="height: 1px;">
-                                <ul class="nav navbar-nav" style="display: inline-block;">
-                                    <li><a href="/">হোম</a></li>
-                                    {{-- <li><a href="http://vplease-lalmonirhat.gov.bd/abedon/form">আবেদন ফর্ম (বাসা)</a></li> --}}
+                                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                                  <ul class="nav navbar-nav">
+                                 <li class="{{Request::is('/')?'active':''}}"><a href="{{ URL::to('/') }}">হোম</a></li> 
                                     <li><a href="{{route('application.index')}}">আবেদন ফর্ম</a></li>
                                     <li class="dropdown">
                                         <a href="http://vplease-lalmonirhat.gov.bd/#" class="dropdown-toggle" data-toggle="dropdown">লগ ইন </b></a>
@@ -77,22 +75,140 @@
 
 
                             </div><!-- /.navbar-collapse -->
-                        </div>
+                        
                         </div>
                     </nav>
                 </div>
 
-
+ <div class="col-md-3">
+                    
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+                   <ul class="nav navbar-nav" style="background-color:green;">
+                       
+                        <li class="{{Request::is('/')?'active':''}}"><a id="google_translate_element">
+                     </a></li>
+                               
+                     
+                     
+                     </ul>
+                            
+                              
+                        </div>
+            </div>
             </div>
         </div>
     </div>
-    <div class="app">
-        <section class="section">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-8 col-lg-9 col-md-10 col-12 mx-auto">
+    <div id="app">
+    <section class="section">
+      <div class="container-fluid">
+  
+ 
+
+<?php $currentDate = date("l, F j, Y");
+
+$engDATE = array(1,2,3,4,5,6,7,8,9,0, 'January', 'February', 'March','April', 'May', 'June', 'July', 'August','September', 'October', 'November', 'December', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday');
+    
+$bangDATE = array('১','২','৩','৪','৫','৬','৭','৮','৯','০','জানুয়ারী','ফেব্রুয়ারী','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর','শনিবার','রবিবার','সোমবার','মঙ্গলবার',' বুধবার','বৃহস্পতিবার','শুক্রবার' ); 
+
+$convertedDATE = str_replace($engDATE, $bangDATE, $currentDate); 
+
+
+?>
+
+
+<?php
+class BanglaDate {
+ private $timestamp;
+ private $morning;
+ private $engHour;
+ private $engDate;
+ private $engMonth;
+ private $engYear;
+ private $bangDate;
+ private $bangMonth;
+ private $bangYear;
+ private $bn_months = array("পৌষ", "মাঘ", "ফাল্গুন", "চৈত্র", "বৈশাখ", "জ্যৈষ্ঠ", "আষাঢ়", "শ্রাবণ", "ভাদ্র", "আশ্বিন", "কার্তিক", "অগ্রহায়ণ");
+ private $bn_month_dates = array(30,30,30,30,31,31,31,31,31,30,30,30);
+ private $bn_month_middate = array(13,12,14,13,14,14,15,15,15,15,14,14); 
+ private $lipyearindex = 3;
+ function __construct( $timestamp, $hour = 6 ) {
+ $this->BanglaDate( $timestamp, $hour );
+ }
+ function BanglaDate( $timestamp, $hour = 6 ) {
+ $this->engDate = date( 'd', $timestamp );
+ $this->engMonth = date( 'm', $timestamp );
+ $this->engYear = date( 'Y', $timestamp );
+ $this->morning = $hour;
+ $this->engHour = date( 'G', $timestamp );
+ //calculate the bangla date
+ $this->calculate_date();
+ //now call calculate_year for setting the bangla year
+ $this->calculate_year();
+ //convert english numbers to Bangla
+ $this->convert();
+ }
+ function set_time( $timestamp, $hour = 6 ) {
+ $this->BanglaDate( $timestamp, $hour );
+ }
+private function calculate_date() { 
+ $this->bangDate = $this->engDate - $this->bn_month_middate[$this->engMonth - 1];
+ if ($this->engHour < $this->morning) 
+ $this->bangDate -= 1;
+ 
+ if (($this->engDate <= $this->bn_month_middate[$this->engMonth - 1]) || ($this->engDate == $this->bn_month_middate[$this->engMonth - 1] + 1 && $this->engHour < $this->morning) ) {
+ $this->bangDate += $this->bn_month_dates[$this->engMonth - 1];
+ if ($this->is_leapyear() && $this->lipyearindex == $this->engMonth) 
+ $this->bangDate += 1;
+ $this->bangMonth = $this->bn_months[$this->engMonth - 1];
+ }
+ else{
+ $this->bangMonth = $this->bn_months[($this->engMonth)%12]; 
+ }
+ }
+function is_leapyear() {
+ if ( $this->engYear % 400 == 0 || ($this->engYear % 100 != 0 && $this->engYear % 4 == 0) )
+ return true;
+ else
+ return false;
+ }
+ function calculate_year() {
+ $this->bangYear = $this->engYear - 593;
+ if (($this->engMonth < 4) || (($this->engMonth == 4) && (($this->engDate < 14) || ($this->engDate == 14 && $this->engHour < $this->morning))))
+ $this->bangYear -= 1;
+ }
+ function bangla_number( $int ) {
+ $engNumber = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
+ $bangNumber = array('১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯', '০');
+$converted = str_replace( $engNumber, $bangNumber, $int );
+ return $converted;
+ }
+ function convert() {
+ $this->bangDate = $this->bangla_number( $this->bangDate );
+ $this->bangYear = $this->bangla_number( $this->bangYear );
+ }
+ function get_date() {
+ return array($this->bangDate, $this->bangMonth, $this->bangYear);
+ }
+}
+function BDdate($time)
+{
+$bn = new BanglaDate($time);
+ $output = $bn->get_date();
+ $ReadyDate = "$output[0] $output[1] $output[2]";
+ return $ReadyDate;
+}
+
+$time = time();
+$Bdate = BDdate($time);
+//echo $Bdate;
+?>
+
+
+    <div class="container" style="margin-top: 20px;">
+        <div class="row" style="F9F9F9;">
+                    <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header text-center">
                                 <h1>Applications</h1>
                                 @include('layouts.partial.flash-alert')
                             </div>
@@ -213,7 +329,7 @@
                                         <div class="col-md-7">
                                             <div class="col-md-6">
                                                 <input type="text" class="form-control @error('main_name') is-invalid @enderror"
-                                                        name="main_name" placeholder="মোঃ কামাল"
+                                                        name="main_name" placeholder="নাম"
                                                         value="{{ old('main_name') }}">
                                                 @error('main_name')
                                                     <div class="invalid-feedback">
@@ -247,7 +363,7 @@
                                             <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
                                                 <input type="text" class="form-control @error('main_fathers_name') is-invalid @enderror"
                                                         name="main_fathers_name" value="{{ old('main_fathers_name') }}"
-                                                        placeholder="মোঃ কামাল">
+                                                        placeholder="নাম">
                                                 @error('main_fathers_name')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -274,6 +390,7 @@
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                                     <select name="main_zila" class="form-control ml-2" placeholder=""id="">
+                                                        <option selected="selected" disabled >জেলা</option>
                                                         <option value="লালমনিরহাট">লালমনিরহাট</option>
                                                     </select>
                                                 </div>
@@ -284,6 +401,7 @@
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                                     <select name="main_upzila" class="form-control ml-2" id="main_upzila">
+                                                        <option selected="selected" disabled >উপজেলা</option>
                                                         @foreach ($upa_zilas as $item)
                                                             <option value="{{$item->id}}">{{$item->name}}</option>
                                                         @endforeach
@@ -318,7 +436,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" class="form-control @error('main_f_or_m_name') is-invalid @enderror"
                                                         name="main_f_or_m_name" value="{{old('main_f_or_m_name')}}"
-                                                        placeholder="মোঃ কামাল">
+                                                        placeholder="নাম">
                                                 @error('main_f_or_m_name')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -433,16 +551,96 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
+        
+        
+        
+        
+        </div><!--/.container-fluid-->
             </section>
-        </div>
+          </div>
+          <footer>
+            <div class="footer">
+          <div class="container">
+             <div class="col-sm-12">
+                 <div class="col-sm-6">
+                  <div class="float-left">
+                                   <h5>অর্পিত সম্পত্তি লিজ নবায়ন সহজীকরণ, লালমনিরহাট -- 059161308, 059161468</h5>
+          </div>
+           </div> 
+           <div class="col-sm-6">
+                  <div class="float-right" style="padding-top: 8px;">
+                    © 2020 &nbsp;Developed By<div class="bullet textshadoow">ZS Technologies </div> <a style="color: #03A9F4;" target="_blank" href="https://zstechbd.com/"><img style="display:inline-block;height:28px;margin-left:5px;" src="http://eschooling24.com/wp-content/themes/prawncity-it/img/web2.png"></a>
+                  </div>
+              </div>
+          </div>
+            </div>
+               </div>
+        </footer>
+@include('admin.static.js')
+   
+<script src="js/jquery-2.1.4.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-printme.js"></script>
+<script src="js/script.js"></script>
+ <script type="text/javascript" src="js/jquery.imagemapster.js"></script>
 
-    @include('admin.static.js')
-    <script src="{{asset('')}}assets/bootstrap.min.js.download"></script>
-    {{-- <script src="{{asset('')}}assets/jquery-printme.js.download"></script> --}}
-    {{-- <script src="{{asset('')}}assets/script.js.download"></script> --}}
-    <script type="text/javascript" src="{{asset('')}}assets/jquery.imagemapster.js.download"></script>
+<script type="text/javascript">
 
-    <script type="text/javascript" src="{{asset('')}}assets/element.js.download"></script>
+$(document).ready(function() {
+    $('img').mapster({
+        showToolTip: true,
+        noHrefIsMask: false,
+        fillColor: '0a7a0a',
+        fillOpacity: 0.7,
+        mapKey: "group",
+        strokeWidth: 5,
+        stroke:true,
+        strokeColor: 'F88017',
+		onClick: go
+        
+    });
+	
+	
+
+});
+function go(data) {
+    if (this.href && this.href !== '#') {
+        window.open(this.href);
+    }
+}
+</script>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+       
+                   <script type="text/javascript">
+var tday=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var tmonth=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+function GetClock(){
+var d=new Date();
+var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
+var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+if(nhour==0){ap=" AM";nhour=12;}
+else if(nhour<12){ap=" AM";}
+else if(nhour==12){ap=" PM";}
+else if(nhour>12){ap=" PM";nhour-=12;}
+
+if(nmin<=9) nmin="0"+nmin;
+if(nsec<=9) nsec="0"+nsec;
+
+var clocktext=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+document.getElementById('clockbox').innerHTML=clocktext;
+}
+
+GetClock();
+setInterval(GetClock,1000);
+</script>
     <script>
         // every upazila wise showing all unions
         $('#main_upzila').on('click', function() {

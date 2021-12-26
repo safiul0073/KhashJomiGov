@@ -19,13 +19,16 @@ class AdcController extends Controller
         }
         $grohonData = $service->queryCount(auth()->user()->role_id, null);
         $preronData =$service->queryCount(6,auth()->user()->role_id);
-
+        $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
             $applications = $service->queryData(auth()->user()->role_id, null);
         }else if($tab == 'put1') {
             $applications = $service->queryData(6, auth()->user()->role_id);
+        }else if($tab == 'nothi') {
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
+
         }
-        return view('admin.contents.adc.index', compact('applications', 'tab', 'grohonData', 'preronData'));
+        return view('admin.contents.adc.index', compact('applications', 'tab', 'grohonData', 'preronData','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {
@@ -43,7 +46,7 @@ class AdcController extends Controller
         if(!$application) return redirect()->back()->with('error', 'something went wrong');
 
         if($request->receive){
-            $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)->where('send_id',4)->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id,'status'=>0]);
+            $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)->where('send_id',4)->update(['accept_id'=>$request->receive, 'send_id'=>auth()->user()->role_id]);
             if (!$h) return redirect()->back()->with('error', 'Already sended');
         }
 

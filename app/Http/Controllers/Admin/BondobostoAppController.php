@@ -21,14 +21,15 @@ class BondobostoAppController extends Controller
     public function index()
     {
         $upa_zilas = UpaZila::all();
-        return view('admin.contents.applications.index', compact('upa_zilas'));
+        return view('admin.contents.application.index', compact('upa_zilas'));
     }
 
     public function getUnion ($id) {
-
-        $unions = Union::where('upa_zila_id', $id)->get();
         $hell = '';
+        $unions = Union::where('upa_zila_id', $id)->get();
+        $hell .= '<option ' .'selected' .' disabled'.' >'.'ইউনিয়ন'.'</option>';
         foreach($unions as $un) {
+
             $hell .= '<option value="'.$un->id.'">'.$un->name.'</option>';
         }
         $htmls = '';

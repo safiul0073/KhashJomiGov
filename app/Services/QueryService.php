@@ -11,12 +11,17 @@ class QueryService {
         if ($send == null) {
             $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept) {
                 $query->where('accept_id', $accept);
-                        })->where('status', 1)->count();
+                        })->where('status', 2)->count();
+            return $result;
+        }else if (is_array($accept)) {
+            $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
+                $query->whereIn('accept_id', $accept)->where('send_id', $send);
+            })->where('status', 2)->count();
             return $result;
         }else{
             $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
                 $query->where('accept_id', $accept)->where('send_id', $send);
-            })->where('status', 1)->count();
+            })->where('status', 2)->count();
             return $result;
         }
     }
@@ -25,11 +30,15 @@ class QueryService {
         if ($send == null) {
             $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept) {
                 $query->where('accept_id', $accept);
-            })->where('status', 1)->get();
-        } else {
+            })->where('status', 2)->get();
+        } else if (is_array($accept)) {
+            $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
+                $query->whereIn('accept_id', $accept)->where('send_id', $send);
+            })->where('status', 2)->get();
+        }else {
             $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
                 $query->where('accept_id', $accept)->where('send_id', $send);
-            })->where('status', 1)->get();
+            })->where('status', 2)->get();
         }
         return $result;
     }

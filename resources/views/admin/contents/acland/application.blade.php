@@ -219,14 +219,33 @@
                                     {{-- <p>{!!$item->montobbo!!}</p> --}}
                                     <p>{!! $item->adesh !!}</p>
                                 </div>
-                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                    <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
-                                    <div class="w-100 text-center">
-                                        {{-- <p>{{$item->user->name}}</p> --}}
-                                        <p>{{$item->user->role->name}}</p>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                                        <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
+                                        <div class="w-100 text-center">
+                                            {{-- <p>{{$item->user->name}}</p> --}}
+                                            <p>{{$item->role->name}}</p>
+                                        </div>
                                     </div>
+                                    @if (count($previous_users) > 0)
+                                        @foreach ($previous_users as $user)
+                                             @foreach ($user->explodedData() as $app)
+                                                    @if ($app == $item->bondobosto_app_id)
+                                                        @if ($user->role_id == $item->role_id)
+                                                        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="w-100 text-center">
+                                                                {{-- <p>{{$item->user->name}}</p> --}}
+                                                                <p ><del>{{$item->role->name}}</del></p>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                    @endif
+                                             @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
-                                <div class="col-12">
+
+                                <div class="row">
                                     @if ($item->file)
                                         <div class="col-md-6">
                                             <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
@@ -251,7 +270,7 @@
                         <div class="card-body">
                             <table class="table">
                                 <thead>
-                                    @foreach ($roles as $item)
+                                    @foreach (array_sort_for_role($roles) as $item)
                                         @if ($item->id != auth()->user()->role_id)
                                         <tr style="background-color: green;" class="text-white border-1">
                                             <th>

@@ -26,6 +26,7 @@
                 <a href="{{url('/admin/ac-land?tab=get2')}}" class="btn @if($tab == "get2" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা-2 ({{$applications_grohon2}})</a>
                 <a href="{{url('/admin/ac-land?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা-1 ({{$applications_preron1}})</a>
                 <a href="{{url('/admin/ac-land?tab=put2')}}" class="btn @if($tab == "put2" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা-2 ({{$applications_preron2}})</a>
+                <a href="{{url('/admin/ac-land?tab=nothi')}}" class="btn @if($tab == "nothi" || $tab == null) btn-success @else btn-primary @endif">নথি ({{$nothiCount}})</a>
             </div>
             <div class="card-body">
                 <div class="row">

@@ -18,15 +18,18 @@ class TowshilderController extends Controller
             $tab = 'get1';
 
         }
-        $grohonApps = $service->queryCount(auth()->user()->role_id, 1);
+        $grohonApps = $service->queryCount(auth()->user()->role_id, null);
         $preronApp =$service->queryCount(1,auth()->user()->role_id);
-
+        $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
-            $applications = $service->queryData(auth()->user()->role_id, 1);
+            $applications = $service->queryData(auth()->user()->role_id, null);
         }else if($tab == 'put1') {
             $applications = $service->queryData(1, auth()->user()->role_id);
+        }else if($tab == 'nothi') {
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
+
         }
-        return view('admin.contents.towshilder.index', compact('applications', 'tab','grohonApps', 'preronApp'));
+        return view('admin.contents.towshilder.index', compact('applications', 'tab','grohonApps', 'preronApp','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {
@@ -46,7 +49,7 @@ class TowshilderController extends Controller
         if($request->receive){
             $h = $application->app_roles()->where('accept_id',auth()->user()->role_id)
                                           ->where('send_id',$request->receive)
-                                          ->update(['accept_id'=>1, 'send_id'=>auth()->user()->role_id,'status'=>0]);
+                                          ->update(['accept_id'=>1, 'send_id'=>auth()->user()->role_id]);
             if (!$h) return redirect()->back()->with('error', 'Already sended');
         }
 
