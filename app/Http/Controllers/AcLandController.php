@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\File;
 
 class AcLandController extends Controller
 {
+    
     public function index (Request $request, QueryService $service) {
+
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'home';
-
         }
+
         $applications_count = BondobostoApp::where('status', 0)->count();
         $nothiCount = BondobostoApp::where('status', 1)->count();
         $applications_grohon1 = $service->queryCount(auth()->user()->role_id, 2);

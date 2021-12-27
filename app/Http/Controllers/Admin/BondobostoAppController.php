@@ -18,13 +18,18 @@ class BondobostoAppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $upa_zilas = UpaZila::all();
-        return view('admin.contents.application.index', compact('upa_zilas'));
+        $upa_zila_id = $request->upa_zila_id;
+        $union_id = $request->union_id;
+
+        return view('admin.contents.application.index', compact('upa_zilas','upa_zila_id', 'union_id'));
     }
 
     public function getUnion ($id) {
+
         $hell = '';
         $unions = Union::where('upa_zila_id', $id)->get();
         $hell .= '<option ' .'selected' .' disabled'.' >'.'ইউনিয়ন'.'</option>';
@@ -46,6 +51,8 @@ class BondobostoAppController extends Controller
     public function store(BondobostoRequest $request, FileService $service)
     {
             $attributes = [
+                'upa_zila_id' => $request->upa_zila_id,
+                'union_id' => $request->union_id,
                 'app_class' => $service->dataExecute($request->app_class),
                 'avater' => $service->fileExequtes($request->file('avater')),
                 'main_name' => $request->main_name,

@@ -10,13 +10,40 @@ class BondobostoAppPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability, BondobostoApp  $bondobostoApp)
+    {
+        if ($user->role_id == User::$DC) {
+            return true;
+        }
+        if ($user->role_id == User::$ADC) {
+            return true;
+        }
+        if ($user->role_id == User::$RDC) {
+            return true;
+        }
+        if ($user->role_id == User::$AC_LAND) {
+            if ($user->upa_zila_id == $bondobostoApp->upa_zila_id) {
+                return true;
+            }
+        }
+
+        if ($user->role_id == User::$TOWSHILDER) {
+            if ($user->upa_zila_id == $bondobostoApp->upa_zila_id) {
+
+                if ($user->union_id == $bondobostoApp->union_id) {
+                    return true;
+                }
+
+            }
+        }
+    }
     /**
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user )
     {
 
     }

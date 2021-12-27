@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BondobostoAppController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AppSendController;
 use App\Http\Controllers\DcController;
+use App\Http\Controllers\Frontend\ApplicationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TowshilderController;
@@ -62,6 +63,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('app-sends/{id}', [AppSendController::class, 'appSends'])->name('app.sends');
 });
 
+// show unoion and upazila page for bondobosto app
+Route::get('bondobosto', [ApplicationController::class, 'index'])->name('bondobosto-app');
+Route::get('bondobosto/show', [ApplicationController::class, 'show'])->name('bondobosto-app.show');
 // application frontend Secton here
 Route::resource('application', BondobostoAppController::class);
 

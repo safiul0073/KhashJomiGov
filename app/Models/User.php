@@ -23,7 +23,7 @@ class User extends Authenticatable
 
     // UNION Role is Towshilder only 2
     public static $TOWSHILDER = 2;
-    
+
     protected $fillable = [
         'name',
         'avatar',
@@ -54,6 +54,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // upazila belongsTo user
+    public function upazila()
+    {
+        return $this->belongsTo(Upazila::class);
+    }
+
+    // union belongsTo user
+    public function union()
+    {
+        return $this->belongsTo(Union::class);
+    }
+    
     // role belongsTo user
     public function role()
     {

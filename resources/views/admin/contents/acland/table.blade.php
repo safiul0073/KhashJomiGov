@@ -12,6 +12,7 @@
         </thead>
         <tbody>
             @foreach ($applications as $key => $application)
+            @can('view', $application)
              <tr>
                  <td>{{$key+1}}</td>
                  <td>{{$application->main_name}}</td>
@@ -32,6 +33,7 @@
 
                  </td>
              </tr>
+             @endcan
             @endforeach
         </tbody>
     </table>
