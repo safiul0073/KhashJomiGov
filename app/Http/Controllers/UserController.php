@@ -16,9 +16,11 @@ class UserController extends Controller
     public function __construct(FileService $service)
     {
         $this->service = $service;
+        $this->authorizeResource(User::class,'user');
     }
     public function index()
     {
+        
         $users = User::with('role')->get();
         $roles = Role::all();
 

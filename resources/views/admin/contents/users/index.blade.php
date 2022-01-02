@@ -40,89 +40,90 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $key => $user)
-                                     <tr>
-                                         <td>{{$key+1}}</td>
-                                         <td>{{$user->name}}</td>
-                                         <td>{{$user->email}}</td>
-                                         <td>{{$user->role?$user->role->name:''}}</td>
-                                         <td><img src="{{$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
-                                         <td>
-                                            <div class="d-flex flex-column">
-                                                <a href="{{route('user.show', $user->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
-                                                <a href="javascript:void(0)"
-                                                    data-toggle="modal"
-                                                    data-target="#modal-default{{$user->id}}"
-                                                    class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
-                                                <button type="button" class="btn btn-outline-danger waves-effect" onclick="deleteCategory({{$user->id}})"><i class="fas fa-ban"></i></button>
-                                                    <form id="delete-form-{{$user->id}}" action="{{route('user.destroy',$user->id)}}" method="POST" style="display: none;" >
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                             </div>
-                                         </td>
-                                         <div class="modal fade" id="modal-default{{$user->id}}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content bg-success">
-                                                    <div class="modal-header ">
-                                                        <h4 class="modal-title ">@lang('Create New User')</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <form method="post" enctype="multipart/form-data" action="{{route("user.update", $user->id)}}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="name">@lang('Name')</label>
-                                                                <input type="text" class="form-control" value="{{$user->name}}" id="name" name="name" placeholder="Enter Name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="email">@lang('Email')</label>
-                                                                <input type="email" class="form-control" value="{{$user->email}}" id="email" name="email" placeholder="Enter Email">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="phone">Phone Number</label>
-                                                                <input type="text" class="form-control" value="{{$user->phone}}" id="phone" name="phone" placeholder="Enter Phone Number">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="password">@lang('Password')</label>
-                                                                <input type="text" class="form-control"  id="password" name="password" placeholder="Enter Password">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="role">@lang('Role')</label>
-                                                                <select class="form-control text-black" id="role" name="role_id">
-                                                                    @foreach ($roles as $role)
-                                                                        @if ($role->id == $user->role_id)
-                                                                            <option value="{{$role->id}}" selected="selected" >{{$role->name}}</option>
-                                                                        @else
-                                                                        <option value="{{$role->id}}">{{$role->name}}</option>
-                                                                        @endif
-
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="avater">@lang('Image')</label>
-                                                                <input type="file" class="form-control" id="avater" name="avater" placeholder="Enter Avater">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sign">@lang('Sign')</label>
-                                                                <input type="file" class="form-control" id="sign" name="sign" placeholder="Enter Sign">
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">@lang('Close')
-                                                            </button>
-                                                            <button type="submit" class="btn btn-success">@lang('Update')</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- /.modal-content -->
+                                    @can('view', $user)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$user->role?$user->role->name:''}}</td>
+                                        <td><img src="{{$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                                        <td>
+                                           <div class="d-flex flex-column">
+                                               <a href="{{route('user.show', $user->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
+                                               <a href="javascript:void(0)"
+                                                   data-toggle="modal"
+                                                   data-target="#modal-default{{$user->id}}"
+                                                   class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
+                                               <button type="button" class="btn btn-outline-danger waves-effect" onclick="deleteCategory({{$user->id}})"><i class="fas fa-ban"></i></button>
+                                                   <form id="delete-form-{{$user->id}}" action="{{route('user.destroy',$user->id)}}" method="POST" style="display: none;" >
+                                                       @csrf
+                                                       @method('DELETE')
+                                                   </form>
                                             </div>
-                                            <!-- /.modal-dialog -->
-                                        </div>
-                                     </tr>
+                                        </td>
+                                        <div class="modal fade" id="modal-default{{$user->id}}">
+                                           <div class="modal-dialog">
+                                               <div class="modal-content bg-success">
+                                                   <div class="modal-header ">
+                                                       <h4 class="modal-title ">@lang('Create New User')</h4>
+                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                           <span aria-hidden="true">×</span></button>
+                                                   </div>
+                                                   <form method="post" enctype="multipart/form-data" action="{{route("user.update", $user->id)}}">
+                                                       @csrf
+                                                       @method('PUT')
+                                                       <div class="modal-body">
+                                                           <div class="form-group">
+                                                               <label for="name">@lang('Name')</label>
+                                                               <input type="text" class="form-control" value="{{$user->name}}" id="name" name="name" placeholder="Enter Name">
+                                                           </div>
+                                                           <div class="form-group">
+                                                               <label for="email">@lang('Email')</label>
+                                                               <input type="email" class="form-control" value="{{$user->email}}" id="email" name="email" placeholder="Enter Email">
+                                                           </div>
+                                                           <div class="form-group">
+                                                               <label for="phone">Phone Number</label>
+                                                               <input type="text" class="form-control" value="{{$user->phone}}" id="phone" name="phone" placeholder="Enter Phone Number">
+                                                           </div>
+                                                           <div class="form-group">
+                                                               <label for="password">@lang('Password')</label>
+                                                               <input type="text" class="form-control"  id="password" name="password" placeholder="Enter Password">
+                                                           </div>
+                                                           <div class="form-group">
+                                                               <label for="role">@lang('Role')</label>
+                                                               <select class="form-control text-black" id="role" name="role_id">
+                                                                   @foreach ($roles as $role)
+                                                                       @if ($role->id == $user->role_id)
+                                                                           <option value="{{$role->id}}" selected="selected" >{{$role->name}}</option>
+                                                                       @else
+                                                                       <option value="{{$role->id}}">{{$role->name}}</option>
+                                                                       @endif
 
+                                                                   @endforeach
+                                                               </select>
+                                                           </div>
+                                                           <div class="form-group">
+                                                               <label for="avater">@lang('Image')</label>
+                                                               <input type="file" class="form-control" id="avater" name="avater" placeholder="Enter Avater">
+                                                           </div>
+                                                           <div class="form-group">
+                                                               <label for="sign">@lang('Sign')</label>
+                                                               <input type="file" class="form-control" id="sign" name="sign" placeholder="Enter Sign">
+                                                           </div>
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">@lang('Close')
+                                                           </button>
+                                                           <button type="submit" class="btn btn-success">@lang('Update')</button>
+                                                       </div>
+                                                   </form>
+                                               </div>
+                                               <!-- /.modal-content -->
+                                           </div>
+                                           <!-- /.modal-dialog -->
+                                       </div>
+                                    </tr>
+                                    @endcan
                                     @endforeach
                                 </tbody>
                             </table>

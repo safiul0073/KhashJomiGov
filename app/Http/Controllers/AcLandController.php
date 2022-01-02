@@ -11,28 +11,30 @@ use Illuminate\Support\Facades\File;
 
 class AcLandController extends Controller
 {
-    
+
     public function index (Request $request, QueryService $service) {
 
+        $user= [];
+        $user = auth()->user();
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'home';
         }
 
-        $applications_count = BondobostoApp::where('status', 0)->count();
-        $nothiCount = BondobostoApp::where('status', 1)->count();
-        $applications_grohon1 = $service->queryCount(auth()->user()->role_id, 2);
-        $applications_preron2 = $service->queryCount(3,auth()->user()->role_id);
-        $applications_preron1 = $service->queryCount(2,auth()->user()->role_id);
-        $applications_grohon2 = $service->queryCount(auth()->user()->role_id, 3);
+        $applications_count = BondobostoApp::where('status', 0)->where('upa_zila_id', $user->upa_zila_id)->count();
+        $nothiCount = BondobostoApp::where('status', 1)->where('upa_zila_id', $user->upa_zila_id)->count();
+        $applications_grohon1 = $service->queryCount($user->role_id, 2, $user->upazila_id);
+        $applications_preron2 = $service->queryCount([3,4,5,6],$user->role_id, $user->upa_zila_id);
+        $applications_preron1 = $service->queryCount(2,$user->role_id, $user->upa_zila_id);
+        $applications_grohon2 = $service->queryCount($user->role_id, 3, $user->upa_zila_id);
         if ($tab == 'home') {
-            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 0)->latest()->get();
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('upa_zila_id', $user->upa_zila_id)->where('status', 0)->latest()->get();
 
         }else if($tab == 'get1') {
-            $applications = $service->queryData(auth()->user()->role_id, 2);
+            $applications = $service->queryData($user->role_id, 2, $user->upazila_id);
 
         }else if ($tab == 'get2') {
-            $applications = $service->queryData(auth()->user()->role_id, 4);
+            $applications = $service->queryData($user->role_id, 4, $user->upazila_id);
             foreach($applications as $app) {
                 $app->status = 1;
                 $app->save();
@@ -41,13 +43,13 @@ class AcLandController extends Controller
 
 
         }else if($tab == 'put1') {
-            $applications = $service->queryData(2,auth()->user()->role_id);
+            $applications = $service->queryData(2,$user->role_id, $user->upa_zila_id);
 
         }else if($tab == 'put2') {
-            $applications = $service->queryData([3,4,5,6],auth()->user()->role_id);
+            $applications = $service->queryData([3,4,5,6],$user->role_id, $user->upa_zila_id);
 
         }else if($tab == 'nothi') {
-            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('upa_zila_id', $user->upa_zila_id)->where('status', 1)->latest()->get();
 
         }
 
