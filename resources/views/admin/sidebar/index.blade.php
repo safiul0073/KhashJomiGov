@@ -31,7 +31,7 @@
                       </p>
                     </a> --}}
                   {{-- </li> --}}
-                  @can('isAcland', auth()->user())
+                  @can('isAcland')
                   <li class="nav-item ">
                     <a href="{{ route('ac-land') }}" class="nav-link {{ request()->routeIs('ac-land') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -40,17 +40,9 @@
                       </p>
                     </a>
                   </li>
-                  <li class="nav-item ">
-                    <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users"></i>
-                      <p>
-                        ব্যবহারকারী
-                      </p>
-                    </a>
-                  </li>
                   @endcan
 
-                  @can('isTowshildeer', auth()->user())
+                  @can('isTowshildeer')
                   <li class="nav-item ">
                     <a href="{{ route('towshilder') }}" class="nav-link {{ request()->routeIs('towshilder') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -60,7 +52,7 @@
                     </a>
                   </li>
                   @endcan
-                  @can('isUno', auth()->user())
+                  @can('isUno')
                   <li class="nav-item ">
                     <a href="{{ route('uno') }}" class="nav-link {{ request()->routeIs('uno') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -70,7 +62,7 @@
                     </a>
                   </li>
                   @endcan
-                  @can('isDc', auth()->user())
+                  @can('isDc')
                   <li class="nav-item ">
                     <a href="{{ route('dc') }}" class="nav-link {{ request()->routeIs('dc') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -80,7 +72,7 @@
                     </a>
                   </li>
                   @endcan
-                  @can('isAdc', auth()->user())
+                  @can('isAdc')
                   <li class="nav-item ">
                     <a href="{{ route('adc') }}" class="nav-link {{ request()->routeIs('adc') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -90,7 +82,7 @@
                     </a>
                   </li>
                   @endcan
-                  @can('isAdcRevinew', auth()->user())
+                  @can('isAdcRevinew')
                   <li class="nav-item ">
                     <a href="{{ route('adc-revinew') }}" class="nav-link {{ request()->routeIs('adc-revinew') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -98,6 +90,16 @@
                         আবেদন ডাটা
                       </p>
                     </a>
+                  </li>
+                  @endcan
+                  @can('manage-users')
+                  <li class="nav-item ">
+                      <a href="{{ route('user.index') }}" class="nav-link {{ request()->routeIs('user*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-users"></i>
+                        <p>
+                          ব্যবহারকারী
+                        </p>
+                      </a>
                   </li>
                   @endcan
                   <li class="nav-item ">

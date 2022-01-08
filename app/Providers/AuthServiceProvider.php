@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\BondobostoApp;
+use App\Models\User;
 use App\Policies\BondobostoAppPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -27,6 +28,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::define('manage-users', function ($user) {
+            return $user->role_id == User::$DC || $user->role_id == User::$AC_LAND;
+        });
 
         Gate::define('isAcland', function ($user) {
             if ($user->isAcLand()) {

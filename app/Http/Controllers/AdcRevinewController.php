@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\File;
 class AdcRevinewController extends Controller
 {
     public function index (Request $request,QueryService $service) {
+        
+        $user= [];
+        $user = auth()->user();
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'get1';

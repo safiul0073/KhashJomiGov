@@ -216,17 +216,29 @@
 
                             <div class="card-body">
                                 <div class="col-12">
-                                    <p>{!!$item->montobbo!!}</p>
+                                    {{-- <p>{!!$item->montobbo!!}</p> --}}
                                     <p>{!! $item->adesh !!}</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
                                         <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
                                         <div class="w-100 text-center">
-                                            {{-- <p>{{$item->user->name}},</p> --}}
-                                            <p>{{$item->user->role->name}}</p>
+                                            {{-- <p>{{$item->user->name}}</p> --}}
+                                            <p>{{$item->role->name}}</p>
                                         </div>
                                     </div>
+                                    @if (count($previous_users) > 0)
+                                        @foreach ($previous_users as $user)
+                                            @if ($user->id == $item->user_id)
+                                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                                                    <div class="w-100 text-center">
+                                                        {{-- <p>{{$user->name}}</p> --}}
+                                                        <p class=""><s>{{$user->role->name}}</s></p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
 
                                 <div class="row">

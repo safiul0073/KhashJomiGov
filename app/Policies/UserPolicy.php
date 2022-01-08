@@ -17,12 +17,13 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
+        
         if ($user->role_id == User::$DC) {
             return true;
         }
 
         if ($user->role_id == User::$AC_LAND) {
-            
+
                 return true;
         }
     }
@@ -36,6 +37,8 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
+
+
         if ($user->role_id == User::$DC) {
             return true;
         }
@@ -45,6 +48,8 @@ class UserPolicy
                 return true;
             }
         }
+
+
     }
 
     /**
@@ -55,6 +60,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
+
         if ($user->role_id == User::$DC) {
             return true;
         }

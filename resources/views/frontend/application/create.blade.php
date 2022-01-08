@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header text-center">
                         <h1>Applications</h1>
-                        @include('layouts.partial.flash-alert')
+                        {{-- @include('layouts.partial.flash-alert') --}}
                     </div>
                     <div class="card-body">
                         <form method="post" class=" action="{{route('application.store')}}" enctype="multipart/form-data">
@@ -70,7 +70,7 @@
 
                             <div class="form-group my-2">
                                 <div class="">
-                                    <label class="my-3" for="">   (খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
+                                    <label class="my-3" for="">(খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
 
                                     <div class="form-check row">
                                         <div class="col-md-5">
@@ -190,8 +190,8 @@
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <select name="main_zila" class="form-control ml-2" placeholder=""id="">
-                                                <option selected="selected" disabled >জেলা</option>
-                                                <option value="লালমনিরহাট">লালমনিরহাট</option>
+                                                <option disabled >জেলা</option>
+                                                <option selected="selected" value="লালমনিরহাট">লালমনিরহাট</option>
                                             </select>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                             <select name="main_upzila" class="form-control ml-2" id="main_upzila">
                                                 <option selected="selected" disabled >উপজেলা</option>
                                                 @foreach ($upa_zilas as $item)
-                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    <option @if($upa_zila_id == $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
                                                 @endforeach
                                             </select>
 
@@ -215,7 +215,12 @@
                                             <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">ইউনিয়নঃ</label>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3 setUnion">
-
+                                            <select name="main_union" class="form-control ml-2" id="main_union">
+                                                <option selected="selected" disabled >ইউনিয়ন</option>
+                                                @foreach ($unions as $item)
+                                                    <option @if($union_id == $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
                                     </div>

@@ -12,20 +12,23 @@ use Illuminate\Support\Facades\File;
 class UnoController extends Controller
 {
     public function index (Request $request,QueryService $service) {
+        
+        $user= [];
+        $user = auth()->user();
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'get1';
 
         }
-        $grohonData = $service->queryCount(auth()->user()->role_id, null);
-        $preronData =$service->queryCount(4,auth()->user()->role_id);
-        $nothiCount = BondobostoApp::where('status', 1)->count();
+        $grohonData = $service->queryCount(auth()->user()->role_id, null,$user->upa_zila_id);
+        $preronData =$service->queryCount(4,auth()->user()->role_id,$user->upa_zila_id);
+        $nothiCount = BondobostoApp::where('status', 1)->where('upa_zila_id', $user->upa_zila_id)->count();
         if($tab == 'get1') {
-            $applications = $service->queryData(auth()->user()->role_id, null);
+            $applications = $service->queryData(auth()->user()->role_id, null,$user->upa_zila_id);
         }else if($tab == 'put1') {
-            $applications = $service->queryData(4, auth()->user()->role_id);
+            $applications = $service->queryData(4, auth()->user()->role_id,$user->upa_zila_id);
         }else if($tab == 'nothi') {
-            $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
+            $applications = BondobostoApp::with(['union','upa_zila'])->where('upa_zila_id', $user->upa_zila_id)->where('status', 1)->latest()->get();
 
         }
         return view('admin.contents.uno.index', compact('applications', 'tab','grohonData','preronData','nothiCount'));

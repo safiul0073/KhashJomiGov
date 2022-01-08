@@ -208,40 +208,52 @@
             <br>
             <div class="row">
                 @foreach ($app_sends as $item)
-                <div class="col-md-6">
-                    <div class="card">
-                        <div  style="background-color: #f3aeae;" class="card-header text-danger">
-                            <h5 class="text-center">{!!$item->onucched!!}</h5>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="col-12">
-                                {{-- <p>{!!$item->montobbo!!}</p> --}}
-                                <p>{!! $item->adesh !!}</p>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div style="background-color: #f3aeae;" class="card-header text-danger">
+                                <h5 class="text-center">{!!$item->onucched!!}</h5>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                    <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
-                                    <div class="w-100 text-center">
-                                        {{-- <p>{{$item->user->name}},</p> --}}
-                                        <p>{{$item->user->role->name}}</p>
-                                    </div>
+
+                            <div class="card-body">
+                                <div class="col-12">
+                                    {{-- <p>{!!$item->montobbo!!}</p> --}}
+                                    <p>{!! $item->adesh !!}</p>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                @if ($item->file)
-                                    <div class="col-md-6">
-                                        <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                                        <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
+                                        <div class="w-100 text-center">
+                                            {{-- <p>{{$item->user->name}}</p> --}}
+                                            <p>{{$item->role->name}}</p>
+                                        </div>
                                     </div>
-                                @endif
-                                <div class="col-md-6">
-                                    <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
+                                    @if (count($previous_users) > 0)
+                                        @foreach ($previous_users as $user)
+                                            @if ($user->id == $item->user_id)
+                                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                                                    <div class="w-100 text-center">
+                                                        {{-- <p>{{$user->name}}</p> --}}
+                                                        <p class=""><s>{{$user->role->name}}</s></p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="row">
+                                    @if ($item->file)
+                                        <div class="col-md-6">
+                                            <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                        </div>
+                                    @endif
+                                    <div class="col-md-6">
+                                        <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
             <form action="{{route('uno.to.dc', $application->id)}}" enctype="multipart/form-data" method="post">

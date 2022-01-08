@@ -18,42 +18,44 @@ class HomeController extends Controller
 
     public function index(QueryService $service)
     {
-        if (auth()->user()->role_id == 1) {
-            $totalApp = BondobostoApp::where('status', 0)->count();
-            $applications_grohon1 = $service->queryCount(auth()->user()->role_id, 2);
-            $applications_preron2 = $service->queryCount(3,auth()->user()->role_id);
-            $applications_preron1 = $service->queryCount(2,auth()->user()->role_id);
-            $applications_grohon2 = $service->queryCount(auth()->user()->role_id, 3);
+        $user = [];
+        $user = auth()->user();
+        if ( $user->role_id == 1) {
+            $totalApp = BondobostoApp::where('status', 0)->where('upa_zila_id', $user->upa_zila_id)->count();
+            $applications_grohon1 = $service->queryCount( $user->role_id, 2, $user->upazila_id);
+            $applications_preron2 = $service->queryCount(3, $user->role_id, $user->upazila_id);
+            $applications_preron1 = $service->queryCount(2, $user->role_id, $user->upazila_id);
+            $applications_grohon2 = $service->queryCount( $user->role_id, 3, $user->upazila_id);
             return view('admin.contents.dashboard.index', compact('totalApp','applications_grohon1','applications_preron2','applications_preron1','applications_grohon2'));
         }
-        if (auth()->user()->role_id == 2) {
-            $totalApp = BondobostoApp::where('status', 0)->count();
-            $grohonApps = $service->queryCount(auth()->user()->role_id, null);
-            $preronApp =$service->queryCount(1,auth()->user()->role_id);
+        if ( $user->role_id == 2) {
+            $totalApp = BondobostoApp::where('status', 0)->where('upa_zila_id', $user->upa_zila_id)->where('union_id', $user->union_id)->count();
+            $grohonApps = $service->queryCount( $user->role_id, null, $user->upazila_id, $user->union_id);
+            $preronApp =$service->queryCount(1, $user->role_id, $user->upazila_id, $user->union_id);
             return view('admin.contents.dashboard.index', compact('totalApp','grohonApps','preronApp'));
         }
-        if (auth()->user()->role_id == 3) {
-            $totalApp = BondobostoApp::where('status', 0)->count();
-            $grohonData = $service->queryCount(auth()->user()->role_id, null);
-            $preronData =$service->queryCount(4,auth()->user()->role_id);
+        if ( $user->role_id == 3) {
+            $totalApp = BondobostoApp::where('status', 0)->where('upa_zila_id', $user->upa_zila_id)->count();
+            $grohonData = $service->queryCount( $user->role_id, null, $user->upazila_id);
+            $preronData =$service->queryCount(4, $user->role_id, $user->upazila_id);
             return view('admin.contents.dashboard.index', compact('totalApp','grohonData','preronData'));
         }
-        if (auth()->user()->role_id == 4) {
+        if ( $user->role_id == 4) {
             $totalApp = BondobostoApp::where('status', 0)->count();
-            $grohonData = $service->queryCount(auth()->user()->role_id, null);
-            $preronData =$service->queryCount([5,1],auth()->user()->role_id);
+            $grohonData = $service->queryCount( $user->role_id);
+            $preronData =$service->queryCount([5,1], $user->role_id);
             return view('admin.contents.dashboard.index', compact('totalApp','grohonData','preronData'));
         }
-        if (auth()->user()->role_id == 5) {
+        if ( $user->role_id == 5) {
             $totalApp = BondobostoApp::where('status', 0)->count();
-            $grohonData = $service->queryCount(auth()->user()->role_id, null);
-            $preronData =$service->queryCount(6,auth()->user()->role_id);
+            $grohonData = $service->queryCount( $user->role_id);
+            $preronData =$service->queryCount(6, $user->role_id);
             return view('admin.contents.dashboard.index', compact('totalApp','grohonData','preronData'));
         }
-        if (auth()->user()->role_id == 6) {
+        if ( $user->role_id == 6) {
             $totalApp = BondobostoApp::where('status', 0)->count();
-            $grohonData = $service->queryCount(auth()->user()->role_id, null);
-            $preronData =$service->queryCount(4,auth()->user()->role_id);
+            $grohonData = $service->queryCount($user->role_id);
+            $preronData =$service->queryCount(4, $user->role_id);
             return view('admin.contents.dashboard.index', compact('totalApp','grohonData','preronData'));
         }
 
@@ -63,9 +65,10 @@ class HomeController extends Controller
         $application = BondobostoApp::with('app_sends')->findOrFail($id);
         $roles = Role::all();
         $app_sends = AppSend::with('user')->where('bondobosto_app_id', $id)->get();
-        $previous_users = PreviusUser::all();
+        $previous_users = $application->upa_zila->users->where('status', 0);
         switch (auth()->user()->role_id) {
             case 1:
+
                 return view('admin.contents.acland.application', compact('application','roles','app_sends','previous_users'));
                 break;
             case 2:

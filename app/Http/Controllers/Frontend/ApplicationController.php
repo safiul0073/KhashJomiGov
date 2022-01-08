@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Union;
 use App\Models\UpaZila;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ApplicationController extends Controller
 {
     public function index (Request $request) {
         $upozilas = UpaZila::all();
-        return view('frontend.application.index', compact('upozilas'));
+        $unions = Union::all();
+        return view('frontend.application.index', compact('upozilas','unions'));
     }
 
     public function show (Request $request) {

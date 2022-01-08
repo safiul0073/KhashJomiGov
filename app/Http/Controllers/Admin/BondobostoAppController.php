@@ -24,8 +24,8 @@ class BondobostoAppController extends Controller
         $upa_zilas = UpaZila::all();
         $upa_zila_id = $request->upa_zila_id;
         $union_id = $request->union_id;
-
-        return view('admin.contents.application.index', compact('upa_zilas','upa_zila_id', 'union_id'));
+        $unions = Union::all();
+        return view('frontend.application.create', compact('upa_zilas','upa_zila_id', 'union_id', 'unions'));
     }
 
     public function getUnion ($id) {

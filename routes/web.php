@@ -9,6 +9,7 @@ use App\Http\Controllers\AppSendController;
 use App\Http\Controllers\DcController;
 use App\Http\Controllers\Frontend\ApplicationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TowshilderController;
 use App\Http\Controllers\UnoController;
@@ -24,7 +25,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     // user section here
-    Route::resource('user', UserController::class);
+    Route::resource('user', UserController::class)->middleware('can:manage-users');
 
     // profile section here
     Route::get('profile/{id}', [ProfileController::class, 'index'])->name('profile.show');

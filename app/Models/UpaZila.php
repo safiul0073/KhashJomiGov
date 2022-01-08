@@ -15,6 +15,10 @@ class UpaZila extends Model
         return $this->hasMany(Union::class);
     }
 
+    public function users () {
+        return $this->hasMany(User::class, 'upa_zila_id');
+    }
+
     public static function generateUpaZila() {
         $upaZilas = [
             [

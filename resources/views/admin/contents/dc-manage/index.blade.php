@@ -1,24 +1,17 @@
 @extends('layouts.admin-app')
-@section('title', 'Ac Land')
-@push('css')
-
-1
-2
-3
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-@endpush
+@section('title', 'Mange User')
 @section('contents')
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Ac Land</h1>
+              <h1 class="m-0">Mange User</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-user"><a href="#">Home</a></li>
-                <li class="breadcrumb-user active">Ac Land</li>
+                <li class="breadcrumb-user active">Mange User</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -28,11 +21,20 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="javascript:void(0)" id="showModal" class="btn btn-success">Create a new User</a>
-                <a href="{{ route('user.index',['tab' => 'former']) }}"  class="btn btn-success">Former User</a>
-                <a href="{{ route('user.index') }}"  class="btn btn-success">Present User</a>
+                @can('isDc')
+                <ul class="nav nav-tabs pt-1 pl-2 bg-green">
+                    @foreach ($upazilas as $item)
+                        <li class="nav-item">
+                        <a class="nav-link {{ $tab == $item->id? 'active text-green' :'text-white'}}"  href="{{ route('user.index', ['tab' => $item->id]) }}"> {{ $item->name }}</a>
+                      </li>
+                    @endforeach
+                  </ul>
+                @endcan
             </div>
             <div class="card-body">
+                <div class="my-1">
+                    <a href="javascript:void(0)" id="showModal" class="btn btn-success ">Create a new User</a>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -44,7 +46,6 @@
                                         <th>ইমেইল</th>
                                         <th>রোল</th>
                                         <th>ছবি</th>
-                                        <th>ইউনিয়ন</th>
                                         <th>কার্যক্রম</th>
                                     </tr>
                                 </thead>
@@ -55,9 +56,8 @@
                                         <td>{{$key+1}}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->role? $user->role->name :''}}</td>
+                                        <td>{{$user->role?$user->role->name:''}}</td>
                                         <td><img src="{{$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
-                                        <td>{{$user->union? $user->union->name :''}}</td>
                                         <td>
                                            <div class="d-flex flex-column">
                                                <a href="{{route('user.show', $user->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
@@ -84,8 +84,6 @@
                                                        @csrf
                                                        @method('PUT')
                                                        <div class="modal-body">
-                                                        <input type="hidden" value="{{ $role_id }}" name="role_id" >
-                                                        <input type="hidden" value="{{ $upa_zila_id }}" name="upa_zila_id" >
                                                            <div class="form-group">
                                                                <label for="name">@lang('Name')</label>
                                                                <input type="text" class="form-control" value="{{$user->name}}" id="name" name="name" placeholder="Enter Name">
@@ -103,13 +101,13 @@
                                                                <input type="text" class="form-control"  id="password" name="password" placeholder="Enter Password">
                                                            </div>
                                                            <div class="form-group">
-                                                               <label for="role">@lang('Union')</label>
-                                                               <select class="form-control text-black" required id="role" name="role_id">
-                                                                   @foreach ($unions as $unon)
-                                                                       @if ($unon->id == $user->unon_id)
-                                                                           <option value="{{$unon->id}}" selected="selected" >{{$unon->name}}</option>
+                                                               <label for="role">@lang('Role')</label>
+                                                               <select class="form-control text-black" id="role" name="role_id">
+                                                                   @foreach ($roles as $role)
+                                                                       @if ($role->id == $user->role_id)
+                                                                           <option value="{{$role->id}}" selected="selected" >{{$role->name}}</option>
                                                                        @else
-                                                                       <option value="{{$unon->id}}">{{$unon->name}}</option>
+                                                                       <option value="{{$role->id}}">{{$role->name}}</option>
                                                                        @endif
 
                                                                    @endforeach
@@ -159,9 +157,8 @@
             </div>
             <form method="post" action="{{route("user.store")}}" enctype="multipart/form-data" >
                 @csrf
+                <input type="hidden" value="{{$tab}}" name="upa_zila_id">
                 <div class="modal-body">
-                    <input type="hidden" value="{{ $role_id }}" name="role_id" >
-                    <input type="hidden" value="{{ $upa_zila_id }}" name="upa_zila_id" >
                     <div class="form-group">
                         <label for="name">@lang('Name')</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
@@ -179,9 +176,10 @@
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number">
                     </div>
                     <div class="form-group">
-                        <label for="role">@lang('Select Union')</label>
-                        <select required class="form-control text-black" id="role" name="union_id">
-                            @foreach ($unions as $role)
+                        <label for="role">@lang('Role')</label>
+                        <select class="form-control text-black" id="role" name="role_id">
+
+                            @foreach ($roles as $role)
                                 <option value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
@@ -208,7 +206,6 @@
 </div>
 @endsection
 @push('js')
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 
@@ -221,7 +218,7 @@ function deleteCategory(id){
         buttonsStyling: false
         })
         swalWithBootstrapButtons.fire({
-        title: 'Are you sure send to former?',
+        title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,

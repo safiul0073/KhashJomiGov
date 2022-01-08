@@ -34,6 +34,7 @@ class User extends Authenticatable
         'upa_zila_id',
         'union_id',
         'password',
+        'status'
     ];
 
     /**
@@ -58,7 +59,7 @@ class User extends Authenticatable
     // upazila belongsTo user
     public function upazila()
     {
-        return $this->belongsTo(Upazila::class);
+        return $this->belongsTo(UpaZila::class, 'upa_zila_id', 'id');
     }
 
     // union belongsTo user
@@ -66,7 +67,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Union::class);
     }
-    
+
     // role belongsTo user
     public function role()
     {

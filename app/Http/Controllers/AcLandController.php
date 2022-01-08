@@ -23,7 +23,7 @@ class AcLandController extends Controller
 
         $applications_count = BondobostoApp::where('status', 0)->where('upa_zila_id', $user->upa_zila_id)->count();
         $nothiCount = BondobostoApp::where('status', 1)->where('upa_zila_id', $user->upa_zila_id)->count();
-        $applications_grohon1 = $service->queryCount($user->role_id, 2, $user->upazila_id);
+        $applications_grohon1 = $service->queryCount($user->role_id, 2, $user->upa_zila_id);
         $applications_preron2 = $service->queryCount([3,4,5,6],$user->role_id, $user->upa_zila_id);
         $applications_preron1 = $service->queryCount(2,$user->role_id, $user->upa_zila_id);
         $applications_grohon2 = $service->queryCount($user->role_id, 3, $user->upa_zila_id);
@@ -40,7 +40,6 @@ class AcLandController extends Controller
                 $app->save();
                 $applications[] = $app;
             }
-
 
         }else if($tab == 'put1') {
             $applications = $service->queryData(2,$user->role_id, $user->upa_zila_id);

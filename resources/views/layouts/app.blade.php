@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('')}}css/styles.css">
     <link rel="stylesheet" href="{{asset('')}}css/dycalendar.css">
     <link rel="stylesheet" href="{{asset('')}}css/jquery-ui.css">
-
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     <style type="text/css">
         body {
@@ -59,7 +58,5 @@
 <script src="{{asset('')}}js/script.js"></script>
 <script type="text/javascript" src="{{asset('')}}js/jquery.imagemapster.js"></script>
 @stack('scripts')
-
-
 </body>
 </html>
