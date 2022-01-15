@@ -195,9 +195,6 @@
                             <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
                             <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
                         </div>
-
-
-
                 </div>
             </div>
             <br>
@@ -211,34 +208,41 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div style="background-color: #f3aeae;" class="card-header text-danger">
-                                <h5 class="text-center">{!!$item->onucched!!}</h5>
+                                <h3 class="text-center">{!!$item->onucched!!}</h3>
                             </div>
 
                             <div class="card-body">
-                                <div class="col-12">
+
                                     {{-- <p>{!!$item->montobbo!!}</p> --}}
-                                    <p>{!! $item->adesh !!}</p>
-                                </div>
+                                    <h4 style="style="font-size:14px;>{!! $item->adesh !!}</h4>
+
                                 <div class="row">
 
-                                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                        <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
-                                        <div class="w-100 text-center">
-                                            {{-- <p>{{$item->user->name}}</p> --}}
-                                            <p>{{$item->role->name}}</p>
-                                        </div>
+                                    <div style="width: 150px; float: left;">
+                                        <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                            <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
+
+                                            <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; ">
+                                                    {{$item->user->name}}
+                                                    <br>
+                                                    তারিখ: {{$item->created_at->format('d F, Y H:i:s A')}}
+                                                    <br>
+                                                    {{$item->role->name}}</h4>
                                     </div>
-                                    {{dd($previous_users)}}
                                     @if (count($previous_users) > 0)
                                         @foreach ($previous_users as $user)
 
                                             @if ($user->id == $item->user_id)
-                                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                                    <div class="w-100 text-center">
-                                                        {{-- <p>{{$user->name}}</p> --}}
-                                                        <p class=""><s>{{$user->role->name}}</s></p>
-                                                    </div>
-                                                </div>
+                                            <div style="width: 150px; float: left;">
+                                                <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                                    {{-- <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p> --}}
+
+                                                    <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; text-decoration:line-through">
+                                                            {{$user->name}}
+                                                            তারিখ: {{$item->created_at->format('d F, Y H:i:s A')}}
+                                                            <br>
+                                                            {{$user->role->name}}</h4>
+                                            </div>
                                             @endif
                                         @endforeach
                                     @endif
@@ -260,6 +264,7 @@
 
                 @endforeach
             </div>
+            @if ($application->status != 1)
             <form action="{{route('dc.to.adc', $application->id)}}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
@@ -332,7 +337,9 @@
                         </div>
                     </div>
                 </div>
-        </form>
+            </form>
+            @endif
+
         </div>
     </div>
     </div>

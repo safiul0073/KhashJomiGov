@@ -16,6 +16,7 @@ class CreateAppSendsTable extends Migration
         Schema::create('app_sends', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('bondobosto_app_id');
+            $table->unsignedBigInteger('accept_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_id');
             $table->string('file')->nullable();

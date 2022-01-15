@@ -1,5 +1,5 @@
 @extends('layouts.admin-app')
-@section('title', 'Ac Land')
+@section('title', '{{auth()->user()->upazila->name}}')
 @push('css')
 
 1
@@ -13,12 +13,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Ac Land</h1>
+              <h1 class="m-0">{{auth()->user()->upazila->name}}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-user"><a href="#">Home</a></li>
-                <li class="breadcrumb-user active">Ac Land</li>
+                <li class="breadcrumb-user"><a href="{{ url('/admin') }}">Home</a></li>
+                <li class="breadcrumb-user active">{{auth()->user()->upazila->name}}</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -29,8 +29,8 @@
         <div class="card">
             <div class="card-header">
                 <a href="javascript:void(0)" id="showModal" class="btn btn-success">Create a new User</a>
-                <a href="{{ route('user.index',['tab' => 'former']) }}"  class="btn btn-success">Former User</a>
-                <a href="{{ route('user.index') }}"  class="btn btn-success">Present User</a>
+                <a href="{{ route('user.index',['tab' => 'former']) }}"  class="btn {{$tab == 'former' ? 'btn-outline-success' : 'btn-success'}}">Former User</a>
+                <a href="{{ route('user.index') }}"  class="btn {{ !$tab ? 'btn-outline-success' : 'btn-success'}}">Present User</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -159,6 +159,7 @@
             </div>
             <form method="post" action="{{route("user.store")}}" enctype="multipart/form-data" >
                 @csrf
+
                 <div class="modal-body">
                     <input type="hidden" value="{{ $role_id }}" name="role_id" >
                     <input type="hidden" value="{{ $upa_zila_id }}" name="upa_zila_id" >

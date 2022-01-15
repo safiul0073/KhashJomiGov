@@ -9,7 +9,7 @@ class AppSend extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function bondobosto_app () {
         return $this->belongsTo(BondobostoApp::class, 'bondobosto_app_id', 'id');

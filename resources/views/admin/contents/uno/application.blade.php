@@ -215,47 +215,58 @@
                             </div>
 
                             <div class="card-body">
-                                <div class="col-12">
-                                    {{-- <p>{!!$item->montobbo!!}</p> --}}
-                                    <p>{!! $item->adesh !!}</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                        <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
-                                        <div class="w-100 text-center">
-                                            {{-- <p>{{$item->user->name}}</p> --}}
-                                            <p>{{$item->role->name}}</p>
-                                        </div>
-                                    </div>
-                                    @if (count($previous_users) > 0)
-                                        @foreach ($previous_users as $user)
-                                            @if ($user->id == $item->user_id)
-                                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                                    <div class="w-100 text-center">
-                                                        {{-- <p>{{$user->name}}</p> --}}
-                                                        <p class=""><s>{{$user->role->name}}</s></p>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </div>
 
-                                <div class="row">
-                                    @if ($item->file)
-                                        <div class="col-md-6">
-                                            <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                {{-- <p>{!!$item->montobbo!!}</p> --}}
+                                <h4 style="style="font-size:14px;>{!! $item->adesh !!}</h4>
+
+                            <div class="row">
+
+                                <div style="width: 150px; float: left;">
+                                    <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                        <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
+
+                                        <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; ">
+                                                {{$item->user->name}}
+                                                তারিখ: {{$item->created_at->format('d F, Y H:i:s A')}}
+                                                <br>
+                                                {{$item->role->name}}</h4>
+                                </div>
+                                @if (count($previous_users) > 0)
+                                    @foreach ($previous_users as $user)
+
+                                        @if ($user->id == $item->user_id)
+                                        <div style="width: 150px; float: left;">
+                                            <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                                {{-- <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p> --}}
+
+                                                <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; text-decoration:line-through">
+                                                        {{$user->name}}
+
+                                                        <br>
+                                                        {{$user->role->name}}</h4>
                                         </div>
-                                    @endif
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
+
+                            <div class="row">
+                                @if ($item->file)
                                     <div class="col-md-6">
-                                        <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
+                                        <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
                                     </div>
+                                @endif
+                                <div class="col-md-6">
+                                    <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
+            @if ($application->status != 1)
             <form action="{{route('uno.to.dc', $application->id)}}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
@@ -282,7 +293,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-md-6">
@@ -322,8 +332,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+                </div>
+            </form>
+            @endif
+
         </div>
     </div>
     </div>

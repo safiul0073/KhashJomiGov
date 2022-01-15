@@ -15,6 +15,10 @@ class Union extends Model
         return $this->belongsTo(UpaZila::class);
     }
 
+    public function bondobosto_apps () {
+        return $this->hasMany(BondobostoApp::class);
+    }
+
     public static function generateUnions() {
         $unions = [
             [

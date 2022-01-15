@@ -1,19 +1,18 @@
 <?php
 
-use App\Http\Controllers\AcLandController;
-use App\Http\Controllers\AdcController;
-use App\Http\Controllers\AdcRevinewController;
-use App\Http\Controllers\Admin\BondobostoAppController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\AppSendController;
-use App\Http\Controllers\DcController;
+use App\Http\Controllers\Admin\AcLandController;
+use App\Http\Controllers\Admin\AdcController;
+use App\Http\Controllers\Admin\AdcRevinewController;
+use App\Http\Controllers\Frontend\BondobostoAppController;
+use App\Http\Controllers\Frontend\DashboardController;
+use App\Http\Controllers\Admin\AppSendController;
+use App\Http\Controllers\Admin\DcController;
 use App\Http\Controllers\Frontend\ApplicationController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ManageController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TowshilderController;
-use App\Http\Controllers\UnoController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\TowshilderController;
+use App\Http\Controllers\Admin\UnoController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

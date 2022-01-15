@@ -1,12 +1,12 @@
 @extends('layouts.admin-app')
-@section('title', 'Ac Land')
+@section('title', auth()->user()->name)
 @section('contents')
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">DC</h1>
+              <h1 class="m-0">{{auth()->user()->name}}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -21,9 +21,10 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <a href="{{url('/admin/dc?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ({{$grohonData}})</a>
-
-                <a href="{{url('/admin/dc?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ({{$preronData}})</a>
+                <a href="{{url('/admin/dc?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ১ ({{$grohonData1}})</a>
+                <a href="{{url('/admin/dc?tab=get2')}}" class="btn @if($tab == "get2" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ২ ({{$grohonData2}})</a>
+                <a href="{{url('/admin/dc?tab=put1')}}" class="btn @if($tab == "put1" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ১ ({{$preronData1}})</a>
+                <a href="{{url('/admin/dc?tab=put2')}}" class="btn @if($tab == "put2" || $tab == null) btn-success @else btn-primary @endif">প্রেরিত ডাটা ২ ({{$preronData2}})</a>
                 <a href="{{url('/admin/dc?tab=nothi')}}" class="btn @if($tab == "nothi" || $tab == null) btn-success @else btn-primary @endif">নথি ({{$nothiCount}})</a>
             </div>
             <div class="card-body">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BondobostoRequest;
@@ -21,11 +21,10 @@ class BondobostoAppController extends Controller
     public function index(Request $request)
     {
 
-        $upa_zilas = UpaZila::all();
-        $upa_zila_id = $request->upa_zila_id;
-        $union_id = $request->union_id;
-        $unions = Union::all();
-        return view('frontend.application.create', compact('upa_zilas','upa_zila_id', 'union_id', 'unions'));
+        $upa_zila = UpaZila::find($request->upa_zila_id);
+        $union = Union::find($request->union_id);
+
+        return view('frontend.application.create', compact('upa_zila','union'));
     }
 
     public function getUnion ($id) {

@@ -13,8 +13,8 @@
                         <form method="post" class=" action="{{route('application.store')}}" enctype="multipart/form-data">
                             @csrf
 
-                            <input type="hidden" name="union_id" value="{{$union_id}}">
-                            <input type="hidden" name="upa_zila_id" value="{{$upa_zila_id}}">
+                            <input type="hidden" name="union_id" value="{{$union->id}}">
+                            <input type="hidden" name="upa_zila_id" value="{{$upa_zila->id}}">
                             <div class="from-group my-2">
                                 <div class="">
                                     <div class="row">
@@ -200,13 +200,8 @@
                                             <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">উপজেলাঃ</label>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                            <select name="main_upzila" class="form-control ml-2" id="main_upzila">
-                                                <option selected="selected" disabled >উপজেলা</option>
-                                                @foreach ($upa_zilas as $item)
-                                                    <option @if($upa_zila_id == $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
-                                                @endforeach
-                                            </select>
-
+                                            <input type="text" class="form-control ml-2" disabled value="{{$upa_zila->name}}" >
+                                            <input type="hidden" name="main_upzila" value="{{$upa_zila->id}}" >
                                         </div>
 
                                     </div>
@@ -215,12 +210,8 @@
                                             <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">ইউনিয়নঃ</label>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3 setUnion">
-                                            <select name="main_union" class="form-control ml-2" id="main_union">
-                                                <option selected="selected" disabled >ইউনিয়ন</option>
-                                                @foreach ($unions as $item)
-                                                    <option @if($union_id == $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
-                                                @endforeach
-                                            </select>
+                                                <input type="text" class="form-control ml-2" disabled value="{{$union->name}}" >
+                                                <input type="hidden" name="main_union" value="{{$union->id}}" >
                                         </div>
 
                                     </div>
@@ -279,7 +270,7 @@
                                             <th class="text-center">সম্পর্ক</th>
                                             <th class="text-center">কি করেন</th>
                                             <th class="text-center">মন্তব্য</th>
-                                            <th class="text-center"><a id="add" href="javascript:void(0)" class="btn btn-secondary">+</a></th>
+                                            <th class="text-center"><a id="add" href="javascript:void(0)" class="btn btn-success">+</a></th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
@@ -380,7 +371,7 @@
                     var tableBody = $('#tableBody')
                     var i = 1;
                     $('#add').on('click', function (e) {
-                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" class="form-control" type="text"></td><td ><input class="form-control" style="width: 60px;" name="age[][age]" min="1" type="number" ></td><td ><input class="form-control" style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input class="form-control" name="whatdo[][whatdo]" type="text" ></td> <td ><input class="form-control" name="comment[][comment]" type="text" ></td><td><a id="delete" class="btn btn-sm btn-secondary rounded" >-</a></td></tr>')
+                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" class="form-control" type="text"></td><td ><input class="form-control" style="width: 60px;" name="age[][age]" min="1" type="number" ></td><td ><input class="form-control" style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input class="form-control" name="whatdo[][whatdo]" type="text" ></td> <td ><input class="form-control" name="comment[][comment]" type="text" ></td><td><a id="delete" class="btn btn-sm btn-danger rounded" >-</a></td></tr>')
                     })
 
                     $(document).on('click', '#delete', function () {

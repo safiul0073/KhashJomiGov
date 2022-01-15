@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\PreviusUser;
 use App\Models\Role;
 use App\Models\UpaZila;
@@ -42,15 +43,17 @@ class UserController extends Controller
         $user=auth()->user();
         $role_id =  User::$TOWSHILDER;
         if ($request->tab == 'former')  { // showing former user if tab has value like former
+            $tab = 'former';
             $users = $user->upazila->users->where('status', 0);
         }else{
             $users = $user->upazila->users->where('status', 1);
+            $tab = null;
         }
 
         $unions = $user->upazila->unions;
         $upa_zila_id = $user->upa_zila_id;
 
-        return view('admin.contents.users.index', compact('users', 'unions','role_id','upa_zila_id'));
+        return view('admin.contents.users.index', compact('users', 'unions','role_id','upa_zila_id','tab'));
     }
 
     public function store(Request $request)
@@ -74,6 +77,13 @@ class UserController extends Controller
             }else {
                 $user = User::where('role_id', $request->role_id)->where('union_id', $request->union_id)->where('status', 1)->first();
                 if ($user) return redirect()->back()->with('error', 'User already exists');
+            }
+
+            if ($request->role_id == User::$DC || $request->role_id == User::$RDC || $request->role_id == User::$ADC) { // check if role is DC, RDC or ADC then setting upa_zila_id null
+                $request->upa_zila_id = null;
+                if (User::where('role_id', $request->role_id)->where('status', 1)->first()) {
+                    return redirect()->back()->with('error', 'User already exists');
+                }
             }
 
             $user = User::create([
@@ -129,31 +139,41 @@ class UserController extends Controller
             'avater' => 'nullable|image|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:10000',
             'sign' => 'nullable|image|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:10000',
         ]);
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'role_id' => $request->role_id,
-            'upa_zila_id' => $request->upa_zila_id,
-            'union_id' => $request->union_id? $request->union_id : null,
-        ]);
 
-        if($request->password) {
-            $user->password = bcrypt($request->password);
+        try {
+            if ($request->role_id == User::$DC || $request->role_id == User::$RDC || $request->role_id == User::$ADC) { // check if role is DC, RDC or ADC then setting upa_zila_id null
+                $request->upa_zila_id = null;
+            }
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'role_id' => $request->role_id,
+                'upa_zila_id' => $request->upa_zila_id,
+                'union_id' => $request->union_id? $request->union_id : null,
+            ]);
+
+            if($request->password) {
+                $user->password = bcrypt($request->password);
+            }
+
+            if ($request->hasFile('avater')) {
+                $avaterfullName = $this->service->fileExequtes($request->file('avater'));
+                $user->avater = $avaterfullName;
+            }
+
+            if ($request->hasFile('sign')) {
+                $sign = $this->service->fileExequtes($request->file('sign'));
+                $user->sign = $sign;
+            }
+
+            $user->save();
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return redirect()->back()->with('error', $ex->getMessage());
         }
 
-        if ($request->hasFile('avater')) {
-            $avaterfullName = $this->service->fileExequtes($request->file('avater'));
-            $user->avater = $avaterfullName;
-        }
-
-        if ($request->hasFile('sign')) {
-            $sign = $this->service->fileExequtes($request->file('sign'));
-            $user->sign = $sign;
-        }
-
-        $user->save();
-        if (!$user) return redirect()->back()->with('error', 'Unable to update user');
         return redirect()->back()->with('success', 'User updated successfully');
     }
 

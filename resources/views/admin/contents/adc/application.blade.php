@@ -215,117 +215,130 @@
                             </div>
 
                             <div class="card-body">
-                                <div class="col-12">
-                                    {{-- <p>{!!$item->montobbo!!}</p> --}}
-                                    <p>{!! $item->adesh !!}</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                        <img class="img-responsive my-1" height="60px" width="60px" src="{{$item->user->sign}}" alt="">
-                                        <div class="w-100 text-center">
-                                            {{-- <p>{{$item->user->name}}</p> --}}
-                                            <p>{{$item->role->name}}</p>
-                                        </div>
-                                    </div>
-                                    @if (count($previous_users) > 0)
-                                        @foreach ($previous_users as $user)
-                                            @if ($user->id == $item->user_id)
-                                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                                    <div class="w-100 text-center">
-                                                        {{-- <p>{{$user->name}}</p> --}}
-                                                        <p class=""><s>{{$user->role->name}}</s></p>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </div>
 
-                                <div class="row">
-                                    @if ($item->file)
-                                        <div class="col-md-6">
-                                            <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                {{-- <p>{!!$item->montobbo!!}</p> --}}
+                                <h4 style="style="font-size:14px;>{!! $item->adesh !!}</h4>
+
+                            <div class="row">
+
+                                <div style="width: 150px; float: left;">
+                                    <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                        <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
+
+                                        <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; ">
+                                                {{$item->user->name}}
+                                                তারিখ: {{$item->created_at->format('d F, Y H:i:s A')}}
+                                                <br>
+                                                {{$item->role->name}}</h4>
+                                </div>
+                                @if (count($previous_users) > 0)
+                                    @foreach ($previous_users as $user)
+
+                                        @if ($user->id == $item->user_id)
+                                        <div style="width: 150px; float: left;">
+                                            <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                                {{-- <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p> --}}
+
+                                                <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; text-decoration:line-through">
+                                                        {{$user->name}}
+
+                                                        <br>
+                                                        {{$user->role->name}}</h4>
                                         </div>
-                                    @endif
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
+
+                            <div class="row">
+                                @if ($item->file)
                                     <div class="col-md-6">
-                                        <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
+                                        <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
                                     </div>
+                                @endif
+                                <div class="col-md-6">
+                                    <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <form action="{{route('dc.to.adc_revinew', $application->id)}}" enctype="multipart/form-data" method="post">
-                @csrf
-                @method('PUT')
-                <div class="row">
-                    <div class="col-md-6">
 
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        @foreach ($roles as $item)
-                                            @if ($item->id == 6)
-                                                <tr style="background-color: green;" class="text-white border-1">
-                                                    <th>
-                                                        <label for="">{{$item->name}}</label>
-                                                    </th>
-                                                    <th>
-                                                        <input value="{{$item->id}}" checked="checked" name="receive" type="radio">
-                                                    </th>
-                                                </tr>
-                                            @endif
+        @if ($application->status != 1)
+        <form action="{{route('dc.to.adc_revinew', $application->id)}}" enctype="multipart/form-data" method="post">
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <div class="col-md-6">
 
-                                        @endforeach
-                                    </thead>
-                                </table>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    @foreach ($roles as $item)
+                                        @if ($item->id == 6)
+                                            <tr style="background-color: green;" class="text-white border-1">
+                                                <th>
+                                                    <label for="">{{$item->name}}</label>
+                                                </th>
+                                                <th>
+                                                    <input value="{{$item->id}}" checked="checked" name="receive" type="radio">
+                                                </th>
+                                            </tr>
+                                        @endif
+
+                                    @endforeach
+                                </thead>
+                            </table>
                         </div>
-
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
+                </div>
 
-                                <div class="form-group">
-                                    <label for="">অনুচ্ছেদ</label>
-                                    <textarea class="form-control" name="onucched" id="summernote" >{{old('content')}}</textarea>
-                                    @error('onucched')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">আদেশ</label>
-                                    <textarea class="form-control" name="adesh" id="summernote" >{{old('content')}}</textarea>
-                                    @error('adesh')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="file" class="form-control" name="file">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
 
-                                    @error('file')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
-                                    <a href="{{url('/admin')}}"  class="btn btn-info">Back</a>
-                                </div>
+                            <div class="form-group">
+                                <label for="">অনুচ্ছেদ</label>
+                                <textarea class="form-control" name="onucched" id="summernote" >{{old('content')}}</textarea>
+                                @error('onucched')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">আদেশ</label>
+                                <textarea class="form-control" name="adesh" id="summernote" >{{old('content')}}</textarea>
+                                @error('adesh')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="file" class="form-control" name="file">
+
+                                @error('file')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
+                                <a href="{{url('/admin')}}"  class="btn btn-info">Back</a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </form>
+        @endif
+
         </div>
     </div>
     </div>

@@ -2,98 +2,181 @@
 namespace App\Services;
 
 use App\Models\BondobostoApp;
+use App\Models\User;
 
 class QueryService {
 
-    public function queryCount($accept, $send=null, $upa_zila_id=null, $union_id = null) {
-        if ($upa_zila_id == null && $union_id == null && $send == null) {
+    public function queryCount($accept_id, $role_id=null) {
 
-            return $this->Accept($accept, $send)->count();
-
-        }else if ($upa_zila_id == null && $union_id == null) {
-
-            return $this->AcceptSend($accept, $send)->count();
-
-        }else if ($send == null) {
-
-            return $this->AcptUpUn($accept, $upa_zila_id, $union_id)->count();
-
-        }else if (is_array($accept)) {
-
-            return $this->AcptSndUpUn($accept, $send, $upa_zila_id, $union_id)->count();
-
-        }else{
-            return $this->AcptSndUpUn($accept, $send, $upa_zila_id, $union_id)->count();
-        }
-    }
-
-    // geting application data
-    public function queryData($accept, $send=null, $upa_zila_id=null, $union_id = null) {
-
-        if ($upa_zila_id == null && $union_id == null && $send == null) {
-
-            return $this->Accept($accept, $send)->get();
-
-        }else if ($upa_zila_id == null && $union_id == null) {
-
-            return $this->AcceptSend($accept, $send)->get();
-
-        }else if ($send == null) {
-            return $this->AcptUpUn($accept, $upa_zila_id, $union_id)->get();
-        } else if (is_array($accept)) {
-            return $this->AcptSndUpUn($accept, $send, $upa_zila_id, $union_id)->get();
-        }else {
-            return $this->AcptSndUpUn($accept, $send, $upa_zila_id, $union_id)->get();
-        }
-
-    }
-
-    public function AcptUpUn($accept,$upa_zila_id, $union_id) {
-        if($union_id == null){
-            $result = $this->Accept($accept)->where('upa_zila_id', $upa_zila_id);
-            return $result;
-        }else {
-            $result = $this->Accept($accept)->where('upa_zila_id', $upa_zila_id)->where('union_id', $union_id);
-            return $result;
-        }
-    }
-
-    public function AcptSndUpUn($accept, $send, $upa_zila_id, $union_id) {
-        $result= [];
-        if (is_array($accept)) {
-            if($union_id == null){
-                $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
-                    $query->whereIn('accept_id', $accept)->where('send_id', $send);
-                })->where('status', 2)->where('upa_zila_id', $upa_zila_id);
-                return $result;
-            }else {
-                $result = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
-                    $query->whereIn('accept_id', $accept)->where('send_id', $send);
-                })->where('status', 2)->where('upa_zila_id', $upa_zila_id)->where('union_id', $union_id);
-                return $result;
+        if ($role_id == null){
+            if (is_array($accept_id)) {
+               $query = BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id) {
+                   $query->whereIn('accept_id', $accept_id);
+               })->where('status', 2);
+            }else{
+               $query = BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id) {
+                   $query->where('accept_id', $accept_id);
+               })->where('status', 2);
             }
-        }
-        if($union_id == null){
-            $result = $this->AcceptSend($accept, $send)->where('upa_zila_id', $upa_zila_id);
-            return $result;
-        }else {
-            $result = $this->AcceptSend($accept, $send)->where('upa_zila_id', $upa_zila_id)->where('union_id', $union_id);
-            return $result;
-        }
+
+          }else{
+           if (is_array($accept_id)) {
+               $query =BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                   $query->whereIn('accept_id', $accept_id)->where('role_id', $role_id);
+               })->where('status', 2);
+            }else{
+               $query =BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                   $query->where('accept_id', $accept_id)->where('role_id', $role_id);
+               })->where('status', 2);
+            }
+           }
+           return $query->count();
+
+    }
+    public function queryCountUpazila(User $user,$accept_id, $role_id) {
+
+        if ($role_id == null){
+             if (is_array($accept_id)) {
+                $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->whereIn('accept_id', $accept_id);
+                })->where('status', 2);
+             }else{
+                $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->where('accept_id', $accept_id);
+                })->where('status', 2);
+             }
+
+           }else{
+            if (is_array($accept_id)) {
+                $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                    $query->whereIn('accept_id', $accept_id)->where('role_id', $role_id);
+                })->where('status', 2);
+             }else{
+                 if (is_array($role_id)) {
+                    $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                        $query->where('accept_id', $accept_id)->whereIn('role_id', $role_id);
+                    })->where('status', 2);
+                 }else {
+                    $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                        $query->where('accept_id', $accept_id)->where('role_id', $role_id);
+                    })->where('status', 2);
+                 }
+
+             }
+            }
+            return $query->count();
+    }
+    public function queryCountUnion(User $user,$accept_id, $role_id=null) {
+
+        if ($role_id == null){
+             if (is_array($accept_id)) {
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->whereIn('accept_id', $accept_id);
+                })->where('status', 2);
+             }else{
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->where('accept_id', $accept_id);
+                })->where('status', 2);
+             }
+
+           }else{
+            if (is_array($accept_id)) {
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->whereIn('accept_id', $accept_id);
+                })->where('status', 2);
+             }else{
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->where('accept_id', $accept_id);
+                })->where('status', 2);
+             }
+            }
+            return $query->count();
+    }
+    public function queryData($accept_id, $role_id=null) {
+
+        if ($role_id == null){
+            if (is_array($accept_id)) {
+               $query = BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id) {
+                   $query->whereIn('accept_id', $accept_id);
+               })->where('status', 2);
+            }else{
+               $query = BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id) {
+                   $query->where('accept_id', $accept_id);
+               })->where('status', 2);
+            }
+
+          }else{
+            if (is_array($accept_id)) {
+                $query =BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                    $query->whereIn('accept_id', $accept_id)->where('role_id', $role_id);
+                })->where('status', 2);
+             }else{
+                $query =BondobostoApp::whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                    $query->where('accept_id', $accept_id)->where('role_id', $role_id);
+                })->where('status', 2);
+             }
+           }
+           return $query->get();
+
+    }
+    public function queryDataUpazila(User $user,$accept_id, $role_id) {
+
+        if ($role_id == null){
+            if (is_array($accept_id)) {
+               $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                   $query->whereIn('accept_id', $accept_id);
+               })->where('status', 2);
+            }else{
+               $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                   $query->where('accept_id', $accept_id);
+               })->where('status', 2);
+            }
+
+          }else{
+           if (is_array($accept_id)) {
+               $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                   $query->whereIn('accept_id', $accept_id)->where('role_id', $role_id);
+               })->where('status', 2);
+            }else{
+                if (is_array($role_id)) {
+                   $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                       $query->where('accept_id', $accept_id)->whereIn('role_id', $role_id);
+                   })->where('status', 2);
+                }else {
+                   $query = $user->upazila->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id, $role_id) {
+                       $query->where('accept_id', $accept_id)->where('role_id', $role_id);
+                   })->where('status', 2);
+                }
+
+            }
+           }
+            return $query->get();
+    }
+    public function queryDataUnion(User $user,$accept_id, $role_id=null) {
+
+        if ($role_id == null){
+             if (is_array($accept_id)) {
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->whereIn('accept_id', $accept_id);
+                })->where('status', 2);
+             }else{
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->where('accept_id', $accept_id);
+                })->where('status', 2);
+             }
+
+           }else{
+            if (is_array($accept_id)) {
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->whereIn('accept_id', $accept_id);
+                })->where('status', 2);
+             }else{
+                $query = $user->union->bondobosto_apps()->whereHas('app_sends', function ($query) use ($accept_id) {
+                    $query->where('accept_id', $accept_id);
+                })->where('status', 2);
+             }
+            }
+            return $query->get();
     }
 
-    public function AcceptSend ($accept, $send) {
-        
-        $query = BondobostoApp::whereHas('app_roles', function ($query) use ($accept, $send) {
-            $query->where('accept_id', $accept)->where('send_id', $send);
-        })->where('status', 2);
-        return $query->get();
-    }
-
-    public function Accept ($accept) {
-        $query = BondobostoApp::whereHas('app_roles', function ($query) use ($accept) {
-            $query->where('accept_id', $accept);
-        })->where('status', 2);
-        return $query;
-    }
 }

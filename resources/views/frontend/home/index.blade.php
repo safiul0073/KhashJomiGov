@@ -198,7 +198,6 @@
                     </div>
                   </div><!--/.card-->
 
-
 </div>
                 </div>
 
@@ -222,9 +221,6 @@
                 onClick: go
 
             });
-
-
-
         });
         function go(data) {
             if (this.href && this.href !== '#') {

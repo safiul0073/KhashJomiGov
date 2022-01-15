@@ -35,6 +35,7 @@
                 <div class="my-1">
                     <a href="javascript:void(0)" id="showModal" class="btn btn-success ">Create a new User</a>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -83,6 +84,7 @@
                                                    <form method="post" enctype="multipart/form-data" action="{{route("user.update", $user->id)}}">
                                                        @csrf
                                                        @method('PUT')
+                                                       <input type="hidden" value="{{$tab}}" name="upa_zila_id">
                                                        <div class="modal-body">
                                                            <div class="form-group">
                                                                <label for="name">@lang('Name')</label>
