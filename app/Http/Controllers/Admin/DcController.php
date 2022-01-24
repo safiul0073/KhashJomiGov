@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AppSend;
 use App\Models\BondobostoApp;
+use App\Models\User;
 use App\Services\FileService;
 use App\Services\QueryService;
 use Illuminate\Http\Request;
@@ -21,22 +22,22 @@ class DcController extends Controller
             $tab = 'get1';
 
         }
-        $grohonData1 = $service->queryCount($user->role_id, 3);
-        $grohonData2 = $service->queryCount($user->role_id, [6,1]);
-        $preronData1 =$service->queryCount(5,$user->role_id);
-        $preronData2 =$service->queryCount(1,$user->role_id);
+        $grohonData1 = $service->queryCount($user->role_id, [User::UNO,User::AC_LAND]);
+        $grohonData2 = $service->queryCount($user->role_id, User::ADC);
+        $preronData1 =$service->queryCount(User::RDC,$user->role_id);
+        $preronData2 =$service->queryCount(User::AC_LAND,$user->role_id);
         $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
-            $applications = $service->queryData($user->role_id, [3,1]);
+            $applications = $service->queryData($user->role_id, [User::UNO,User::AC_LAND]);
 
         }else if($tab == 'get2') {
-            $applications = $service->queryData($user->role_id,6);
+            $applications = $service->queryData($user->role_id,User::ADC);
 
         }else if($tab == 'put1') {
-            $applications = $service->queryData(5, $user->role_id);
+            $applications = $service->queryData(User::RDC, $user->role_id);
 
         }else if($tab == 'put2') {
-            $applications = $service->queryData(1, $user->role_id);
+            $applications = $service->queryData(User::AC_LAND, $user->role_id);
 
         }else if($tab == 'nothi') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();

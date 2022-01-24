@@ -211,25 +211,27 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div style="background-color: #f3aeae;" class="card-header text-danger">
-                                <h5 class="text-center">{!!$item->onucched!!}</h5>
+                                {{-- <h5 class="text-center">{!!$item->onucched!!}</h5> --}}
                             </div>
 
                             <div class="card-body">
 
                                 {{-- <p>{!!$item->montobbo!!}</p> --}}
-                                <h4 style="style="font-size:14px;>{!! $item->adesh !!}</h4>
+                                {{-- <h4 style="style="font-size:14px;>{!! $item->adesh !!}</h4> --}}
 
                             <div class="row">
 
-                                <div style="width: 150px; float: left;">
+                                <div style="width: 170px; float: left;">
                                     <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
                                         <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
 
                                         <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; ">
-                                                {{$item->user->name}} <br>
-                                                তারিখ: {{$item->created_at->format('d F, Y H:i:s A')}}
-                                                <br>
-                                                {{$item->role->name}}</h4>
+                                            {{$item->user->name}}
+                                            <br>
+                                            {{$item->role->name}}
+                                            <br>
+                                            <br>
+                                            {{$item->created_at->format('d M, Y H:i:s')}}</h4>
                                 </div>
                                 @if (count($previous_users) > 0)
                                     @foreach ($previous_users as $user)
@@ -266,91 +268,97 @@
 
                 @endforeach
             </div>
-            @if ($application->status != 1 || !$dc_to_aclnad)
-                <form action="{{route('ac-land.to.any', $application->id)}}" enctype="multipart/form-data" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="row">
-                    <div class="col-md-6">
-
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        @foreach (array_sort_for_role($roles) as $item)
-                                            @if ($item->id != auth()->user()->role_id)
-                                            <tr style="background-color: green;" class="text-white border-1">
-                                                <th>
-                                                    <label for="">{{$item->name}}</label>
-                                                </th>
-                                                <th>
-                                                    <input value="{{$item->id}}" name="receive" type="radio">
-                                                </th>
-                                            </tr>
-                                            @endif
-                                        @endforeach
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <select class="form-control @error('openion') is-invalid @enderror" name="openion" id="">
-                                        <option selected disabled value="">আপনার মতামত</option>
-                                        <option  value="জরুরি">জরুরি</option>
-                                        <option value="ব্যবস্থা নিন">ব্যবস্থা নিন</option>
-                                    </select>
-                                    @error('openion')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">মন্তব্য</label>
-                                    <textarea class="form-control" name="montobbo" id="summernote" >{{old('content')}}</textarea>
-                                    @error('montobbo')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="file" class="form-control" name="file">
-
-                                    @error('file')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
-                                    <a href="{{url('/')}}"  class="btn btn-info">Back</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            @else
-            <div class="row">
-                <div class="col-md-8 col-lg-10 col-xl-10 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="">Send to Nothi</label>
-                                <a class="btn btn-success" href="">Send</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <br>
+            <a onclick="printMemu()" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+            <div style="display:none;">
+                @include('admin.contents.print_tamplate', ['app_sends' => $app_sends, 'application' => $application])'])
             </div>
+            <br>
+            @if ($application->status != 1)
+            @if (count($dc_to_aclnad))
+               <div class="row">
+                <div class="col-md-6 mx-auto my-5">
+                    <form method="post" action="{{route('ac-land.to.nothi',  $application->id)}}">
+                        @csrf
+                        @method('PUT')
+                        <button class="btn btn-success" type="submit" >Send To Nothi</button>
+                    </form>
+                </div>
+               </div>
+            @else
+                    <form action="{{route('ac-land.to.any', $application->id)}}" enctype="multipart/form-data" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                            @foreach (array_sort_for_role($roles) as $item)
+                                                @if ($item->id != auth()->user()->role_id)
+                                                <tr style="background-color: green;" class="text-white border-1">
+                                                    <th>
+                                                        <label for="">{{$item->name}}</label>
+                                                    </th>
+                                                    <th>
+                                                        <input value="{{$item->id}}" name="receive" type="radio">
+                                                    </th>
+                                                </tr>
+                                                @endif
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <select class="form-control @error('openion') is-invalid @enderror" name="openion" id="">
+                                            <option selected disabled value="">আপনার মতামত</option>
+                                            <option  value="জরুরি">জরুরি</option>
+                                            <option value="ব্যবস্থা নিন">ব্যবস্থা নিন</option>
+                                        </select>
+                                        @error('openion')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">মন্তব্য</label>
+                                        <textarea class="form-control" name="montobbo" id="summernote" >{{old('content')}}</textarea>
+                                        @error('montobbo')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" name="file">
+
+                                        @error('file')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
+                                        <a href="{{url('/')}}"  class="btn btn-info">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            @endif
+
             @endif
 
         </div>
@@ -361,10 +369,35 @@
 @endsection
 
 @push('js')
-  <script>
+<script src="{{ asset('js/jquery-printme.js') }}"></script>
+<script>
       $(document).ready(function () {
         $('#summernote').summernote()
       })
 
-  </script>
+      function printMemu() {
+
+        var contents = $("#montobbo_print").html();
+        var frame1 = $('<iframe />');
+        frame1[0].name = "frame1";
+        frame1.css({ "position": "absolute", "top": "-1000000px" });
+        $("body").append(frame1);
+        var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+        frameDoc.document.open();
+        //Create a new HTML document.
+        frameDoc.document.write('<html><head><title>প্রিন্ট</title>');
+        frameDoc.document.write('</head><body>');
+        //Append the external CSS file.
+        frameDoc.document.write('<link rel="stylesheet" href="{{asset('')}}dist/css/adminlte.min.css">');
+        //Append the DIV contents.
+        frameDoc.document.write(contents);
+        frameDoc.document.write('</body></html>');
+        frameDoc.document.close();
+        setTimeout(function () {
+            window.frames["frame1"].focus();
+            window.frames["frame1"].print();
+            frame1.remove();
+        }, 500);
+    }
+</script>
 @endpush

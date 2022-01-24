@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AppSend;
 use App\Models\BondobostoApp;
+use App\Models\User;
 use App\Services\FileService;
 use App\Services\QueryService;
 use Illuminate\Http\Request;
@@ -20,12 +21,12 @@ class AdcController extends Controller
 
         }
         $grohonData = $service->queryCount(auth()->user()->role_id, null);
-        $preronData =$service->queryCount(6,auth()->user()->role_id);
+        $preronData =$service->queryCount(User::DC,auth()->user()->role_id);
         $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
             $applications = $service->queryData(auth()->user()->role_id, null);
         }else if($tab == 'put1') {
-            $applications = $service->queryData(6, auth()->user()->role_id);
+            $applications = $service->queryData(User::DC, auth()->user()->role_id);
         }else if($tab == 'nothi') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
 

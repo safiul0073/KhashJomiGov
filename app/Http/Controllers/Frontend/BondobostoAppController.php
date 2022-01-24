@@ -31,7 +31,7 @@ class BondobostoAppController extends Controller
 
         $hell = '';
         $unions = Union::where('upa_zila_id', $id)->get();
-        $hell .= '<option ' .'selected' .' disabled'.' >'.'ইউনিয়ন'.'</option>';
+        $hell .= '<option ' .'selected' .' disabled'.' >'.'ইউনিয়ন নির্বাচন'.'</option>';
         foreach($unions as $un) {
 
             $hell .= '<option value="'.$un->id.'">'.$un->name.'</option>';

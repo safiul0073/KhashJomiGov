@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         $tab = null;
         $role_query = Role::query();
-         if (User::$DC == auth()->user()->role_id) {
+         if (User::DC == auth()->user()->role_id) {
             $tab = null;
             $tab = $request->tab;
             if ($tab === null) {
@@ -36,12 +36,12 @@ class UserController extends Controller
             $user2 = User::with('role')->where('upa_zila_id', null)->where('status', 1)->get();
             $roles = Role::all();
             $users = $user2->merge($users);
-            $roles = $role_query->where('id', '!=', User::$TOWSHILDER)->get();
+            $roles = $role_query->where('id', '!=', User::TOWSHILDER)->get();
             return view('admin.contents.dc-manage.index', compact('users', 'roles', 'upazilas','tab'));
          }
 
         $user=auth()->user();
-        $role_id =  User::$TOWSHILDER;
+        $role_id =  User::TOWSHILDER;
         if ($request->tab == 'former')  { // showing former user if tab has value like former
             $tab = 'former';
             $users = $user->upazila->users->where('status', 0);
@@ -70,16 +70,19 @@ class UserController extends Controller
         ]);
 
         DB::beginTransaction();
+
         try {
-            if(auth()->user()->role_id == User::$DC){
+            if(auth()->user()->role_id == User::DC){
+
                 $user = User::where('upa_zila_id', $request->upa_zila_id)->where('role_id', $request->role_id)->where('status', 1)->first();
                 if ($user) return redirect()->back()->with('error', 'User already exists');
             }else {
+
                 $user = User::where('role_id', $request->role_id)->where('union_id', $request->union_id)->where('status', 1)->first();
                 if ($user) return redirect()->back()->with('error', 'User already exists');
             }
 
-            if ($request->role_id == User::$DC || $request->role_id == User::$RDC || $request->role_id == User::$ADC) { // check if role is DC, RDC or ADC then setting upa_zila_id null
+            if ($request->role_id == User::DC || $request->role_id == User::RDC || $request->role_id == User::ADC) { // check if role is DC, RDC or ADC then setting upa_zila_id null
                 $request->upa_zila_id = null;
                 if (User::where('role_id', $request->role_id)->where('status', 1)->first()) {
                     return redirect()->back()->with('error', 'User already exists');
@@ -141,7 +144,7 @@ class UserController extends Controller
         ]);
 
         try {
-            if ($request->role_id == User::$DC || $request->role_id == User::$RDC || $request->role_id == User::$ADC) { // check if role is DC, RDC or ADC then setting upa_zila_id null
+            if ($request->role_id == User::DC || $request->role_id == User::RDC || $request->role_id == User::ADC) { // check if role is DC, RDC or ADC then setting upa_zila_id null
                 $request->upa_zila_id = null;
             }
             $user->update([

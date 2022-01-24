@@ -28,7 +28,7 @@ class AcLandController extends Controller
         $nothiCount = BondobostoApp::where('status', 1)->where('upa_zila_id', $user->upa_zila_id)->count();
         $applications_grohon1 = $service->queryCountUpazila($user, $user->role_id,2);
         $applications_preron2 = $service->queryCountUpazila($user, [3,4,5,6],$user->role_id);
-        $from_dc_grohon_count = $service->queryCountUpazila($user, $user->role_id,User::$DC);
+        $from_dc_grohon_count = $service->queryCountUpazila($user, $user->role_id,User::DC);
         $applications_preron1 = $service->queryCountUpazila($user, 2, $user->role_id);
         $applications_grohon2 = $service->queryCountUpazila($user ,$user->role_id, [3,5,6]);
         if ($tab == 'home') {
@@ -43,7 +43,7 @@ class AcLandController extends Controller
 
 
         }else if ($tab == 'dc_get') {
-            $applications = $service->queryDataUpazila($user, $user->role_id,User::$DC);
+            $applications = $service->queryDataUpazila($user, $user->role_id,User::DC);
 
 
         }else if($tab == 'put1') {
@@ -119,6 +119,17 @@ class AcLandController extends Controller
         }
         DB::commit();
         return redirect()->back()->withSuccess('আপনার মতামত সফলভাবে পাঠিয়েছে & সেন্ড করা হয়েছে');
+
+    }
+
+
+    public function sendToNothi ($id) {
+
+            $app = BondobostoApp::findOrFail($id);
+            if (!$app) return redirect()->back()->with('error', 'something went wrong');
+            $a = $app->update(['status' => 1]);
+            if (!$a) return redirect()->back()->with('error', 'something went wrong');
+            return redirect()->back()->withSuccess('Send successfully');
 
     }
 

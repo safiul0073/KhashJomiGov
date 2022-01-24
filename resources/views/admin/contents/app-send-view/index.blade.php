@@ -20,7 +20,7 @@
     <div class="container">
         <div class="card">
             <div style="background-color: #f3aeae;" class="card-header text-danger">
-                <h5 class="text-center">{!!$app_send->onucched!!}</h5>
+                <h5 class="text-center">অনুচ্ছেদ: {!!$app_send->onucched!!}</h5>
             </div>
             <div class="card-body">
                 <div class="row">

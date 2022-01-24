@@ -8,15 +8,15 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title text-center">Select Upozila and Union</h3>
+                    <h3 class="card-title text-center">উপজেলা এবং ইউনিয়ন নির্বাচন করুন</h3>
                 </div>
                 <div class="card-body">
                     <form method="get" action="{{ route('bondobosto-app.show') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="upozila">Upozila</label>
+                            <label for="upozila">উপজেলা</label>
                             <select class="form-control" id="main_upzila" name="upozila">
-                                <option selected disabled >Select Upozila</option>
+                                <option selected disabled >উপজেলা নির্বাচন</option>
                                 @foreach($upozilas as $upozila)
                                     <option value="{{$upozila->id}}">{{$upozila->name}}</option>
                                 @endforeach

@@ -17,12 +17,12 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        
-        if ($user->role_id == User::$DC) {
+
+        if ($user->role_id == User::DC) {
             return true;
         }
 
-        if ($user->role_id == User::$AC_LAND) {
+        if ($user->role_id == User::AC_LAND) {
 
                 return true;
         }
@@ -39,11 +39,11 @@ class UserPolicy
     {
 
 
-        if ($user->role_id == User::$DC) {
+        if ($user->role_id == User::DC) {
             return true;
         }
 
-        if ($user->role_id == User::$AC_LAND) {
+        if ($user->role_id == User::AC_LAND) {
             if ($user->upa_zila_id == $model->upa_zila_id) {
                 return true;
             }
@@ -61,10 +61,10 @@ class UserPolicy
     public function create(User $user)
     {
 
-        if ($user->role_id == User::$DC) {
+        if ($user->role_id == User::DC) {
             return true;
         }
-        if ($user->role_id == User::$AC_LAND) {
+        if ($user->role_id == User::AC_LAND) {
             if ($user->upa_zila_id == $user->upa_zila_id) {
                 return true;
             }
@@ -80,10 +80,10 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        if ($user->role_id == User::$DC) {
+        if ($user->role_id == User::DC) {
             return true;
         }
-        if ($user->role_id == User::$AC_LAND) {
+        if ($user->role_id == User::AC_LAND) {
             if ($user->upa_zila_id == $model->upa_zila_id) {
                 return true;
             }
@@ -99,10 +99,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        if ($user->role_id == User::$DC) {
+        if ($user->role_id == User::DC) {
             return true;
         }
-        if ($user->role_id == User::$AC_LAND) {
+        if ($user->role_id == User::AC_LAND) {
             if ($user->upa_zila_id == $model->upa_zila_id) {
                 return true;
             }

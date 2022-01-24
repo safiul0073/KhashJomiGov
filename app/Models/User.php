@@ -13,16 +13,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public static $DC = 4;
-    public static $ADC = 5;
-    public static $RDC = 6;
+    public const DC = 4;
+    public const ADC = 5;
+    public const RDC = 6;
 
-    // UpaZila Role is ACland only 1
-    public static $AC_LAND = 1;
-    public static $UNO = 3;
+    // UpaZila Role is ACland only 1 and uno = 3
+    public const AC_LAND = 1;
+    public const UNO = 3;
 
     // UNION Role is Towshilder only 2
-    public static $TOWSHILDER = 2;
+    public const TOWSHILDER = 2;
 
     protected $fillable = [
         'name',

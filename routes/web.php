@@ -38,6 +38,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/ac-land', [AcLandController::class, 'index'])->name('ac-land');
     Route::put('ac-land-to-any/{id}', [AcLandController::class, 'sendToAny'])->name('ac-land.to.any');
     Route::get('ac-land-to-uno/{id}', [AcLandController::class, 'sendToUno'])->name('ac-land.to.uno');
+    Route::put('send-to-nothi/{id}', [AcLandController::class, 'sendToNothi'])->name('ac-land.to.nothi');
 
     // Towswhilder Section Here..
     Route::get('/towshilder', [TowshilderController::class, 'index'])->name('towshilder');

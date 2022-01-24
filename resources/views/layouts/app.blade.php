@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('')}}css/dycalendar.css">
     <link rel="stylesheet" href="{{asset('')}}css/jquery-ui.css">
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
+    @yield('style')
     <style type="text/css">
         body {
             font-family: 'SolaimanLipi', Arial, sans-serif !important;
@@ -57,6 +58,7 @@
 <script src="{{asset('')}}js/jquery-printme.js"></script>
 <script src="{{asset('')}}js/script.js"></script>
 <script type="text/javascript" src="{{asset('')}}js/jquery.imagemapster.js"></script>
+@yield('scripts')
 @stack('scripts')
 </body>
 </html>
