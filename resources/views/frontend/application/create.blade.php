@@ -361,12 +361,119 @@
                                 {{-- Rahman er  kaj start here --}}
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
+                                        <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                                     </div>
                                     <div class="col-md-6">
                                         <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
                                     </div>
                                 </div>
+                                <div class="form-group  row">
+                                <div class="col-md-6">
+                                        <label for="">১৪| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                    <br>
+                                    <div class="row text-center">
+                                            <h1>শপথ নামা</h1>
+                                    </div>
+
+                                    <div class="row">
+                                            <div class="col-md-12">
+                                                <p>
+                                                <strong >আমি</strong> <input type="text" id="app-input-field" name="names"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
+                                                    প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
+                                                    আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
+                                                    করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি 
+                                                    দেওয়া হইল,ওহা আমরা নিজে চাষাবাদ করিব,বর্গাদার দিয়া কোনোভাবে চাষ করিব না এবং হস্তান্তর করিব না,বর্গাদার দিয়া কোনোভাবে চাষ করিব
+                                                    না এবং হস্তান্তর করিব না|আমি দরখাস্তের সকল মর্ম জানিয়া শুনিয়া এবং বুজিয়া সুষ্ট জ্ঞানে সহি করিলাম/টিপসই দিলাম |
+                                                </p>
+                                            </div>
+                                    </div>
+
+                                    <div class="row">
+                                            <div class="d-flex float-right">
+                                                <div class="form-group">
+                                                    <label for="">দরখাস্তকারীর সই/টিপসই</label>
+                                                    <img src="" alt="">
+                                                    <input type="file" class="file-form-control form-control-sm" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">শনাক্তকারী সই/টিপসই</label>
+                                                    <img src="" alt="">
+                                                    <input type="file" class="file-form-control form-control-sm" >
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                        <div class="col-8 mx-auto">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text">
+                                        </div>
+                                        </div>
+                                        
+                                    </div> -->
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম :</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">পদবী:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">ঠিকানা:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                
                                 {{-- end of Rahman er  kaj --}}
                                 {{-- form submit button --}}
                                 <button id="getValue" type="submit" class="btn btn-primary">Save</button>
