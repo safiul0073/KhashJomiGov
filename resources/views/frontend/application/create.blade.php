@@ -400,17 +400,17 @@
     //     $('#summernote1').summernote()
     //   })
          // every upazila wise showing all unions
-          $('#main_upzila').on('click', function() {
-                 var upazila_id = $(this).val();
-                 $.ajax({
-                     type: "get",
-                     url: 'get-unions/'+upazila_id,
-                     global: false,
-                     success: function(res) {
-                         $('.setUnion').html(res)
-                     }
-                 })
-             })
+        //   $('#main_upzila').on('click', function() {
+        //          var upazila_id = $(this).val();
+        //          $.ajax({
+        //              type: "get",
+        //              url: 'get-unions/'+upazila_id,
+        //              global: false,
+        //              success: function(res) {
+        //                  $('.setUnion').html(res)
+        //              }
+        //          })
+        //      })
 
 
                 $(document).ready(function () {

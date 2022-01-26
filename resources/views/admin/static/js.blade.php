@@ -22,4 +22,4 @@
 <script src="{{asset('')}}dist/js/adminlte.js"></script>
 
 
-@stack('js')
+
