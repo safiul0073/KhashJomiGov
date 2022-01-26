@@ -41,5 +41,7 @@
       <!-- ./wrapper -->
 
       @include('admin.static.js')
+      @yield('script_lib')
+      @stack('js')
 </body>
 </html>

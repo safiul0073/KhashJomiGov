@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover data-table">
         <thead style="background-color:green" class="text-white">
             <tr class="text-center">
                 <th>ক্রমিক</th>
@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($applications as $key => $application)
+            {{-- @foreach ($applications as $key => $application)
              <tr>
                  <td>{{$key+1}}</td>
                  <td>{{$application->main_name}}</td>
@@ -31,14 +31,42 @@
 
                  </td>
              </tr>
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </div>
 @push('js')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
+
+    // datatable showing by ajax request showing
+    $(document).ready(function() {
+            $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('dc') }}',
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'father', name: 'fathers'},
+                    {data: 'address', name: 'address'},
+                    {data: 'image', name: 'image'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ],
+                order: [[0, 'asc']],
+                language: {
+                    paginate: {
+                        previous: "<i class='fa fa-chevron-left'>",
+                        next: "<i class='fa fa-chevron-right'>",
+                    },
+                },
+                drawCallback: function () {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                },
+            });
+        })
+
+    // deleting application method by ajax request
     function deleteApplication(id){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

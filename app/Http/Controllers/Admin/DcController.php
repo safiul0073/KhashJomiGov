@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AppSend;
 use App\Models\BondobostoApp;
 use App\Models\User;
+use App\Services\DataTableService;
 use App\Services\FileService;
 use App\Services\QueryService;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class DcController extends Controller
         $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
             $applications = $service->queryData($user->role_id, [User::UNO,User::AC_LAND]);
+            DataTableService::make($applications, $request);
 
         }else if($tab == 'get2') {
             $applications = $service->queryData($user->role_id,User::ADC);
