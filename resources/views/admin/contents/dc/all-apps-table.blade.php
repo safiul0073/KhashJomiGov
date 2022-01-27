@@ -7,6 +7,7 @@
                 <th>আবেদন কারির পিতা/স্বামী</th>
                 <th>ঠিকানা</th>
                 <th>ছবি</th>
+                <th>অবস্থা</th>
                 <th>কার্যক্রম</th>
             </tr>
         </thead>
@@ -18,6 +19,15 @@
                  <td>{{$application->main_fathers_name}}</td>
                  <td>{{$application->main_village}}, {{$application->union->name}}, {{$application->upa_zila->name}}</td>
                  <td><img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                 <td>
+                    @if ($application->status == 0)
+                        <span class="badge badge-pill badge-warning">শুরু করেনি</span>
+                    @elseif ($application->status == 2)
+                        <span class="badge badge-pill badge-primary">চলমান</span>
+                    @elseif ($application->status==1 )
+                        <span class="badge badge-pill badge-success">সম্পূর্ণ</span>
+                    @endif
+                 </td>
                  <td>
                     <div class="d-flex flex-column">
                         <a href="{{route('show.app', $application->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
@@ -38,33 +48,6 @@
 @push('js')
 
 <script type="text/javascript">
-
-    // // datatable showing by ajax request showing
-    // $(document).ready(function() {
-    //         $('.data-table').DataTable({
-    //             processing: true,
-    //             serverSide: true,
-    //             ajax: '{{ route('dc') }}',
-    //             columns: [
-    //                 {data: 'id', name: 'id'},
-    //                 {data: 'name', name: 'name'},
-    //                 {data: 'father', name: 'fathers'},
-    //                 {data: 'address', name: 'address'},
-    //                 {data: 'image', name: 'image'},
-    //                 {data: 'action', name: 'action', orderable: false, searchable: false},
-    //             ],
-    //             order: [[0, 'asc']],
-    //             language: {
-    //                 paginate: {
-    //                     previous: "<i class='fa fa-chevron-left'>",
-    //                     next: "<i class='fa fa-chevron-right'>",
-    //                 },
-    //             },
-    //             drawCallback: function () {
-    //                 $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
-    //             },
-    //         });
-    //     })
 
     // deleting application method by ajax request
     function deleteApplication(id){

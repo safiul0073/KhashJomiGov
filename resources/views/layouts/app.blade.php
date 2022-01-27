@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('')}}css/dycalendar.css">
     <link rel="stylesheet" href="{{asset('')}}css/jquery-ui.css">
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
-    @yield('style')
+    @yield('styles')
     <style type="text/css">
         body {
             font-family: 'SolaimanLipi', Arial, sans-serif !important;

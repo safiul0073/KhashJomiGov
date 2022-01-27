@@ -23,6 +23,7 @@ class DcController extends Controller
             $tab = 'get1';
 
         }
+        $applications_count = BondobostoApp::count();
         $grohonData1 = $service->queryCount($user->role_id, [User::UNO,User::AC_LAND]);
         $grohonData2 = $service->queryCount($user->role_id, User::ADC);
         $preronData1 =$service->queryCount(User::RDC,$user->role_id);
@@ -30,7 +31,6 @@ class DcController extends Controller
         $nothiCount = BondobostoApp::where('status', 1)->count();
         if($tab == 'get1') {
             $applications = $service->queryData($user->role_id, [User::UNO,User::AC_LAND]);
-            DataTableService::make($applications, $request);
 
         }else if($tab == 'get2') {
             $applications = $service->queryData($user->role_id,User::ADC);
@@ -44,8 +44,13 @@ class DcController extends Controller
         }else if($tab == 'nothi') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
 
+        }else if ($tab == 'apps') {
+            $applications = BondobostoApp::with(['union','upa_zila'])->latest()->get();
+
         }
-        return view('admin.contents.dc.index', compact('applications', 'tab', 'grohonData1','grohonData2', 'preronData1','preronData2','nothiCount'));
+
+        
+        return view('admin.contents.dc.index', compact('applications', 'tab','applications_count', 'grohonData1','grohonData2', 'preronData1','preronData2','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {

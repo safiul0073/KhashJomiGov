@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('styles')
-<!-- include summernote css/js -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.4.2/summernote-bs2.css" rel="stylesheet">
+    <style>
+        #app-input-field {
+            outline: none;
+            width: 200px;
+            border: none;
+            border-bottom: 2px dotted black;
+        }
+    </style>
 @endsection
 @section('content')
 <div class="container-flued">
@@ -402,7 +408,7 @@
                                                 <strong >আমি</strong> <input type="text" id="app-input-field" name="names"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
                                                     প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
                                                     আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
-                                                    করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি 
+                                                    করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি
                                                     দেওয়া হইল,ওহা আমরা নিজে চাষাবাদ করিব,বর্গাদার দিয়া কোনোভাবে চাষ করিব না এবং হস্তান্তর করিব না,বর্গাদার দিয়া কোনোভাবে চাষ করিব
                                                     না এবং হস্তান্তর করিব না|আমি দরখাস্তের সকল মর্ম জানিয়া শুনিয়া এবং বুজিয়া সুষ্ট জ্ঞানে সহি করিলাম/টিপসই দিলাম |
                                                 </p>
@@ -414,39 +420,22 @@
                                                 <div class="form-group">
                                                     <label for="">দরখাস্তকারীর সই/টিপসই</label>
                                                     <img src="" alt="">
-                                                    <input type="file" class="file-form-control form-control-sm" >
+                                                    <input type="file" name="dorkhastokarir_tipshoi" value="{{ old('dorkhastokarir_tipshoi') }}" class="file-form-control form-control-sm" >
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">শনাক্তকারী সই/টিপসই</label>
                                                     <img src="" alt="">
-                                                    <input type="file" class="file-form-control form-control-sm" >
+                                                    <input type="file" name="shonaktokarir_tipshoi" value="{{ old('shonaktokarir_tipshoi') }}" class="file-form-control form-control-sm" >
                                                 </div>
                                             </div>
                                     </div>
 
-                                    <!-- <div class="row">
-                                        <div class="col-8 mx-auto">
-                                        <div class="col-md-6">
-                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" type="text">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" type="text">
-                                        </div>
-                                        </div>
-                                        
-                                    </div> -->
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" value="{{ old('poron_kari') }}" name="poron_kari" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -454,7 +443,7 @@
                                             <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম :</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" name="puron_karir_girdian" value="{{ old('puron_karir_girdian') }}" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -462,7 +451,7 @@
                                             <label for="">পদবী:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text">
+                                            <input class="form-control" value="{{ old('podobi') }}" name="podobi" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -470,10 +459,21 @@
                                             <label for="">ঠিকানা:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text">
+                                            <textarea name="address" id="" class="form-control" >{{old('address')}}</textarea>
                                         </div>
                                     </div>
-                                
+
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <th>সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+
                                 {{-- end of Rahman er  kaj --}}
                                 {{-- form submit button --}}
                                 <button id="getValue" type="submit" class="btn btn-primary">Save</button>
