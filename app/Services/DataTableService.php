@@ -22,7 +22,7 @@ class  DataTableService {
                 ->editColumns('avater', function ($query) {
                     return '<img src="'.$query->avater.'" class="img-fluid" align="center" >';
                 })
-                ->editColumns('action', function ($query) {
+                ->addColumn('action', function ($query) {
                     $acction = '<div class="d-flex flex-column">';
                     $acction .= '<a href="'.route('show.app', $query->id).'" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>';
                     $acction .= '<a href="'.route('edit.app', $query->id).'" class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>';

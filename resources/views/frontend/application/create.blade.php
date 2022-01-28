@@ -7,6 +7,28 @@
             border: none;
             border-bottom: 2px dotted black;
         }
+        table.form-group{
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table{
+            width:60%;
+            border: 1px solid black;
+        }
+        table th{
+            text-align: center;
+        }
+        table td{
+            padding: 10px;
+        }
+
+        #rajosho_input {
+            outline: none;
+            width: 300px;
+        }
+
+
     </style>
 @endsection
 @section('content')
@@ -463,16 +485,48 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <table>
+                                        <table class="form-group">
                                             <tr>
-                                                <th>সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
+                                                <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div style="display: inline;">
+                                                                <label for="">১| দরখাস্ত প্রাপ্তির তারিখ<span style="margin-left: 38px;">:</span></label>
+                                                                <input disabled name="dorkhasto_praptir_tarik" id="rajosho_input" value="{{ old('dorkhasto_praptir_tarik') }}" type="text">
+                                                            </div>
+                                                            <div style="display: inline;">
+                                                                <label for="">২| প্রাপ্তির ক্রমিক নং<span style="margin-left: 58px;">:</span></label>
+                                                                <input disabled name="praptir_kromic_no" id="rajosho_input" value="{{ old('proptir_kromic_nong') }}" type="text">
+                                                            </div>
+                                                            <div style="display: inline;">
+                                                                <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 10px;">:</span></label>
+                                                                <input disabled name="praptir_roshid_kromik_no" id="rajosho_input" value="{{ old('praptir_roshid_kromik_no') }}" type="text">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4" style="display: inline;">
+                                                            <label for="">সময়:</label>
+                                                            <input disabled name="praptir_somoy" class="form-control" value="{{ old('praptir_somoy') }}" type="text">
+                                                        </div>
+                                                    </div>
+
+                                            </td>
+
                                             </tr>
                                         </table>
-                                    </div>
+                                        <div class="form-group d-flex">
+                                            <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
+                                            <input name="vumi_rajossho_office_shakkor" disabled id="rajosho_input" value="{{ old('vumi_rajossho_office_shakkor') }}" class="form-control" type="file">
+                                        </div>
+                                        <div class="row">
+                                            <div class="float-right">
+                                                <input type="file" name="rajossho_kormokorter_sakkhor" disabled value="{{ old('rajossho_kormokorter_sakkhor') }}" >
+                                                <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
+                                            </div>
+                                        </div>
 
                                 {{-- end of Rahman er  kaj --}}
                                 {{-- form submit button --}}
