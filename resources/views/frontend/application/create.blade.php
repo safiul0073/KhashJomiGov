@@ -7,19 +7,19 @@
             border: none;
             border-bottom: 2px dotted black;
         }
-        table.form-group{
+        .office_table{
             margin-left: auto;
             margin-right: auto;
         }
 
-        table{
+        .office_table{
             width:60%;
             border: 1px solid black;
         }
-        table th{
+        .office_table th{
             text-align: center;
         }
-        table td{
+        .office_table td{
             padding: 10px;
         }
 
@@ -360,22 +360,22 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">৯।  দরখাস্তকারী অথবা তাহার পিতা/মাতা/পর্বে কোনো খাস কৃষি জমি পাইয়া থাকিলে উহার বিবরণ: </label>
-                                        <textarea name="dorkhastokarir_khas_jomir_biboron" class="form-control"></textarea>
+                                        <textarea name="dorkhastokarir_khas_jomir_biboron" class="form-control">{!!old('dorkhastokarir_khas_jomir_biboron')!!}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="">১০।  খাস জমির জন্য কোনো জায়গা দরখাস্ত দাখিল করিলে উহার বিবরণ: </label>
-                                        <textarea name="dorkhastokarir_khas_dakhil_biboron" class="form-control"></textarea>
+                                        <textarea name="dorkhastokarir_khas_dakhil_biboron" class="form-control">{!!old('dorkhastokarir_khas_dakhil_biboron')!!}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="">১১।  নদী ভাঙ্গা পরিবার হইলে কবে কোথায় নদী ভাঙিয়াছিল  এবং সেই জায়গার কোনো দলিল দস্তাবেজ থাকিলে উহার বিবরণ (প্রয়োজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
-                                        <textarea name="dorkhastokarir_nodi_vangon_biborn" id="summernote" class="form-control"></textarea>
+                                        <textarea name="dorkhastokarir_nodi_vangon_biborn" class="form-control">{!!old('dorkhastokarir_nodi_vangon_biborn')!!}</textarea>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
                                         </div>
                                         <div class="col-md-6">
-                                            <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                            <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control">{!!old('dorkhastokarir_shohidorpongo_person_biboron')!!}</textarea>
                                         </div>
                                     </div>
 
@@ -392,7 +392,7 @@
                                         <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <textarea name="dorkhastokarir_khash_jomir_biboron" id="summernote1" class="form-control">{{ old('dorkhastokarir_khash_jomir_biboron') }}</textarea>
+                                        <textarea name="dorkhastokarir_khash_jomir_biboron" class="form-control">{{ old('dorkhastokarir_khash_jomir_biboron') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group  row">
@@ -427,7 +427,7 @@
                                     <div class="row">
                                             <div class="col-md-12">
                                                 <p>
-                                                <strong >আমি</strong> <input type="text" id="app-input-field" value="{{ old('shopoth_namar_baktir_name') }}" name="shopoth_namar_baktir_namr"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" name="shopoth_nama_parents_name" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
+                                                <strong >আমি</strong> <input type="text" id="app-input-field" value="{{ old('shopoth_namar_baktir_name') }}" name="shopoth_namar_baktir_name"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" value="{{ old('shopoth_nama_parents_name') }}" name="shopoth_nama_parents_name" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
                                                     প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
                                                     আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
                                                     করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি
@@ -485,7 +485,7 @@
                                         </div>
                                     </div>
 
-                                        <table class="form-group">
+                                        <table class="form-group office_table">
                                             <tr>
                                                 <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
                                             </tr>
