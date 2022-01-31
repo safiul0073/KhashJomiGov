@@ -392,7 +392,7 @@
                                         <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                        <textarea name="dorkhastokarir_khash_jomir_biboron" id="summernote1" class="form-control">{{ old('dorkhastokarir_khash_jomir_biboron') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group  row">
@@ -400,7 +400,7 @@
                                         <label for="">১৪| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
                                     </div>
                                     <div class="col-md-6">
-                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                        <textarea name="khashjomipower_karon" id="summernote1" class="form-control">{{ old('khashjomipower_karon') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -408,7 +408,7 @@
                                         <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
                                     </div>
                                     <div class="col-md-6">
-                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                        <textarea name="mowjar_name_somuho" id="summernote1" class="form-control">{{ old('mowjar_name_somuho') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -416,7 +416,7 @@
                                         <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
                                     </div>
                                     <div class="col-md-6">
-                                        <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control"></textarea>
+                                        <textarea name="duijon_baktir_nam_tikana" id="summernote1" class="form-control">{{ old('duijon_baktir_nam_tikana') }}</textarea>
                                     </div>
                                 </div>
                                     <br>
@@ -427,7 +427,7 @@
                                     <div class="row">
                                             <div class="col-md-12">
                                                 <p>
-                                                <strong >আমি</strong> <input type="text" id="app-input-field" name="names"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
+                                                <strong >আমি</strong> <input type="text" id="app-input-field" value="{{ old('shopoth_namar_baktir_name') }}" name="shopoth_namar_baktir_namr"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" name="shopoth_nama_parents_name" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
                                                     প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
                                                     আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
                                                     করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি
@@ -457,7 +457,7 @@
                                             <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" value="{{ old('poron_kari') }}" name="poron_kari" type="text">
+                                            <input class="form-control" value="{{ old('poron_kari_name') }}" name="poron_kari_name" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -473,7 +473,7 @@
                                             <label for="">পদবী:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" value="{{ old('podobi') }}" name="podobi" type="text">
+                                            <input class="form-control" value="{{ old('puron_karir_podobi') }}" name="puron_karir_podobi" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -481,7 +481,7 @@
                                             <label for="">ঠিকানা:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <textarea name="address" id="" class="form-control" >{{old('address')}}</textarea>
+                                            <textarea name="purun_karir_address" id="" class="form-control" >{{old('purun_karir_address')}}</textarea>
                                         </div>
                                     </div>
 

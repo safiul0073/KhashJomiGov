@@ -78,6 +78,24 @@ class BondobostoAppController extends Controller
                 'vumihi_muktijudda_sonod' => $request->hasFile('vumihi_muktijudda_sonod')? $service->fileExequtes($request->file('vumihi_muktijudda_sonod')): null,
                 'vumihi_commission_sonod' => $request->hasFile('vumihi_commission_sonod')?$service->fileExequtes($request->file('vumihi_commission_sonod')) : null,
                 'vumihin_others_sonod' => $request->hasFile('vumihin_others_sonod')? $service->fileExequtes($request->file('vumihin_others_sonod')): null,
+                'dorkhastokarir_khash_jomir_biboron' => $request->dorkhastokarir_khash_jomir_biboron,
+                'khashjomipower_karon' => $request->khashjomipower_karon,
+                'mowjar_name_somuho' => $request->mowjar_name_somuho,
+                'duijon_baktir_nam_tikana' => $request->duijon_baktir_nam_tikana,
+                'shopoth_namar_baktir_name' => $request->shopoth_namar_baktir_name,
+                'shopoth_nama_parents_name' => $request->shopoth_nama_parents_name,
+                'dorkhastokarir_tipshoi' => $request->hasFile('dorkhastokarir_tipshoi')? $service->fileExequtes($request->file('dorkhastokarir_tipshoi')): null,
+                'shonaktokarir_tipshoi' => $request->hasFile('shonaktokarir_tipshoi')? $service->fileExequtes($request->file('shonaktokarir_tipshoi')): null,
+                'poron_kari_name' => $request->poron_kari_name,
+                'puron_karir_girdian' => $request->puron_karir_girdian,
+                'puron_karir_podobi' => $request->puron_karir_podobi,
+                'purun_karir_address' => $request->purun_karir_address,
+                'dorkhasto_praptir_tarik' => $request->dorkhasto_praptir_tarik,
+                'praptir_kromic_no' => $request->praptir_kromic_no,
+                'praptir_roshid_kromik_no' => $request->praptir_roshid_kromik_no,
+                'praptir_somoy' => $request->praptir_somoy,
+                'vumi_rajossho_office_shakkor' => $request->vumi_rajossho_office_shakkor,
+                'rajossho_kormokorter_sakkhor' => $request->rajossho_kormokorter_sakkhor,
             ];
             $b = BondobostoApp::create($attributes);
             if (!$b) return redirect()->back()->with('error','Unable to create!');
@@ -105,14 +123,6 @@ class BondobostoAppController extends Controller
         $service = new FileService();
 
        $avater = $service->deleteFile($request,$application->avater,$request->file('avater'));
-        // if ($request->hasFile('avater')) {
-        //     if (file_exists(public_path($application->avater))) {
-        //         unlink(public_path($application->avater));
-        //     }
-        //     $avater = $service->fileExequtes($request->file('avater'));
-        // } else {
-        //     $avater = $application->avater;
-        // }
 
         if ($request->hasFile('vumihi_muktijudda_sonod')) {
             if (file_exists(public_path($application->vumihi_muktijudda_sonod))) {
@@ -139,6 +149,41 @@ class BondobostoAppController extends Controller
             $vumihin_others_sonod = $service->fileExequtes($request->file('vumihin_others_sonod'));
         } else {
             $vumihin_others_sonod = $application->vumihin_others_sonod;
+        }
+        if ($request->hasFile('dorkhastokarir_tipshoi')) {
+            if (file_exists(public_path($application->dorkhastokarir_tipshoi))) {
+                unlink(public_path($application->dorkhastokarir_tipshoi));
+            }
+            $dorkhastokarir_tipshoi = $service->fileExequtes($request->file('dorkhastokarir_tipshoi'));
+        } else {
+            $dorkhastokarir_tipshoi = $application->dorkhastokarir_tipshoi;
+        }
+
+        if ($request->hasFile('shonaktokarir_tipshoi')) {
+            if (file_exists(public_path($application->shonaktokarir_tipshoi))) {
+                unlink(public_path($application->shonaktokarir_tipshoi));
+            }
+            $shonaktokarir_tipshoi = $service->fileExequtes($request->file('shonaktokarir_tipshoi'));
+        } else {
+            $shonaktokarir_tipshoi = $application->shonaktokarir_tipshoi;
+        }
+
+        if ($request->hasFile('vumi_rajossho_office_shakkor')) {
+            if (file_exists(public_path($application->vumi_rajossho_office_shakkor))) {
+                unlink(public_path($application->vumi_rajossho_office_shakkor));
+            }
+            $vumi_rajossho_office_shakkor = $service->fileExequtes($request->file('vumi_rajossho_office_shakkor'));
+        } else {
+            $vumi_rajossho_office_shakkor = $application->vumi_rajossho_office_shakkor;
+        }
+
+        if ($request->hasFile('rajossho_kormokorter_sakkhor')) {
+            if (file_exists(public_path($application->rajossho_kormokorter_sakkhor))) {
+                unlink(public_path($application->rajossho_kormokorter_sakkhor));
+            }
+            $rajossho_kormokorter_sakkhor = $service->fileExequtes($request->file('rajossho_kormokorter_sakkhor'));
+        } else {
+            $rajossho_kormokorter_sakkhor = $application->rajossho_kormokorter_sakkhor;
         }
 
         $attributes = [
@@ -168,6 +213,24 @@ class BondobostoAppController extends Controller
             'vumihi_muktijudda_sonod' => $vumihi_muktijudda_sonod,
             'vumihi_commission_sonod' => $vumihi_commission_sonod,
             'vumihin_others_sonod' => $vumihin_others_sonod,
+            'dorkhastokarir_khash_jomir_biboron' => $request->dorkhastokarir_khash_jomir_biboron,
+            'khashjomipower_karon' => $request->khashjomipower_karon,
+            'mowjar_name_somuho' => $request->mowjar_name_somuho,
+            'duijon_baktir_nam_tikana' => $request->duijon_baktir_nam_tikana,
+            'shopoth_namar_baktir_name' => $request->shopoth_namar_baktir_name,
+            'shopoth_nama_parents_name' => $request->shopoth_nama_parents_name,
+            'dorkhastokarir_tipshoi' => $dorkhastokarir_tipshoi,
+            'shonaktokarir_tipshoi' => $shonaktokarir_tipshoi,
+            'poron_kari_name' => $request->poron_kari_name,
+            'puron_karir_girdian' => $request->puron_karir_girdian,
+            'puron_karir_podobi' => $request->puron_karir_podobi,
+            'purun_karir_address' => $request->purun_karir_address,
+            'dorkhasto_praptir_tarik' => $request->dorkhasto_praptir_tarik,
+            'praptir_kromic_no' => $request->praptir_kromic_no,
+            'praptir_roshid_kromik_no' => $request->praptir_roshid_kromik_no,
+            'praptir_somoy' => $request->praptir_somoy,
+            'vumi_rajossho_office_shakkor' => $vumi_rajossho_office_shakkor,
+            'rajossho_kormokorter_sakkhor' => $rajossho_kormokorter_sakkhor,
         ];
         $b = $application->update($attributes);
         if (!$b) return redirect()->back()->with('error','Unable to update!');
@@ -196,6 +259,18 @@ class BondobostoAppController extends Controller
         if ($b->vumihin_others_sonod && File::exists(public_path($b->vumihin_others_sonod))) {
             File::delete(public_path($b->vumihin_others_sonod));
         }
+        if ($b->vumi_rajossho_office_shakkor && File::exists(public_path($b->vumi_rajossho_office_shakkor))) {
+            File::delete(public_path($b->vumi_rajossho_office_shakkor));
+        }
+        if ($b->rajossho_kormokorter_sakkhor && File::exists(public_path($b->rajossho_kormokorter_sakkhor))) {
+            File::delete(public_path($b->rajossho_kormokorter_sakkhor));
+        }
+        if ($b->dorkhastokarir_tipshoi && File::exists(public_path($b->dorkhastokarir_tipshoi))) {
+            File::delete(public_path($b->dorkhastokarir_tipshoi));
+        }
+        if ($b->shonaktokarir_tipshoi && File::exists(public_path($b->shonaktokarir_tipshoi))) {
+            File::delete(public_path($b->shonaktokarir_tipshoi));
+        }
 
         if ($b->app_sends()) {
             foreach ($b->app_sends() as $item) {
@@ -204,7 +279,6 @@ class BondobostoAppController extends Controller
                 }
             }
         }
-        $b->app_roles()->delete();
         $b->app_sends()->delete();
         $b->delete();
         if (!$b) return redirect()->back()->with('error','Unable to delete!');
