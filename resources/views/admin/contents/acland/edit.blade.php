@@ -1,6 +1,34 @@
 @extends('layouts.admin-app')
 @section('title', 'Applications')
 @section('css')
+    <style>
+              #app-input-field {
+            outline: none;
+            width: 200px;
+            border: none;
+            border-bottom: 2px dotted black;
+        }
+        .office_table{
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .office_table{
+            width:80%;
+            border: 1px solid black;
+        }
+        .office_table th{
+            text-align: center;
+        }
+        .office_table td{
+            padding: 10px;
+        }
+
+        #rajosho_input {
+            outline: none;
+            width: 300px;
+        }
+    </style>
 @endsection
 @section('contents')
 <div class="content-wrapper">
@@ -421,6 +449,183 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                            <textarea name="dorkhastokarir_khash_jomir_biboron" id="summernote" class="form-control">{{ $application->dorkhastokarir_khash_jomir_biboron }}</textarea>
+                        </div>
+                        <div class="form-group row">
+                            <label for="">১৪| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                            <textarea name="khashjomipower_karon" id="summernote" class="form-control">{{ $application->khashjomipower_karon }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                            <textarea name="mowjar_name_somuho" id="summernote" class="form-control">{{ $application->mowjar_name_somuho }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                            <textarea name="duijon_baktir_nam_tikana" id="summernote" class="form-control">{{ $application->duijon_baktir_nam_tikana }}</textarea>
+                        </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1 class="text-center">শপথ নামা</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <p>
+                                            <strong >আমি</strong> <input type="text" id="app-input-field" value="{{ $application->shopoth_namar_baktir_name }}" name="shopoth_namar_baktir_name"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" value="{{ $application->shopoth_nama_parents_name}}" name="shopoth_nama_parents_name" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
+                                            প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
+                                            আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
+                                            করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি
+                                            দেওয়া হইল,ওহা আমরা নিজে চাষাবাদ করিব,বর্গাদার দিয়া কোনোভাবে চাষ করিব না এবং হস্তান্তর করিব না,বর্গাদার দিয়া কোনোভাবে চাষ করিব
+                                            না এবং হস্তান্তর করিব না|আমি দরখাস্তের সকল মর্ম জানিয়া শুনিয়া এবং বুজিয়া সুষ্ট জ্ঞানে সহি করিলাম/টিপসই দিলাম |
+                                        </p>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">দরখাস্তকারীর সই/টিপসই</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">শনাক্তকারী সই/টিপসই</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10 col-lg-10 col-xl-10 mx-auto">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম <span style="margin-left: 45px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="poron_kari_name" value="{{$application->poron_kari_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম <span style="margin-left: 5px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="puron_karir_girdian" value="{{$application->puron_karir_girdian}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">পদবী <span style="margin-left: 176px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="puron_karir_podobi" value="{{$application->puron_karir_podobi}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">ঠিকানা <span style="margin-left: 169px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <textarea name="purun_karir_address" id="" class="form-control">{{$application->purun_karir_address}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                <table class="form-group office_table">
+                                    <tr>
+                                        <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div style="display: inline;">
+                                                        <label for="">১| দরখাস্ত প্রাপ্তির তারিখ<span style="margin-left: 35px;">:</span></label>
+                                                        <input  name="dorkhasto_praptir_tarik" id="rajosho_input" value="{{ old('dorkhasto_praptir_tarik') }}" type="date">
+                                                    </div>
+                                                    <div style="display: inline;">
+                                                        <label for="">২| প্রাপ্তির ক্রমিক নং<span style="margin-left: 59px;">:</span></label>
+                                                        <input  name="praptir_kromic_no" id="rajosho_input" value="{{ old('proptir_kromic_nong') }}" type="text">
+                                                    </div>
+                                                    <div style="display: inline;">
+                                                        <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 5px;">:</span></label>
+                                                        <input  name="praptir_roshid_kromik_no" id="rajosho_input" value="{{ old('praptir_roshid_kromik_no') }}" type="text">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4" style="display: inline;">
+                                                    <label for="">সময়:</label>
+                                                    <input  name="praptir_somoy" class="form-control" value="{{ old('praptir_somoy') }}" type="time">
+                                                </div>
+                                            </div>
+
+                                    </td>
+
+                                    </tr>
+                                </table>
+                                <div class="form-group">
+                                    <div class="d-flex">
+                                        <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
+                                        <img class="ml-3" id="vumi_sakkhor" src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;">
+                                    </div>
+                                    <div>
+                                        <div class="input-group" style="width: 200px">
+                                            <div class="custom-file">
+                                              <input type="file" id="input_vumi_sakkhor" name="vumi_rajossho_office_shakkor" class="custom-file-input @error('vumi_rajossho_office_shakkor') is-invalid @enderror" id="inputGroupFile01"
+                                                aria-describedby="inputGroupFileAddon01">
+                                              <label class="custom-file-label" for="inputGroupFile01">Choose Only PNG (200kb)</label>
+                                            </div>
+                                          </div>
+                                          @error('vumi_rajossho_office_shakkor')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                          @enderror
+                                    </div>
+                                    {{-- <img src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir"> --}}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                {{-- <input type="file" name="rajossho_kormokorter_sakkhor" class="custom-control-input" value="{{ old('rajossho_kormokorter_sakkhor') }}" > --}}
+                                                {{-- <img src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir"> --}}
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                      <input type="file" name="rajossho_kormokorter_sakkhor" class="custom-file-input @error('rajossho_kormokorter_sakkhor') is-invalid @enderror" id="inputGroupFile01"
+                                                        aria-describedby="inputGroupFileAddon01">
+                                                      <label class="custom-file-label" for="inputGroupFile01">Choose Only PNG (200kb)</label>
+                                                    </div>
+                                                  </div>
+                                                  @error('rajossho_kormokorter_sakkhor')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                  @enderror
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        <div class="form-group">
                             <button id="getValue" type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
@@ -430,20 +635,12 @@
     </div>
 
 @endsection
-
+@section('custome-script')
+<script src="{{asset('admin/custome/js/image-scripts.js')}}"></script>
+@endsection
 @push('js')
   <script>
-   // every upazila wise showing all unions
-   $('#main_upzila').on('click', function() {
-            var upazila_id = $(this).val();
-            $.ajax({
-                type: "get",
-                url: `get-unions/${upazila_id}`,
-                success: function(res) {
-                    $('.setUnion').html(res)
-                }
-            })
-        })
+
 
 
       $(document).ready(function () {
@@ -460,8 +657,6 @@
         $('.isMortal').click(function() {
         $('.isMortal').not(this).prop('checked', false);
     });
-
-
 
 
         })

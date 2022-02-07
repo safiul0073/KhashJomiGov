@@ -42,6 +42,7 @@
 
       @include('admin.static.js')
       @yield('script_lib')
+      @yield('custome-script')
       @stack('js')
 </body>
 </html>

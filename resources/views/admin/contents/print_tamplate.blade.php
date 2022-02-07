@@ -5,14 +5,14 @@
                 <div class="from-group my-2">
                     <div class="">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-8">
                                 <label class="" for=""> ১।(ক) দরখাস্তকারী কোন শ্রেণীর ভুমিহীন:</label>
                                 @foreach ($application->explodedData('app_class') as $key => $item)
                                 <p>{{$key+1}}: {{$item}}</p>
                                 @endforeach
                             </div>
 
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <div style="" class=" border-dark">
 
                                 <img src="{{URL::to($application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label for="">২।  দরখাস্তকারীর পরিবার প্রদানের : </label>
                         <div class="ml-lg-4 ml-xl-4">
                             <p>নাম: {{$application->main_name}}</p>
@@ -71,7 +71,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label  for="">৩।  দরখাস্তকারীর পিতা/স্বামীর: </label>
                         <div class="ml-lg-4 ml-xl-4">
                             <p>নাম: {{$application->main_fathers_name}}</p>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label for="">৪।  দরখাস্তকারীর জন্মস্থান/ঠিকানা: </label>
                         <div class="ml-lg-4 ml-xl-4">
                             <p>গ্রামঃ {{$application->main_village}}</p>
@@ -97,7 +97,7 @@
                             <p>জিলাঃ {{$application->main_zila}}</p>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <label for="">৫।  পরিবার প্রদানের স্ত্রী/স্বামী: </label>
                         <div class="ml-lg-4 ml-xl-4">
                             <p>নাম: {{$application->main_f_or_m_name}}</p>

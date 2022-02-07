@@ -259,51 +259,68 @@
                             </div>
 
                             <div class="row">
-                                    <div class="d-flex float-right">
+                                <div class="col-md-12">
+                                    <div class="float-right">
                                         <div class="form-group">
-                                            <label for="">দরখাস্তকারীর সই/টিপসই</label>
-                                            <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">দরখাস্তকারীর সই/টিপসই</label>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">শনাক্তকারী সই/টিপসই</label>
-                                            <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">শনাক্তকারী সই/টিপসই</label>
+                                            </div>
+
                                         </div>
                                     </div>
+                                </div>
+
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{$application->poron_kari_name}}</p>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম :</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{$application->puron_karir_girdian}}</p>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label for="">পদবী:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{$application->puron_karir_podobi}}</p>
+                            <div class="row">
+                                <div class="col-md-10 col-lg-10 col-xl-10 mx-auto">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম <span style="margin-left: 45px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->poron_kari_name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম <span style="margin-left: 5px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->puron_karir_girdian}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">পদবী <span style="margin-left: 176px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->puron_karir_podobi}}</p>
 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">ঠিকানা <span style="margin-left: 169px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->purun_karir_address}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label for="">ঠিকানা:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{$application->purun_karir_address}}</p>
-                                </div>
-                            </div>
+
 
                                 <table class="form-group office_table">
                                     <tr>
@@ -339,13 +356,29 @@
                                 </table>
                                 <div class="form-group d-flex">
                                     <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
-                                    <input name="vumi_rajossho_office_shakkor" disabled id="rajosho_input" value="{{ old('vumi_rajossho_office_shakkor') }}" class="form-control" type="file">
+                                    @if (!$application->vumi_rajossho_office_shakkor)
+                                    <input name="vumi_rajossho_office_shakkor" id="rajosho_input" value="{{ old('vumi_rajossho_office_shakkor') }}" class="form-control" type="file">
+                                    @endif
+                                    @if ($application->vumi_rajossho_office_shakkor)
+                                    <img src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                    @endif
                                 </div>
                                 <div class="row">
-                                    <div class="float-right">
-                                        <input type="file" name="rajossho_kormokorter_sakkhor" disabled value="{{ old('rajossho_kormokorter_sakkhor') }}" >
-                                        <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                @if (!$application->rajossho_kormokorter_sakkhor)
+                                                <input type="file" name="rajossho_kormokorter_sakkhor" disabled value="{{ old('rajossho_kormokorter_sakkhor') }}" >
+                                                @else
+                                                <img src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                                @endif
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
 
                 </div>

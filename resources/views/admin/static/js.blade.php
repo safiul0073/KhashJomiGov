@@ -15,11 +15,13 @@
 <!-- Tempusdominus Bootstrap 4 -->
 {{-- <script src="{{asset('')}}plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script> --}}
 <!-- Summernote -->
-<script src="{{asset('')}}plugins/summernote/summernote-bs4.min.js"></script>
+{{-- <script src="{{asset('')}}plugins/summernote/summernote-bs4.min.js"></script> --}}
 <!-- overlayScrollbars -->
 <script src="{{asset('')}}plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('')}}dist/js/adminlte.js"></script>
+
+
 
 
 
