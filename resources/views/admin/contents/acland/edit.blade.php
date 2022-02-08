@@ -202,8 +202,13 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="vumihin_others_sonod[]" multiple="multiple"
-                                                class="form-control-file @error('vumihi_muktijudda_sonod') is-invalid @enderror">
+                                            <div class="input-group" style="width: 300px">
+                                                <div class="custom-file">
+                                                    <input type="file" id="input_vumi_sakkhor" name="vumihi_muktijudda_sonod" class="custom-file-input @error('vumihi_muktijudda_sonod') is-invalid @enderror" id="inputGroupFile01"
+                                                    aria-describedby="inputGroupFileAddon01">
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose Only pdf (2mb)</label>
+                                                </div>
+                                            </div>
                                         @error('vumihin_others_sonod')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -406,7 +411,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                             </div>
@@ -584,13 +588,13 @@
                                         <img class="ml-3" id="vumi_sakkhor" src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;">
                                     </div>
                                     <div>
-                                        <div class="input-group" style="width: 200px">
+                                        <div class="input-group" style="width: 300px">
                                             <div class="custom-file">
                                               <input type="file" id="input_vumi_sakkhor" name="vumi_rajossho_office_shakkor" class="custom-file-input @error('vumi_rajossho_office_shakkor') is-invalid @enderror" id="inputGroupFile01"
                                                 aria-describedby="inputGroupFileAddon01">
                                               <label class="custom-file-label" for="inputGroupFile01">Choose Only PNG (200kb)</label>
                                             </div>
-                                          </div>
+                                        </div>
                                           @error('vumi_rajossho_office_shakkor')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -603,11 +607,14 @@
                                     <div class="col-md-12">
                                         <div class="float-right">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                {{-- <input type="file" name="rajossho_kormokorter_sakkhor" class="custom-control-input" value="{{ old('rajossho_kormokorter_sakkhor') }}" > --}}
-                                                {{-- <img src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir"> --}}
+                                                <img id="rajosso_sakkhor" src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+
+
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                      <input type="file" name="rajossho_kormokorter_sakkhor" class="custom-file-input @error('rajossho_kormokorter_sakkhor') is-invalid @enderror" id="inputGroupFile01"
+                                                      <input type="file" id="rajosso_sakkhor_input" name="rajossho_kormokorter_sakkhor" class="custom-file-input @error('rajossho_kormokorter_sakkhor') is-invalid @enderror" id="inputGroupFile01"
                                                         aria-describedby="inputGroupFileAddon01">
                                                       <label class="custom-file-label" for="inputGroupFile01">Choose Only PNG (200kb)</label>
                                                     </div>
@@ -636,29 +643,6 @@
 
 @endsection
 @section('custome-script')
-<script src="{{asset('admin/custome/js/image-scripts.js')}}"></script>
+<script src="{{asset('custom/script/image-script.js')}}"></script>
 @endsection
-@push('js')
-  <script>
 
-
-
-      $(document).ready(function () {
-        var tableBody = $('#tableBody')
-        var i = 1;
-        $('#add').on('click', function (e) {
-          tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" class="form-control" type="text"></td><td ><input class="form-control" style="width: 60px;" name="age[][age]" min="1" type="number" ></td><td ><input class="form-control" style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input class="form-control" name="whatdo[][whatdo]" type="text" ></td> <td ><input class="form-control" name="comment[][comment]" type="text" ></td><td><a id="delete" class="btn btn-sm btn-secondary rounded" >-</a></td></tr>')
-        })
-
-        $(document).on('click', '#delete', function () {
-            $(this).parents('tr').remove();
-        })
-
-        $('.isMortal').click(function() {
-        $('.isMortal').not(this).prop('checked', false);
-    });
-
-
-        })
-  </script>
-@endpush

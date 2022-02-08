@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AcLandController;
 use App\Http\Controllers\Admin\AdcController;
 use App\Http\Controllers\Admin\AdcRevinewController;
+use App\Http\Controllers\Admin\ApplicationApiController;
 use App\Http\Controllers\Frontend\BondobostoAppController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Admin\AppSendController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\DcController;
 use App\Http\Controllers\Frontend\ApplicationController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RunningController;
 use App\Http\Controllers\Admin\TowshilderController;
 use App\Http\Controllers\Admin\UnoController;
 use App\Http\Controllers\Admin\UserController;
@@ -34,6 +36,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // every doc showing using this route...
     Route::get('/doc-show', [HomeController::class, 'docShow'])->name('doc.show');
     Route::get('/app-edit/{id}', [HomeController::class, 'editApplication'])->name('edit.app');
+
+    // running application route here
+    Route::get('/running-application/{id}', [RunningController::class, 'index'] )->name('running.app');
     // Ac Land Section Here..
     Route::get('/ac-land', [AcLandController::class, 'index'])->name('ac-land');
     Route::put('ac-land-to-any/{id}', [AcLandController::class, 'sendToAny'])->name('ac-land.to.any');
@@ -62,6 +67,10 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     // showing app_sends single page data
     Route::get('app-sends/{id}', [AppSendController::class, 'appSends'])->name('app.sends');
+
+    // ajax apis route here..
+    Route::get('/applications-list', [ApplicationApiController::class, 'get_applications'])->name('applications');
+
 });
 
 // show unoion and upazila page for bondobosto app

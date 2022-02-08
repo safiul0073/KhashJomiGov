@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\File;
 class AdcController extends Controller
 {
     public function index (Request $request,QueryService $service) {
+
+        $applications = [];
         $tab = $request->tab;
         if ($tab == null) {
-            $tab = 'get1';
-
+            $tab = 'apps';
         }
+        $applications_count = BondobostoApp::count();
         $grohonData = $service->queryCount(auth()->user()->role_id, null);
         $preronData =$service->queryCount(User::DC,auth()->user()->role_id);
         $nothiCount = BondobostoApp::where('status', 1)->count();
@@ -29,9 +31,8 @@ class AdcController extends Controller
             $applications = $service->queryData(User::DC, auth()->user()->role_id);
         }else if($tab == 'nothi') {
             $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
-
         }
-        return view('admin.contents.adc.index', compact('applications', 'tab', 'grohonData', 'preronData','nothiCount'));
+        return view('admin.contents.adc.index', compact('applications', 'tab', 'applications_count', 'grohonData', 'preronData','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {

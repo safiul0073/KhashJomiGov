@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-hover data-table">
+    <table class="table table-bordered table-hover data-table" >
         <thead style="background-color:green" class="text-white">
             <tr class="text-center">
                 <th>ক্রমিক</th>

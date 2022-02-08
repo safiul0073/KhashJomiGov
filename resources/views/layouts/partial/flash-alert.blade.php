@@ -1,4 +1,4 @@
-@if(isset($form) && $errors->any())
+{{-- @if(isset($form) && $errors->any())
     @foreach($errors->all() as $error)
         <div class="alert alert-danger alert-dismissable fade show" role="alert">
             {{ $error }}
@@ -7,7 +7,7 @@
             </button>
         </div>
     @endforeach
-@endif
+@endif --}}
 @if(session()->has('error'))
     <div class="alert alert-danger alert-dismissable fade show" role="alert">
         {{ session('error') }}
@@ -24,7 +24,7 @@
         </button>
     </div>
 @endif
-@if ($errors->any())
+{{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -32,4 +32,4 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}

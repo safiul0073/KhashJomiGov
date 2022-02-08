@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\File;
 class AdcRevinewController extends Controller
 {
     public function index (Request $request,QueryService $service) {
-        $tab = $request->tab;
-        if ($tab == null) {
-            $tab = 'get1';
-        }
 
+        $applications = [];
+        $tab = $request->tab;
+        if (!$tab) {
+            $tab = 'apps';
+        }
+        $applications_count = BondobostoApp::count();
         $grohonData = $service->queryCount(auth()->user()->role_id, null);
         $preronData =$service->queryCount(User::ADC,auth()->user()->role_id);
         $nothiCount = BondobostoApp::where('status', 1)->count();
@@ -31,7 +33,7 @@ class AdcRevinewController extends Controller
             $applications = BondobostoApp::with(['union','upa_zila'])->where('status', 1)->latest()->get();
 
         }
-        return view('admin.contents.adc_revinew.index', compact('applications', 'tab', 'grohonData', 'preronData','nothiCount'));
+        return view('admin.contents.adc_revinew.index', compact('applications', 'tab','applications_count', 'grohonData', 'preronData','nothiCount'));
     }
 
     public function sendToAny (Request $request, $id) {

@@ -17,10 +17,11 @@ class DcController extends Controller
 {
     public function index (Request $request,QueryService $service) {
         $user = [];
+        $applications = [];
         $user = auth()->user();
         $tab = $request->tab;
         if ($tab == null) {
-            $tab = 'get1';
+            $tab = 'apps';
 
         }
         $applications_count = BondobostoApp::count();
@@ -49,7 +50,7 @@ class DcController extends Controller
 
         }
 
-        
+
         return view('admin.contents.dc.index', compact('applications', 'tab','applications_count', 'grohonData1','grohonData2', 'preronData1','preronData2','nothiCount'));
     }
 

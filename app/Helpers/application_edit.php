@@ -7,7 +7,6 @@ if (! function_exists('find_class_app')) {
     function find_class_app($items, $string)
     {
         $finded = 0;
-
         foreach ($items as $item){
             if(trim($item) == trim($string)){
                 $finded = 1;
@@ -20,7 +19,6 @@ if (! function_exists('array_sort_for_role')) {
     function array_sort_for_role($items)
     {
         $finded = [];
-        
         foreach ($items as $item){
             if ($item->id == 4){
                 $finded[0] = $item;

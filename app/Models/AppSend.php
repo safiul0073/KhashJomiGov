@@ -15,8 +15,14 @@ class AppSend extends Model
         return $this->belongsTo(BondobostoApp::class, 'bondobosto_app_id', 'id');
     }
 
+
+
     public function role () {
         return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function accept () {
+        return $this->belongsTo(Role::class, 'accept_id', 'id');
     }
 
     public function user () {

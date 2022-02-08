@@ -263,7 +263,7 @@
                                     <div class="float-right">
                                         <div class="form-group">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                                <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">দরখাস্তকারীর সই/টিপসই</label>
@@ -271,7 +271,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                                <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">শনাক্তকারী সই/টিপসই</label>
@@ -307,7 +307,6 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p>{{$application->puron_karir_podobi}}</p>
-
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -321,7 +320,6 @@
                                 </div>
                             </div>
 
-
                                 <table class="form-group office_table">
                                     <tr>
                                         <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
@@ -332,46 +330,36 @@
                                                 <div class="col-md-8">
                                                     <div style="display: inline;">
                                                         <label for="">১| দরখাস্ত প্রাপ্তির তারিখ<span style="margin-left: 35px;">:</span></label>
-                                                        <input  name="dorkhasto_praptir_tarik" id="rajosho_input" value="{{ old('dorkhasto_praptir_tarik') }}" type="date">
+                                                        <p>{{$application->dorkhasto_praptir_tarik}}</p>
                                                     </div>
                                                     <div style="display: inline;">
                                                         <label for="">২| প্রাপ্তির ক্রমিক নং<span style="margin-left: 59px;">:</span></label>
-                                                        <input  name="praptir_kromic_no" id="rajosho_input" value="{{ old('proptir_kromic_nong') }}" type="text">
+                                                        <p>{{$application->proptir_kromic_nong}}</p>
                                                     </div>
                                                     <div style="display: inline;">
                                                         <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 5px;">:</span></label>
-                                                        <input  name="praptir_roshid_kromik_no" id="rajosho_input" value="{{ old('praptir_roshid_kromik_no') }}" type="text">
+                                                        <p>{{$application->praptir_roshid_kromik_no}}</p>
                                                     </div>
 
                                                 </div>
                                                 <div class="col-md-4" style="display: inline;">
                                                     <label for="">সময়:</label>
-                                                    <input  name="praptir_somoy" class="form-control" value="{{ old('praptir_somoy') }}" type="time">
+                                                    <p>{{$application->praptir_somoy}}</p>
                                                 </div>
                                             </div>
-
                                     </td>
-
                                     </tr>
                                 </table>
                                 <div class="form-group d-flex">
                                     <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
-                                    @if (!$application->vumi_rajossho_office_shakkor)
-                                    <input name="vumi_rajossho_office_shakkor" id="rajosho_input" value="{{ old('vumi_rajossho_office_shakkor') }}" class="form-control" type="file">
-                                    @endif
-                                    @if ($application->vumi_rajossho_office_shakkor)
-                                    <img src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
-                                    @endif
+                                    <img class="ml-3" src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="">
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="float-right">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                @if (!$application->rajossho_kormokorter_sakkhor)
-                                                <input type="file" name="rajossho_kormokorter_sakkhor" disabled value="{{ old('rajossho_kormokorter_sakkhor') }}" >
-                                                @else
-                                                <img src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
-                                                @endif
+                                                <img src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>

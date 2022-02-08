@@ -28,6 +28,14 @@
             width: 300px;
         }
 
+        .invalid-feedback{
+            color: rgb(194, 21, 21) !important;
+            font-size: 1.5 rem !important;
+        }
+
+        .is-invalid {
+            border: 1px solid rgb(209, 40, 40);
+        }
 
     </style>
 @endsection
@@ -91,8 +99,15 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div style="" class=" border-dark">
-                                                    <label for="">Image:</label>
-                                                    <input name="avater" value="{{old('avater')}}" class="form-control @error('avater') is-invalid @enderror" type="file">
+                                                    <img class="img-thumbnail" id="avater" style="width: 100px;height: 120px;">
+                                                    <label for="">আবেদনকারীর ছবি</label>
+                                                    <div class="input-group" style="width: 300px">
+                                                        <div class="custom-file">
+                                                          <input type="file" id="avater-input" name="avater" class="custom-file-input @error('avater') is-invalid @enderror" id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01">
+                                                          <label class="custom-file-label" for="inputGroupFile01">Choose Only PNG (200kb)</label>
+                                                        </div>
+                                                    </div>
                                                     @error('avater')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -330,7 +345,7 @@
                                                         <input name="comment[][comment]" class="form-control" type="text">
                                                     </td>
                                                     <td>
-                                                        <a id="delete" class="btn btn-sm btn-secondary rounded" >-</a>
+                                                        <a id="delete" class="btn btn-sm btn-danger rounded" >-</a>
                                                     </td>
                                                 </tr>
 
@@ -440,48 +455,56 @@
                                     <div class="row">
                                             <div class="d-flex float-right">
                                                 <div class="form-group">
-                                                    <label for="">দরখাস্তকারীর সই/টিপসই</label>
-                                                    <img src="" alt="">
-                                                    <input type="file" name="dorkhastokarir_tipshoi" value="{{ old('dorkhastokarir_tipshoi') }}" class="file-form-control form-control-sm" >
+                                                    <div>
+                                                        <img id="dor-tipshoi" style="width: 70px; height: 40px;" src="" alt="">
+                                                        <label for="">দরখাস্তকারীর সই/টিপসই</label>
+                                                    </div>
+
+                                                    <input type="file" id="input-dor-tipshoi" name="dorkhastokarir_tipshoi" value="{{ old('dorkhastokarir_tipshoi') }}" class="file-form-control form-control-sm" >
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="">শনাক্তকারী সই/টিপসই</label>
-                                                    <img src="" alt="">
-                                                    <input type="file" name="shonaktokarir_tipshoi" value="{{ old('shonaktokarir_tipshoi') }}" class="file-form-control form-control-sm" >
+                                                    <div>
+                                                        <img src=""style="width: 70px; height: 40px;"  id="son-tipshoi" alt="">
+                                                        <label for="">শনাক্তকারী সই/টিপসই</label>
+                                                    </div>
+
+                                                    <input type="file" id="input-son-tipshoi" name="shonaktokarir_tipshoi" value="{{ old('shonaktokarir_tipshoi') }}" class="file-form-control form-control-sm" >
                                                 </div>
                                             </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম :</label>
+                                    <div style="width: 60%; margin-left: auto; margin-right: auto;">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="">দরখাস্ত ফরম পূরণকারীর নাম <span style="margin-left: 100px;">:</span> </label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" value="{{ old('poron_kari_name') }}" name="poron_kari_name" type="text">
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" value="{{ old('poron_kari_name') }}" name="poron_kari_name" type="text">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম <span style="margin-left: 65px;">:</span></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" name="puron_karir_girdian" value="{{ old('puron_karir_girdian') }}" type="text">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম :</label>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="">পদবী <span style="margin-left: 215px;">:</span></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" value="{{ old('puron_karir_podobi') }}" name="puron_karir_podobi" type="text">
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" name="puron_karir_girdian" value="{{ old('puron_karir_girdian') }}" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="">পদবী:</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" value="{{ old('puron_karir_podobi') }}" name="puron_karir_podobi" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="">ঠিকানা:</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <textarea name="purun_karir_address" id="" class="form-control" >{{old('purun_karir_address')}}</textarea>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="">ঠিকানা <span style="margin-left: 210px;">:</span></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <textarea name="purun_karir_address" id="" class="form-control" >{{old('purun_karir_address')}}</textarea>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -505,7 +528,6 @@
                                                                 <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 10px;">:</span></label>
                                                                 <input disabled name="praptir_roshid_kromik_no" id="rajosho_input" value="{{ old('praptir_roshid_kromik_no') }}" type="text">
                                                             </div>
-
                                                         </div>
                                                         <div class="col-md-4" style="display: inline;">
                                                             <label for="">সময়:</label>
@@ -530,7 +552,7 @@
 
                                 {{-- end of Rahman er  kaj --}}
                                 {{-- form submit button --}}
-                                <button id="getValue" type="submit" class="btn btn-primary">Save</button>
+                                <button id="getValue" type="submit" class="btn btn-primary">Submit</button>
                             </div>
                                 {{-- end of second content --}}
 
@@ -538,8 +560,8 @@
                             {{-- end of tab content --}}
                                 <div class="form-group d-flex float-right">
                                     <ul class="nav nav-pills">
-                                        <li class="active"><a data-toggle="pill" href="#home">First</a></li>
-                                        <li><a data-toggle="pill" href="#menu1">Second</a></li>
+                                        <li class="active"><a data-toggle="pill" href="#home">প্রথম পাতা</a></li>
+                                        <li><a data-toggle="pill" href="#menu1">দ্বিতীয় পাতা</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -553,7 +575,7 @@
 @endsection
 
 @push('scripts')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.4.2/summernote.min.js"></script> --}}
+    <script src="{{asset('custom/scripts/imageScripts.js')}}"></script>
     <script>
 
         // useing summernote third party library

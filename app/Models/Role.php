@@ -22,10 +22,6 @@ class Role extends Model
         return $this->hasMany(AppSend::class);
     }
 
-    public function app_roles (){
-        return $this->hasMany(AppRole::class);
-    }
-    
     public static function generateRole() {
         $roles = [
             ['name' => 'সহকারী কমিশনার (ভূমি)'],

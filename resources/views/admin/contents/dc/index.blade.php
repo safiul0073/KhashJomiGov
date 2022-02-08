@@ -1,11 +1,32 @@
 @extends('layouts.admin-app')
 @section('title', auth()->user()->name)
 
-@section('css')
-{{-- <link rel="stylesheet"href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+@section('css-libbs')
+<link rel="stylesheet"href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet"href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-<link rel="stylesheet"href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}"> --}}
+<link rel="stylesheet"href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 <link rel="stylesheet"href="{{asset('plugins/sweetalert2/sweetalert2.min.css')}}">
+@endsection
+@section('css')
+    <style>
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            background: rgba(0,0,0,.5);
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loader span {
+            color: #fff;
+            font-size: 24px;
+        }
+    </style>
 @endsection
 
 @section('contents')
@@ -19,7 +40,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">DC</li>
+                <li class="breadcrumb-item active">{{auth()->user()->name}}</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -28,7 +49,7 @@
     @include('layouts.partial.flash-alert')
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header border-bottom-info">
                 <a href="{{url('/admin/dc?tab=apps')}}" class="btn @if($tab == "apps" || $tab == null) btn-success @else btn-primary @endif">আবেদনকৃত ({{$applications_count}})</a>
                 <a href="{{url('/admin/dc?tab=get1')}}" class="btn @if($tab == "get1" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ১ ({{$grohonData1}})</a>
                 <a href="{{url('/admin/dc?tab=get2')}}" class="btn @if($tab == "get2" || $tab == null) btn-success @else btn-primary @endif">গৃহীত ডাটা ২ ({{$grohonData2}})</a>
@@ -56,10 +77,10 @@
 
 @section('script_lib')
 
-{{-- <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script> --}}
-{{-- <script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script> --}}
-
+<script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<script src="{{asset('custom/scripts/dataTable.js')}}"></script>
 @endsection

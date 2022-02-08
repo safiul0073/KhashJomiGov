@@ -104,6 +104,7 @@ class User extends Authenticatable
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345678'),
                 'role_id' => '1',
+                'upa_zila_id' => '1',
                 'remember_token' => Str::random(10),
             ],
             [
@@ -112,6 +113,8 @@ class User extends Authenticatable
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345678'),
                 'role_id' => '2',
+                'upa_zila_id' => '1',
+                'union_id' => '1',
                 'remember_token' => Str::random(10),
             ],
             [
@@ -120,6 +123,7 @@ class User extends Authenticatable
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345678'),
                 'role_id' => '3',
+                'upa_zila_id' => '1',
                 'remember_token' => Str::random(10),
             ],
             [
