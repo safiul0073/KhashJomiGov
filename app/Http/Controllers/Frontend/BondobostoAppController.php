@@ -9,6 +9,7 @@ use App\Models\Union;
 use App\Models\UpaZila;
 use App\Services\FileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class BondobostoAppController extends Controller
@@ -122,11 +123,14 @@ class BondobostoAppController extends Controller
 
         $service = new FileService();
 
+        DB::beginTransaction();
+    try {
+
        $avater = $service->deleteFile($request,$application->avater,$request->file('avater'));
 
         if ($request->hasFile('vumihi_muktijudda_sonod')) {
-            if (file_exists(public_path($application->vumihi_muktijudda_sonod))) {
-                unlink(public_path($application->vumihi_muktijudda_sonod));
+            if (file_exists($application->vumihi_muktijudda_sonod)) {
+                unlink($application->vumihi_muktijudda_sonod);
             }
             $vumihi_muktijudda_sonod = $service->fileExequtes($request->file('vumihi_muktijudda_sonod'));
         } else {
@@ -134,8 +138,8 @@ class BondobostoAppController extends Controller
         }
 
         if ($request->hasFile('vumihi_commission_sonod')) {
-            if (file_exists(public_path($application->vumihi_commission_sonod))) {
-                unlink(public_path($application->vumihi_commission_sonod));
+            if (file_exists($application->vumihi_commission_sonod)) {
+                unlink($application->vumihi_commission_sonod);
             }
             $vumihi_commission_sonod = $service->fileExequtes($request->file('vumihi_commission_sonod'));
         } else {
@@ -143,16 +147,16 @@ class BondobostoAppController extends Controller
         }
 
         if ($request->hasFile('vumihin_others_sonod')) {
-            if (file_exists(public_path($application->vumihin_others_sonod))) {
-                unlink(public_path($application->vumihin_others_sonod));
+            if (file_exists($application->vumihin_others_sonod)) {
+                unlink($application->vumihin_others_sonod);
             }
             $vumihin_others_sonod = $service->fileExequtes($request->file('vumihin_others_sonod'));
         } else {
             $vumihin_others_sonod = $application->vumihin_others_sonod;
         }
         if ($request->hasFile('dorkhastokarir_tipshoi')) {
-            if (file_exists(public_path($application->dorkhastokarir_tipshoi))) {
-                unlink(public_path($application->dorkhastokarir_tipshoi));
+            if (file_exists($application->dorkhastokarir_tipshoi)) {
+                unlink($application->dorkhastokarir_tipshoi);
             }
             $dorkhastokarir_tipshoi = $service->fileExequtes($request->file('dorkhastokarir_tipshoi'));
         } else {
@@ -160,8 +164,8 @@ class BondobostoAppController extends Controller
         }
 
         if ($request->hasFile('shonaktokarir_tipshoi')) {
-            if (file_exists(public_path($application->shonaktokarir_tipshoi))) {
-                unlink(public_path($application->shonaktokarir_tipshoi));
+            if (file_exists($application->shonaktokarir_tipshoi)) {
+                unlink($application->shonaktokarir_tipshoi);
             }
             $shonaktokarir_tipshoi = $service->fileExequtes($request->file('shonaktokarir_tipshoi'));
         } else {
@@ -169,18 +173,20 @@ class BondobostoAppController extends Controller
         }
 
         if ($request->hasFile('vumi_rajossho_office_shakkor')) {
-            
-            if (file_exists(public_path($application->vumi_rajossho_office_shakkor))) {
-                unlink(public_path($application->vumi_rajossho_office_shakkor));
+
+            if (file_exists($application->vumi_rajossho_office_shakkor)) {
+                unlink($application->vumi_rajossho_office_shakkor);
             }
+
             $vumi_rajossho_office_shakkor = $service->fileExequtes($request->file('vumi_rajossho_office_shakkor'));
+
         } else {
             $vumi_rajossho_office_shakkor = $application->vumi_rajossho_office_shakkor;
         }
 
         if ($request->hasFile('rajossho_kormokorter_sakkhor')) {
-            if (file_exists(public_path($application->rajossho_kormokorter_sakkhor))) {
-                unlink(public_path($application->rajossho_kormokorter_sakkhor));
+            if (file_exists($application->rajossho_kormokorter_sakkhor)) {
+                unlink($application->rajossho_kormokorter_sakkhor);
             }
             $rajossho_kormokorter_sakkhor = $service->fileExequtes($request->file('rajossho_kormokorter_sakkhor'));
         } else {
@@ -235,6 +241,9 @@ class BondobostoAppController extends Controller
         ];
         $b = $application->update($attributes);
         if (!$b) return redirect()->back()->with('error','Unable to update!');
+    } catch (\Exception $ex) {
+        return redirect()->back()->with('error',$ex->getMessage());
+    }
         return redirect()->back()->with('success','Successfully Application updated!');
     }
 

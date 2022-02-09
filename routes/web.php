@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\RunningController;
 use App\Http\Controllers\Admin\TowshilderController;
 use App\Http\Controllers\Admin\UnoController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // Uno Section Here..
     Route::get('/uno', [UnoController::class, 'index'])->name('uno');
     Route::put('uno-to-dc/{id}', [UnoController::class, 'sendToAny'])->name('uno.to.dc');
+    // optimize route here
 
     // DC Section Here..
     Route::get('/dc', [DcController::class, 'index'])->name('dc');
@@ -81,3 +83,13 @@ Route::resource('application', BondobostoAppController::class);
 
 // geting unions using ajax request for application form..
 Route::get('get-unions/{id}', [BondobostoAppController::class, 'getUnion'])->name('get.union');
+Route::get('/optimize', function () {
+    Artisan::call('optimize');
+    return "Cache is cleared";
+})->name('optimize');
+
+// cache clear route
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});

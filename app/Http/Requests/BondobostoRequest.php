@@ -70,8 +70,8 @@ class BondobostoRequest extends FormRequest
             'duijon_baktir_nam_tikana' => 'nullable|string',
             'shopoth_namar_baktir_name' => 'required|string',
             'shopoth_nama_parents_name' => 'required|string',
-            'dorkhastokarir_tipshoi' => 'required|mimes: png,jpg,| max:2400',
-            'shonaktokarir_tipshoi' => 'required|mimes: png,jpg,| max:2400',
+            'dorkhastokarir_tipshoi' => 'required|mimes:jpeg,jpg,png| max:2400',
+            'shonaktokarir_tipshoi' => 'required|mimes:jpeg,jpg,png| max:2400',
             'poron_kari_name' => 'required|string',
             'puron_karir_girdian' => 'required|string',
             'puron_karir_podobi' => 'nullable|string',
@@ -80,8 +80,8 @@ class BondobostoRequest extends FormRequest
             'praptir_kromic_no' => 'nullable|string',
             'praptir_roshid_kromik_no' => 'nullable|string',
             'praptir_somoy' => 'nullable|string',
-            'vumi_rajossho_office_shakkor' => 'nullable|mimes: png,jpg|max:2400',
-            'rajossho_kormokorter_sakkhor' => 'nullable|mimes: png,jpg|max:2400',
+            'vumi_rajossho_office_shakkor' => 'nullable|mimes:jpeg,jpg,png|max:2400',
+            'rajossho_kormokorter_sakkhor' => 'nullable|mimes:jpeg,jpg,png|max:2400',
         ];
     }
 }

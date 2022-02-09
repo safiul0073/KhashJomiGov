@@ -20,7 +20,7 @@
     @include('layouts.partial.flash-alert')
     <div class="container">
         <div class="card">
-           
+
             <div class="card-body">
 
                 <div class="row">
@@ -31,7 +31,7 @@
                                     <label for="">Profile Photo</label>
                                     <div>
                                         <img class="img-thumbnail" style="width: 100px;height: 120px;"
-                                         src="{{$user->avater? $user->avater : public_path('default.png')}}" id="avatar-preview">
+                                         src="{{$user->avater? '/'.$user->avater : 'default.png'}}" id="avatar-preview">
                                     </div>
                                 </div>
                             </div>
@@ -42,8 +42,8 @@
                                     <label for="">Sign</label>
                                     <div>
                                         <img class="img-thumbnail" style="width: 100px;height: 120px;"
-                                            src="{{$user->sign? $user->sign : ''}}" id="sign-preview">
-                                
+                                            src="{{$user->sign? '/'.$user->sign : ''}}" id="sign-preview">
+
                                     </div>
                                 </div>
                             </div>
@@ -85,17 +85,16 @@
                                             <input id="phone"  type="text" value="{{$user->phone}}" class="form-control"
                                                     name="phone" disabled >
 
-                                        
                                         </div>
                                     </div>
                                 </div>
 
-                            
+
                             </div>
                         </div>
                     </div>
                 </div>
-           
+
             </div>
         </div>
     </div>

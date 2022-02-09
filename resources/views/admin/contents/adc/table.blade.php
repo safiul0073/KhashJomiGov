@@ -17,7 +17,7 @@
                  <td>{{$application->main_name}}</td>
                  <td>{{$application->main_fathers_name}}</td>
                  <td>{{$application->main_village}}, {{$application->union->name}}, {{$application->upa_zila->name}}</td>
-                 <td><img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                 <td><img src="{{URL::to('/'.$application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                  <td>
                     <div class="d-flex flex-column">
                         <a href="{{route('show.app', $application->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>
@@ -35,41 +35,3 @@
         </tbody>
     </table>
 </div>
-@push('js')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script type="text/javascript">
-    function deleteApplication(id){
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-        }).then((result) => {
-        if (result.isConfirmed) {
-            event.preventDefault();
-            document.getElementById('delete-form-'+id).submit();
-        } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-            )
-        }
-        })
-    }
-</script>
-@endpush

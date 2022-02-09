@@ -58,7 +58,7 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->role?$user->role->name:''}}</td>
-                                        <td><img src="{{$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                                        <td><img src="{{'/'.$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                                         <td>
                                            <div class="d-flex flex-column">
                                                <a href="{{route('user.show', $user->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>

@@ -56,7 +56,7 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->role? $user->role->name :''}}</td>
-                                        <td><img src="{{$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                                        <td><img src="{{'/'.$user->avater}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                                         <td>{{$user->union? $user->union->name :''}}</td>
                                         <td>
                                            <div class="d-flex flex-column">

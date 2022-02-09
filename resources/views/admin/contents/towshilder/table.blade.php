@@ -17,7 +17,7 @@
                 <td>{{$application->main_name}}</td>
                 <td>{{$application->main_fathers_name}}</td>
                 <td>{{$application->main_village}}, {{$application->union->name}}, {{$application->upa_zila->name}}</td>
-                 <td><img src="{{URL::to($application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
+                 <td><img src="{{URL::to('/'.$application->avater)}}" style="height: 80px; width:100px;" class="card-img-top" alt="..."></td>
                  <td>
                     <div class="d-flex flex-column">
                         <a href="{{route('show.app', $application->id)}}" class="btn btn-sm btn-outline-success text-black"><i class="far fa-eye"></i></a>

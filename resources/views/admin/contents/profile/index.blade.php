@@ -37,7 +37,7 @@
                                     <label for="">Choose Profile Photo</label>
                                     <div>
                                         <img class="img-thumbnail" style="width: 100px;height: 120px;"
-                                         src="{{$user->avater}}" id="avatar-preview">
+                                         src="{{'/'.$user->avater}}" id="avatar-preview">
                                         <input type="file" class="form-control mt-2 @error('avater') is-invalid @enderror"
                                             name="avater" id="avatar-input">
                                         @error('avater')
@@ -55,7 +55,7 @@
                                     <label for="">Choose Sign</label>
                                     <div>
                                         <img class="img-thumbnail" style="width: 100px;height: 120px;"
-                                            src="{{$user->sign}}" id="sign-preview">
+                                            src="{{'/'.$user->sign}}" id="sign-preview">
                                         <input type="file" class="form-control mt-2 @error('sign') is-invalid @enderror" name="sign" value="" id="selected-sign">
                                         @error('sign')
                                             <span class="invalid-feedback" role="alert">

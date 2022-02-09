@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-2 pb-3 mb-3 d-flex">
                     <div class="image">
-                    <img src="{{ auth()->user()->avater != null? auth()->user()->avater : "http://ssl.gstatic.com/accounts/ui/avatar_2x.png" }}" class="img-circle rounded-circle elevation-2 avatar" alt="User Image">
+                    <img src="{{ auth()->user()->avater != null? '/'.auth()->user()->avater : "http://ssl.gstatic.com/accounts/ui/avatar_2x.png" }}" class="img-circle rounded-circle elevation-2 avatar" alt="User Image">
                     </div>
                     <div class="info">
                     <a href="" class="d-block">{!! auth()->user()->name !!}</a>

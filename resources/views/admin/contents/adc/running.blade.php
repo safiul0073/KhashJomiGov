@@ -21,7 +21,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header border-bottom-info d-flex">
-                <a href="{{url('/admin/dc')}}" class="btn btn-sm btn-primary">পূর্বের পেজ</a>
+                <a href="{{url('/admin/adc')}}" class="btn btn-sm btn-primary">পূর্বের পেজ</a>
                 <h3 class="text-center h5 font-weight-bold ml-4">
                     উপজেলাঃ {{$app->upa_zila->name}}, ইউনিয়নঃ {{' '.$app->union->name .', গ্রামঃ '. $app->main_village }} এর আবেদন পত্রটি বর্তমান অবস্থা।
                 </h3>

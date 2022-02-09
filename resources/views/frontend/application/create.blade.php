@@ -175,7 +175,7 @@
 
                                     <div class="form-group row">
                                         <div class="col-md-5">
-                                            <label for="">২।  দরখাস্তকারীর পরিবার প্রদানের নাম: </label>
+                                            <label for="">২।  দরখাস্তকারীর পরিবার প্রধানের নাম: </label>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="col-md-6">
@@ -233,7 +233,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label for="" >৪।  দরখাস্তকারীর জন্মস্থান/ঠিকানা*: </label>
+                                        <label for="" >৪। দরখাস্তকারীর জন্মস্থান/ঠিকানা*: </label>
 
                                             <div class="from-group row">
                                                 <div class="col-md-5">
@@ -277,7 +277,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-5">
-                                            <label for="">৫।  পরিবার প্রদানের স্ত্রী/স্বামী নাম*: </label>
+                                            <label for="">৫।  পরিবার প্রধানের স্ত্রী/স্বামী নাম*: </label>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="col-md-6">
@@ -442,7 +442,7 @@
                                     <div class="row">
                                             <div class="col-md-12">
                                                 <p>
-                                                <strong >আমি</strong> <input type="text" id="app-input-field" value="{{ old('shopoth_namar_baktir_name') }}" name="shopoth_namar_baktir_name"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" value="{{ old('shopoth_nama_parents_name') }}" name="shopoth_nama_parents_name" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
+                                                <strong >আমি</strong> <input class="@error('shopoth_namar_baktir_name') is-invalid @enderror" type="text" id="app-input-field" value="{{ old('shopoth_namar_baktir_name') }}" name="shopoth_namar_baktir_name"> <strong>পিতা/স্বামী</strong> <input id="app-input-field" class="@error('shopoth_nama_parents_name') is-invalid @enderror" value="{{ old('shopoth_nama_parents_name') }}" name="shopoth_nama_parents_name" type="text"> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
                                                     প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
                                                     আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
                                                     করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি
@@ -459,8 +459,12 @@
                                                         <img id="dor-tipshoi" style="width: 70px; height: 40px;" src="" alt="">
                                                         <label for="">দরখাস্তকারীর সই/টিপসই</label>
                                                     </div>
-
-                                                    <input type="file" id="input-dor-tipshoi" name="dorkhastokarir_tipshoi" value="{{ old('dorkhastokarir_tipshoi') }}" class="file-form-control form-control-sm" >
+                                                    <input type="file" id="input-dor-tipshoi" name="dorkhastokarir_tipshoi" value="{{ old('dorkhastokarir_tipshoi') }}" class="file-form-control form-control-sm @error('dorkhastokarir_tipshoi') is-invalid @enderror" >
+                                                    @error('dorkhastokarir_tipshoi')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <div>
@@ -468,7 +472,12 @@
                                                         <label for="">শনাক্তকারী সই/টিপসই</label>
                                                     </div>
 
-                                                    <input type="file" id="input-son-tipshoi" name="shonaktokarir_tipshoi" value="{{ old('shonaktokarir_tipshoi') }}" class="file-form-control form-control-sm" >
+                                                    <input type="file" id="input-son-tipshoi" name="shonaktokarir_tipshoi" value="{{ old('shonaktokarir_tipshoi') }}" class="file-form-control form-control-sm @error('shonaktokarir_tipshoi') is-invalid @enderror" >
+                                                    @error('shonaktokarir_tipshoi')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                     </div>

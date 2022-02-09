@@ -8,13 +8,13 @@
             border: none;
             border-bottom: 2px dotted black;
         }
-        .office_table{
+        /* .office_table{
             margin-left: auto;
             margin-right: auto;
-        }
+        } */
 
         .office_table{
-            width:80%;
+
             border: 1px solid black;
         }
         .office_table th{
@@ -38,17 +38,18 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-">Application</h1>
+            <h1 class="m-">আবেদন পত্র</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Application</li>
+              <li class="breadcrumb-item"><a href="{{route('home')}}">হোম</a></li>
+              <li class="breadcrumb-item active">আবেদন পত্র</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
     <!-- /.content-header -->
         <!-- Main content -->
 <section class="content">
@@ -56,10 +57,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h1>Application</h1>
-                    @include('layouts.partial.flash-alert')
+                <div class="card-header border-bottom-info d-flex">
+                    <a href="{{url('/admin/ac-land')}}" class="btn btn-sm btn-primary">পূর্বের পেজ</a>
+                    <h3 class="text-center h5 font-weight-bold ml-4">
+                        উপজেলাঃ {{$application->upa_zila->name}}, ইউনিয়নঃ {{' '.$application->union->name .', গ্রামঃ '. $application->main_village }} এর একটি সম্পূর্ণ আবেদন পত্র।
+                    </h3>
                 </div>
+                @include('layouts.partial.flash-alert')
                 <div class="card-body">
 
                         <div class="from-group my-2">
@@ -75,7 +79,7 @@
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
 
-                                        <img src="{{URL::to($application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
+                                        <img src="{{URL::to('/'.$application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +126,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="">২।  দরখাস্তকারীর পরিবার প্রদানের : </label>
+                                <label for="">২।  দরখাস্তকারীর পরিবার প্রধানের : </label>
                                 <div class="ml-lg-4 ml-xl-4">
                                     <p>নাম: {{$application->main_name}}</p>
                                 </div>
@@ -158,7 +162,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="">৫।  পরিবার প্রদানের স্ত্রী/স্বামী: </label>
+                                <label for="">৫।  পরিবার প্রধানের স্ত্রী/স্বামী: </label>
                                 <div class="ml-lg-4 ml-xl-4">
                                     <p>নাম: {{$application->main_f_or_m_name}}</p>
                                 </div>
@@ -263,7 +267,7 @@
                                     <div class="float-right">
                                         <div class="form-group">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
+                                                <img src="{{'/'.$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">দরখাস্তকারীর সই/টিপসই</label>
@@ -271,7 +275,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
+                                                <img src="{{'/'.$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">শনাক্তকারী সই/টিপসই</label>
@@ -320,55 +324,57 @@
                                 </div>
                             </div>
 
-                                <table class="form-group office_table">
-                                    <tr>
-                                        <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div style="display: inline;">
-                                                        <label for="">১| দরখাস্ত প্রাপ্তির তারিখ<span style="margin-left: 35px;">:</span></label>
-                                                        <p>{{$application->dorkhasto_praptir_tarik}}</p>
-                                                    </div>
-                                                    <div style="display: inline;">
-                                                        <label for="">২| প্রাপ্তির ক্রমিক নং<span style="margin-left: 59px;">:</span></label>
-                                                        <p>{{$application->proptir_kromic_nong}}</p>
-                                                    </div>
-                                                    <div style="display: inline;">
-                                                        <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 5px;">:</span></label>
-                                                        <p>{{$application->praptir_roshid_kromik_no}}</p>
-                                                    </div>
+                                <div class="row">
 
-                                                </div>
-                                                <div class="col-md-4" style="display: inline;">
-                                                    <label for="">সময়:</label>
-                                                    <p>{{$application->praptir_somoy}}</p>
-                                                </div>
-                                            </div>
-                                    </td>
-                                    </tr>
-                                </table>
-                                <div class="form-group d-flex">
+                                        <table class="col-md-10 col-lg-10 col-xl-10 mx-auto office_table">
+                                            <tr>
+                                                <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div style="display: inline;">
+                                                                <label for="">১| দরখাস্ত প্রাপ্তির তারিখ<span style="margin-left: 35px;">:</span></label>
+                                                                <p>{{$application->dorkhasto_praptir_tarik}}</p>
+                                                            </div>
+                                                            <div style="display: inline;">
+                                                                <label for="">২| প্রাপ্তির ক্রমিক নং<span style="margin-left: 59px;">:</span></label>
+                                                                <p>{{$application->proptir_kromic_nong}}</p>
+                                                            </div>
+                                                            <div style="display: inline;">
+                                                                <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 5px;">:</span></label>
+                                                                <p>{{$application->praptir_roshid_kromik_no}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4" style="display: inline;">
+                                                            <label for="">সময়:</label>
+                                                            <p>{{$application->praptir_somoy}}</p>
+                                                        </div>
+                                                    </div>
+                                            </td>
+                                            </tr>
+                                        </table>
+
+                                </div>
+                                <div class="form-group d-flex mt-4">
                                     <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
-                                    <img class="ml-3" src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="">
+                                    <img class="ml-3" src="{{'/'.$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="">
 
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="float-right">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="">
+                                                <img src="{{'/'.$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                 </div>
             </div>
             <br>
@@ -394,7 +400,7 @@
 
                                 <div style="width: 170px; float: left;">
                                     <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
-                                        <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
+                                        <img src="{{'/'.$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
 
                                         <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; ">
                                             {{$item->user->name}}

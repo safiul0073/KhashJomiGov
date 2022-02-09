@@ -6,20 +6,20 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-">Application</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Application</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-">আবেদন পত্র</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">হোম</a></li>
+                <li class="breadcrumb-item active">আবেদন পত্র</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
     <!-- /.content-header -->
         <!-- Main content -->
 <section class="content">
@@ -27,10 +27,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h1>Application</h1>
-                    @include('layouts.partial.flash-alert')
+                <div class="card-header border-bottom-info d-flex">
+                    <a href="{{url('/admin/adc')}}" class="btn btn-sm btn-primary">পূর্বের পেজ</a>
+                    <h3 class="text-center h5 font-weight-bold ml-4">
+                        উপজেলাঃ {{$application->upa_zila->name}}, ইউনিয়নঃ {{' '.$application->union->name .', গ্রামঃ '. $application->main_village }} এর একটি সম্পূর্ণ আবেদন পত্র।
+                    </h3>
                 </div>
+                @include('layouts.partial.flash-alert')
                 <div class="card-body">
 
                         <div class="from-group my-2">
@@ -46,7 +49,7 @@
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
 
-                                        <img src="{{URL::to($application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
+                                        <img src="{{URL::to('/'.$application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +67,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                       <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}">File Open</a>
+                                       <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}" >File Open</a>
                                     </div>
 
                                 </div>
@@ -93,7 +96,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="">২।  দরখাস্তকারীর পরিবার প্রদানের : </label>
+                                <label for="">২।  দরখাস্তকারীর পরিবার প্রধানের : </label>
                                 <div class="ml-lg-4 ml-xl-4">
                                     <p>নাম: {{$application->main_name}}</p>
                                 </div>
@@ -129,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="">৫।  পরিবার প্রদানের স্ত্রী/স্বামী: </label>
+                                <label for="">৫।  পরিবার প্রধানের স্ত্রী/স্বামী: </label>
                                 <div class="ml-lg-4 ml-xl-4">
                                     <p>নাম: {{$application->main_f_or_m_name}}</p>
                                 </div>
@@ -195,6 +198,153 @@
                             <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
                             <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
                         </div>
+
+                        <div class="form-group">
+                            <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                            <p>{{ $application->dorkhastokarir_khash_jomir_biboron }}</p>
+                        </div>
+                        <div class="form-group">
+                                <label for="">১৪| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                                <p>{{$application->khashjomipower_karon}}</p>
+                        </div>
+                        <div class="form-group">
+                                <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                                <p>{{$application->mowjar_name_somuho}}</p>
+                        </div>
+                        <div class="form-group">
+                                <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                                <p>{{ $application->duijon_baktir_nam_tikana }}</p>
+                        </div>
+                            <br>
+                            <div class="row text-center">
+                                    <h1>শপথ নামা</h1>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <p>
+                                           আমি <strong >{{ $application->shopoth_namar_baktir_name }}</strong> পিতা/স্বামী <strong> {{ $application->shopoth_nama_parents_name }}</strong> শপথ করিয়া বলিতেছি যে,আমার সম্পর্কে উপরুক্ত বিবরণ আমি পড়িয়াছি অথবা আমাকে পড়িয়া শুনানো হইয়াছে|
+                                            প্রদত্ত বিবরণ আমার জ্ঞান ও বিশ্সাস মতে সত্য|উক্ত বিবরণের কোনো অংশ,ভবিষতে যে কোনো সময় মিথ্যা প্রমাণিত হইলে
+                                            আমাকে প্রদত্ত বন্দোবস্তকৃত জমি বিনা ওজরে সরকারের বরাবরে বাজেয়াপ্ত এবং আমি বা আমার ওয়ারিশান ওহার বিরুদ্দে কোনো প্রকার আইনত দাবি/দাওয়া
+                                            করিতে পারিবে না,করিলেও কোনো আদালতে গ্রহণযোগ্য হইবে না|আমি শপথ পূর্বক আরো বলিতেছি যে,আমার এবং আমার স্ত্রীর নাম খাস জমি
+                                            দেওয়া হইল,ওহা আমরা নিজে চাষাবাদ করিব,বর্গাদার দিয়া কোনোভাবে চাষ করিব না এবং হস্তান্তর করিব না,বর্গাদার দিয়া কোনোভাবে চাষ করিব
+                                            না এবং হস্তান্তর করিব না|আমি দরখাস্তের সকল মর্ম জানিয়া শুনিয়া এবং বুজিয়া সুষ্ট জ্ঞানে সহি করিলাম/টিপসই দিলাম |
+                                        </p>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{'/'.$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">দরখাস্তকারীর সই/টিপসই</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{'/'.$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">শনাক্তকারী সই/টিপসই</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10 col-lg-10 col-xl-10 mx-auto">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত ফরম পূরণকারীর নাম <span style="margin-left: 45px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->poron_kari_name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">দরখাস্ত পূরণকারীর পিতা/স্বামীর নাম <span style="margin-left: 5px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->puron_karir_girdian}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">পদবী <span style="margin-left: 176px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->puron_karir_podobi}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="">ঠিকানা <span style="margin-left: 169px">:</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{$application->purun_karir_address}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+
+                                        <table class="col-md-10 col-lg-10 col-xl-10 mx-auto office_table">
+                                            <tr>
+                                                <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div style="display: inline;">
+                                                                <label for="">১| দরখাস্ত প্রাপ্তির তারিখ<span style="margin-left: 35px;">:</span></label>
+                                                                <p>{{$application->dorkhasto_praptir_tarik}}</p>
+                                                            </div>
+                                                            <div style="display: inline;">
+                                                                <label for="">২| প্রাপ্তির ক্রমিক নং<span style="margin-left: 59px;">:</span></label>
+                                                                <p>{{$application->proptir_kromic_nong}}</p>
+                                                            </div>
+                                                            <div style="display: inline;">
+                                                                <label for="">৩| প্রদত্ত রশিদের ক্রমিক নম্বর<span style="margin-left: 5px;">:</span></label>
+                                                                <p>{{$application->praptir_roshid_kromik_no}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4" style="display: inline;">
+                                                            <label for="">সময়:</label>
+                                                            <p>{{$application->praptir_somoy}}</p>
+                                                        </div>
+                                                    </div>
+                                            </td>
+                                            </tr>
+                                        </table>
+
+                                </div>
+                                <div class="form-group d-flex mt-4">
+                                    <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
+                                    <img class="ml-3" src="{{'/'.$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{{'/'.$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="">
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                 </div>
             </div>
             <br>

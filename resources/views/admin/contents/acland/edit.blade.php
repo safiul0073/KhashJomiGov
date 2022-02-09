@@ -223,7 +223,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-5">
-                                <label for="">২।  দরখাস্তকারীর পরিবার প্রদানের নাম: </label>
+                                <label for="">২।  দরখাস্তকারীর পরিবার প্রধানের নাম: </label>
                             </div>
                             <div class="col-md-7">
                                 <div class="col-md-6">
@@ -337,7 +337,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-5">
-                                <label for="">৫।  পরিবার প্রদানের স্ত্রী/স্বামী নাম*: </label>
+                                <label for="">৫।  পরিবার প্রধানের স্ত্রী/স্বামী নাম*: </label>
                             </div>
                             <div class="col-md-7">
                                 <div class="col-md-6">
@@ -492,7 +492,7 @@
                                     <div class="float-right">
                                         <div class="form-group">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                                <img src="{{'/'.$application->dorkhastokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">দরখাস্তকারীর সই/টিপসই</label>
@@ -500,7 +500,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="{{$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                                <img src="{{'/'.$application->shonaktokarir_tipshoi}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <label for="">শনাক্তকারী সই/টিপসই</label>
@@ -585,7 +585,7 @@
                                 <div class="form-group">
                                     <div class="d-flex">
                                         <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
-                                        <img class="ml-3" id="vumi_sakkhor" src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;">
+                                        <img class="ml-3" id="vumi_sakkhor" src="{{'/'.$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;">
                                     </div>
                                     <div>
                                         <div class="input-group" style="width: 300px">
@@ -607,7 +607,7 @@
                                     <div class="col-md-12">
                                         <div class="float-right">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img id="rajosso_sakkhor" src="{{$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
+                                                <img id="rajosso_sakkhor" src="{{'/'.$application->rajossho_kormokorter_sakkhor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir">
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center">
 
