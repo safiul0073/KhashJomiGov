@@ -79,7 +79,7 @@
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
 
-                                        <img src="{{URL::to('/'.$application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
+                                        <img src="{{'/'.$application->avater}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                             </div>
@@ -225,24 +225,44 @@
                             <p>{{$application->dorkhastokarir_nodi_vangon_biborn}}</p>
                         </div>
                         <div class="form-group">
-                            <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
+                            <label for="">১২। মৌজার নাম: </label>
+                            <p>{{$application->acland_mowja_name}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="">১৩। জি এল নং: </label>
+                            <p>{{$application->acland_jl_no}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="">১৪। খতিয়ান নং: </label>
+                            <p>{{$application->acland_khotian_numbers}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="">১৫। দাগ নং সমুহ: </label>
+                            <p>{{$application->acland_dag_no}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="">১৬। প্রতেক দাগের জায়গার পরিমান: </label>
+                            <p>{{$application->acland_jomit_size}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="">১৭।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
                             <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
                         </div>
 
                         <div class="form-group">
-                            <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                            <label for="">১৮। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে (প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                             <p>{{ $application->dorkhastokarir_khash_jomir_biboron }}</p>
                         </div>
                         <div class="form-group">
-                                <label for="">১৪| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                                <label for="">১৯| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
                                 <p>{{$application->khashjomipower_karon}}</p>
                         </div>
                         <div class="form-group">
-                                <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                                <label for="">২০|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
                                 <p>{{$application->mowjar_name_somuho}}</p>
                         </div>
                         <div class="form-group">
-                                <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                                <label for="">২১|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
                                 <p>{{ $application->duijon_baktir_nam_tikana }}</p>
                         </div>
                             <br>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AppSendController;
 use App\Http\Controllers\Admin\DcController;
 use App\Http\Controllers\Frontend\ApplicationController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\KhashJomiController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RunningController;
 use App\Http\Controllers\Admin\TowshilderController;
@@ -45,7 +46,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::put('ac-land-to-any/{id}', [AcLandController::class, 'sendToAny'])->name('ac-land.to.any');
     Route::get('ac-land-to-uno/{id}', [AcLandController::class, 'sendToUno'])->name('ac-land.to.uno');
     Route::put('send-to-nothi/{id}', [AcLandController::class, 'sendToNothi'])->name('ac-land.to.nothi');
-
+    // ac land section for khash jomi here..
+    Route::resource('khashjomi', KhashJomiController::class)->middleware('can:isAcland');
     // Towswhilder Section Here..
     Route::get('/towshilder', [TowshilderController::class, 'index'])->name('towshilder');
     Route::put('towshilder-to-acland/{id}', [TowshilderController::class, 'sendToAny'])->name('towshilder.to.AcLand');

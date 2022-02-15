@@ -58,17 +58,6 @@ class AcLandController extends Controller
 
         }
 
-        // if (request()->ajax()) {
-        //     return datatables()
-        //     ->of($applications)
-        //     ->addColumn('action', function ($data) {
-        //         $button = '<a href="'.route('admin.ac.land.show', $data->id).'" class="btn btn-primary btn-sm">View</a>';
-        //         return $button;
-        //     })
-        //     ->rawColumns(['action'])
-        //     ->make(true);
-        // }
-
 
         return view('admin.contents.acland.index', compact('applications',
                                                            'tab',

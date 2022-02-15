@@ -223,11 +223,11 @@
                                             </div>
 
                                             <div class="form-check col-md-3">
-                                                <input class="form-check-input isMortal" value="জীবিত" name="main_fathers_mortal"  type="checkbox">
+                                                <input class="form-check-input isMortal" @if(old('main_fathers_mortal' == 'জীবিত')) checked @endif value="জীবিত" name="main_fathers_mortal"  type="checkbox">
                                                 <label class="form-check-label ml-4">জীবিত</label>
                                             </div>
                                             <div class="form-check col-md-3" >
-                                                <input class="form-check-input isMortal" value="মৃত" name="main_fathers_mortal"  type="checkbox">
+                                                <input class="form-check-input isMortal" @if(old('main_fathers_mortal' == 'মৃত')) checked @endif value="মৃত" name="main_fathers_mortal"  type="checkbox">
                                                 <label class="form-check-label ml-4">মৃত</label>
                                             </div>
                                         </div>
@@ -271,7 +271,7 @@
                                                         <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">গ্রামঃ</label>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-xl-3">
-                                                        <input  name="main_village" type="text" class="form-control ml-2" placeholder="">
+                                                        <input  name="main_village" value="{{ old('main_village') }}" type="text" class="form-control ml-2" placeholder="">
                                                     </div>
                                                 </div>
                                     </div>

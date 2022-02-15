@@ -145,7 +145,7 @@
                          </div>
 
             <div class="col-md-6">
-               <img src="{{ asset('images/11.jpg') }}" width="100%" target="_blank" >
+               <img src="{{ asset('images/11.png') }}" width="100%" target="_blank" >
                          </div>
 
                     </div>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="card-body" style="padding: 13px 7px 2px 13px;">
                       <p style="font-size: 13px;line-height: 22px;text-align: justify;margin-bottom: 5px;margin-right: 7px;">
-                          <img src="{{ asset('images/dc.jpg') }}" height="280">
+                          <img src="{{ asset('images/dc.png') }}" height="280">
                        </p>
                        <p style="font-size: 13px;line-height: 22px;text-align: center;margin-bottom: 5px;margin-right: 7px;">
 

@@ -13,11 +13,11 @@ class BondobostoApp extends Model
 
 
     public function union () {
-        return $this->belongsTo(Union::class, 'main_union_id', 'id');
+        return $this->belongsTo(Union::class, 'union_id', 'id');
     }
 
     public function upa_zila () {
-        return $this->belongsTo(UpaZila::class, 'main_upzila_id', 'id');
+        return $this->belongsTo(UpaZila::class, 'upa_zila_id', 'id');
     }
 
     // BondobostoApp has many AppSend

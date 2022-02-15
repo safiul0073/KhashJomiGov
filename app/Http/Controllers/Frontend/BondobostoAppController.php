@@ -60,8 +60,6 @@ class BondobostoAppController extends Controller
                 'main_fathers_name' => $request->main_fathers_name,
                 'main_fathers_mortal' => $request->main_fathers_mortal,
                 'main_village' => $request->main_village,
-                'main_union_id' => $request->main_union,
-                'main_upzila_id' => $request->main_upzila,
                 'main_zila' => $request->main_zila,
                 'main_f_or_m_name' => $request->main_f_or_m_name,
                 'main_f_or_m_age' => $request->main_f_or_m_age,
@@ -126,72 +124,28 @@ class BondobostoAppController extends Controller
         DB::beginTransaction();
     try {
 
-       $avater = $service->deleteFile($request,$application->avater,$request->file('avater'));
-
-        if ($request->hasFile('vumihi_muktijudda_sonod')) {
-            if (file_exists($application->vumihi_muktijudda_sonod)) {
-                unlink($application->vumihi_muktijudda_sonod);
-            }
-            $vumihi_muktijudda_sonod = $service->fileExequtes($request->file('vumihi_muktijudda_sonod'));
-        } else {
-            $vumihi_muktijudda_sonod = $application->vumihi_muktijudda_sonod;
-        }
-
-        if ($request->hasFile('vumihi_commission_sonod')) {
-            if (file_exists($application->vumihi_commission_sonod)) {
-                unlink($application->vumihi_commission_sonod);
-            }
-            $vumihi_commission_sonod = $service->fileExequtes($request->file('vumihi_commission_sonod'));
-        } else {
-            $vumihi_commission_sonod = $application->vumihi_commission_sonod;
-        }
-
-        if ($request->hasFile('vumihin_others_sonod')) {
-            if (file_exists($application->vumihin_others_sonod)) {
-                unlink($application->vumihin_others_sonod);
-            }
-            $vumihin_others_sonod = $service->fileExequtes($request->file('vumihin_others_sonod'));
-        } else {
-            $vumihin_others_sonod = $application->vumihin_others_sonod;
-        }
-        if ($request->hasFile('dorkhastokarir_tipshoi')) {
-            if (file_exists($application->dorkhastokarir_tipshoi)) {
-                unlink($application->dorkhastokarir_tipshoi);
-            }
-            $dorkhastokarir_tipshoi = $service->fileExequtes($request->file('dorkhastokarir_tipshoi'));
-        } else {
-            $dorkhastokarir_tipshoi = $application->dorkhastokarir_tipshoi;
-        }
-
-        if ($request->hasFile('shonaktokarir_tipshoi')) {
-            if (file_exists($application->shonaktokarir_tipshoi)) {
-                unlink($application->shonaktokarir_tipshoi);
-            }
-            $shonaktokarir_tipshoi = $service->fileExequtes($request->file('shonaktokarir_tipshoi'));
-        } else {
-            $shonaktokarir_tipshoi = $application->shonaktokarir_tipshoi;
-        }
-
-        if ($request->hasFile('vumi_rajossho_office_shakkor')) {
-
-            if (file_exists($application->vumi_rajossho_office_shakkor)) {
-                unlink($application->vumi_rajossho_office_shakkor);
-            }
-
-            $vumi_rajossho_office_shakkor = $service->fileExequtes($request->file('vumi_rajossho_office_shakkor'));
-
-        } else {
-            $vumi_rajossho_office_shakkor = $application->vumi_rajossho_office_shakkor;
-        }
-
-        if ($request->hasFile('rajossho_kormokorter_sakkhor')) {
-            if (file_exists($application->rajossho_kormokorter_sakkhor)) {
-                unlink($application->rajossho_kormokorter_sakkhor);
-            }
-            $rajossho_kormokorter_sakkhor = $service->fileExequtes($request->file('rajossho_kormokorter_sakkhor'));
-        } else {
-            $rajossho_kormokorter_sakkhor = $application->rajossho_kormokorter_sakkhor;
-        }
+       $avater = $service->deleteFile($request,$application->avater,'avater');
+       $vumihi_muktijudda_sonod = $service->deleteFile($request,
+                                  $application->vumihi_muktijudda_sonod,
+                                  'vumihi_muktijudda_sonod');
+       $vumihi_commission_sonod = $service->deleteFile($request,
+                                  $application->vumihi_commission_sonod,
+                                  'vumihi_commission_sonod');
+       $vumihin_others_sonod = $service->deleteFile($request,
+                                  $application->vumihin_others_sonod,
+                                  'vumihin_others_sonod');
+       $dorkhastokarir_tipshoi = $service->deleteFile($request,
+                                  $application->dorkhastokarir_tipshoi,
+                                  'dorkhastokarir_tipshoi');
+       $shonaktokarir_tipshoi = $service->deleteFile($request,
+                                  $application->shonaktokarir_tipshoi,
+                                  'shonaktokarir_tipshoi');
+       $vumi_rajossho_office_shakkor = $service->deleteFile($request,
+                                  $application->vumi_rajossho_office_shakkor,
+                                  'vumi_rajossho_office_shakkor');
+       $rajossho_kormokorter_sakkhor = $service->deleteFile($request,
+                                  $application->rajossho_kormokorter_sakkhor,
+                                  'rajossho_kormokorter_sakkhor');
 
         $attributes = [
             'app_class' => $service->dataExecute($request->app_class),
@@ -201,8 +155,6 @@ class BondobostoAppController extends Controller
             'main_fathers_name' => $request->main_fathers_name,
             'main_fathers_mortal' => $request->main_fathers_mortal,
             'main_village' => $request->main_village,
-            'main_union_id' => $request->main_union,
-            'main_upzila_id' => $request->main_upzila,
             'main_zila' => $request->main_zila,
             'main_f_or_m_name' => $request->main_f_or_m_name,
             'main_f_or_m_age' => $request->main_f_or_m_age,
@@ -220,6 +172,11 @@ class BondobostoAppController extends Controller
             'vumihi_muktijudda_sonod' => $vumihi_muktijudda_sonod,
             'vumihi_commission_sonod' => $vumihi_commission_sonod,
             'vumihin_others_sonod' => $vumihin_others_sonod,
+            'acland_mowja_name' => $request->acland_mowja_name,
+            'acland_jl_no' => $request->acland_jl_no,
+            'acland_khotian_numbers' => $request->acland_khotian_numbers,
+            'acland_dag_no' => $request->acland_dag_no,
+            'acland_jomit_size' => $request->acland_jomit_size,
             'dorkhastokarir_khash_jomir_biboron' => $request->dorkhastokarir_khash_jomir_biboron,
             'khashjomipower_karon' => $request->khashjomipower_karon,
             'mowjar_name_somuho' => $request->mowjar_name_somuho,
@@ -241,7 +198,9 @@ class BondobostoAppController extends Controller
         ];
         $b = $application->update($attributes);
         if (!$b) return redirect()->back()->with('error','Unable to update!');
+        DB::commit();
     } catch (\Exception $ex) {
+        DB::rollback();
         return redirect()->back()->with('error',$ex->getMessage());
     }
         return redirect()->back()->with('success','Successfully Application updated!');
@@ -257,35 +216,35 @@ class BondobostoAppController extends Controller
     {
         $b = BondobostoApp::find($id);
 
-        if ($b->avater && File::exists(public_path($b->avater))) {
-            File::delete(public_path($b->avater));
+        if ($b->avater && File::exists($b->avater)) {
+            File::delete($b->avater);
         }
-        if ($b->vumihi_muktijudda_sonod && File::exists(public_path($b->vumihi_muktijudda_sonod))) {
-            File::delete(public_path($b->vumihi_muktijudda_sonod));
+        if ($b->vumihi_muktijudda_sonod && File::exists($b->vumihi_muktijudda_sonod)) {
+            File::delete($b->vumihi_muktijudda_sonod);
         }
-        if ($b->vumihi_commission_sonod && File::exists(public_path($b->vumihi_commission_sonod))) {
-            File::delete(public_path($b->vumihi_commission_sonod));
+        if ($b->vumihi_commission_sonod && File::exists($b->vumihi_commission_sonod)) {
+            File::delete($b->vumihi_commission_sonod);
         }
-        if ($b->vumihin_others_sonod && File::exists(public_path($b->vumihin_others_sonod))) {
-            File::delete(public_path($b->vumihin_others_sonod));
+        if ($b->vumihin_others_sonod && File::exists($b->vumihin_others_sonod)) {
+            File::delete($b->vumihin_others_sonod);
         }
-        if ($b->vumi_rajossho_office_shakkor && File::exists(public_path($b->vumi_rajossho_office_shakkor))) {
-            File::delete(public_path($b->vumi_rajossho_office_shakkor));
+        if ($b->vumi_rajossho_office_shakkor && File::exists($b->vumi_rajossho_office_shakkor)) {
+            File::delete($b->vumi_rajossho_office_shakkor);
         }
-        if ($b->rajossho_kormokorter_sakkhor && File::exists(public_path($b->rajossho_kormokorter_sakkhor))) {
-            File::delete(public_path($b->rajossho_kormokorter_sakkhor));
+        if ($b->rajossho_kormokorter_sakkhor && File::exists($b->rajossho_kormokorter_sakkhor)) {
+            File::delete($b->rajossho_kormokorter_sakkhor);
         }
-        if ($b->dorkhastokarir_tipshoi && File::exists(public_path($b->dorkhastokarir_tipshoi))) {
-            File::delete(public_path($b->dorkhastokarir_tipshoi));
+        if ($b->dorkhastokarir_tipshoi && File::exists($b->dorkhastokarir_tipshoi)) {
+            File::delete($b->dorkhastokarir_tipshoi);
         }
-        if ($b->shonaktokarir_tipshoi && File::exists(public_path($b->shonaktokarir_tipshoi))) {
-            File::delete(public_path($b->shonaktokarir_tipshoi));
+        if ($b->shonaktokarir_tipshoi && File::exists($b->shonaktokarir_tipshoi)) {
+            File::delete($b->shonaktokarir_tipshoi);
         }
 
         if ($b->app_sends()) {
             foreach ($b->app_sends() as $item) {
-                if ($item->file && File::exists(public_path($item->file))) {
-                    File::delete(public_path($item->file));
+                if ($item->file && File::exists($item->file)) {
+                    File::delete($item->file);
                 }
             }
         }

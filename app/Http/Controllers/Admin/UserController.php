@@ -169,7 +169,7 @@ class UserController extends Controller
                 $avaterfullName = $this->service->fileExequtes($request->file('avater'));
                 $user->avater = $avaterfullName;
             }
-
+            
             if ($request->hasFile('sign')) {
                 if (file_exists($user->sign)) {
                     unlink($user->sign);

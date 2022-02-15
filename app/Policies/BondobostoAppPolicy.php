@@ -113,22 +113,22 @@ class BondobostoAppPolicy
      */
     public function delete(User $user, BondobostoApp $bondobostoApp)
     {
-        if ($user->role_id == User::$DC) {
+        if ($user->role_id == User::DC) {
             return true;
         }
-        if ($user->role_id == User::$ADC) {
+        if ($user->role_id == User::ADC) {
             return true;
         }
-        if ($user->role_id == User::$RDC) {
+        if ($user->role_id == User::RDC) {
             return true;
         }
-        if ($user->role_id == User::$AC_LAND) {
+        if ($user->role_id == User::AC_LAND) {
             if ($user->upa_zila_id == $bondobostoApp->upa_zila_id) {
                 return true;
             }
         }
 
-        if ($user->role_id == User::$TOWSHILDER) {
+        if ($user->role_id == User::TOWSHILDER) {
             if ($user->upa_zila_id == $bondobostoApp->upa_zila_id) {
 
                 if ($user->union_id == $bondobostoApp->union_id) {

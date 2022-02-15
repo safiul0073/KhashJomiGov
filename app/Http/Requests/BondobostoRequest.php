@@ -45,8 +45,6 @@ class BondobostoRequest extends FormRequest
             'main_fathers_name' => 'required',
             'main_fathers_mortal' => 'required',
             'main_village' => 'required',
-            'main_union' => 'required',
-            'main_upzila' => 'required',
             'main_zila' => 'required',
             'main_f_or_m_name' => 'required',
             'main_f_or_m_age' => 'required',

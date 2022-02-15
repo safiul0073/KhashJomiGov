@@ -40,6 +40,14 @@
                       </p>
                     </a>
                   </li>
+                  <li class="nav-item ">
+                    <a href="{{ route('khashjomi.index') }}" class="nav-link {{ request()->routeIs('khashjomi.*') ? 'active' : '' }}">
+                      <i class="nav-icon fas fa-globe-asia"></i>
+                      <p>
+                        খাস জমি
+                      </p>
+                    </a>
+                  </li>
                   @endcan
 
                   @can('isTowshildeer')

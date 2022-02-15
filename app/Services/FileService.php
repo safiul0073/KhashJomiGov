@@ -25,7 +25,7 @@ class FileService {
         if (is_array($files)) {
             $filearr = [];
             foreach($files as $file) {
-                $imagename = rand(45464, 676767).time().'_'.uniqid().'.'.$file->extension();
+                $imagename = $file->hashName();
                 $imagepublicpath = public_path('uploads/files');
                 $file->move($imagepublicpath, $imagename);
                 $filearr[] = 'uploads/files/'.$imagename;
@@ -33,7 +33,7 @@ class FileService {
             $file_path = implode(',', $filearr);
         }else {
 
-            $imagename = rand(45464, 676767).time().'_'.uniqid().'.'.$files->extension();
+            $imagename = $files->hashName();
             $imagepublicpath = public_path('uploads/files');
             $files->move($imagepublicpath, $imagename);
             $file_path = 'uploads/files/'.$imagename;
@@ -44,6 +44,7 @@ class FileService {
 
 
     public function deleteFile(Request $request, $file_path, $attribute) {
+
 
         if ($request->hasFile($attribute)) {
             if (file_exists($file_path)) {
