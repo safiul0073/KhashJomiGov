@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use App\Models\BondobostoApp;
+use App\Models\KhashJomi;
 use App\Models\User;
 use App\Policies\BondobostoAppPolicy;
+use App\Policies\KhashJomiPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,7 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        User::class => UserPolicy::class,
         BondobostoApp::class => BondobostoAppPolicy::class,
+        KhashJomi::class => KhashJomiPolicy::class,
     ];
 
     /**
@@ -33,8 +38,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role_id == User::DC || $user->role_id == User::AC_LAND;
         });
 
-        Gate::define('isAcland', function ($user) {
-            if ($user->isAcLand()) {
+        Gate::define('manage-khashjomi', function ($user) {
+            if ($user->role_id == User::AC_LAND) {
                 return true;
             }
         });

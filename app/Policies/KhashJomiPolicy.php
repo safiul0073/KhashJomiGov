@@ -18,7 +18,9 @@ class KhashJomiPolicy
      */
     public function viewAny(User $user)
     {
-
+        if ($user->role_id == User::AC_LAND) {
+            return true;
+        }
     }
 
     /**
@@ -31,31 +33,11 @@ class KhashJomiPolicy
     public function view(User $user, KhashJomi $khashJomi)
     {
 
-        if ($user->role_id == User::AC_LAND) {
-            if ($user->upa_zila_id == $khashJomi->upa_zila_id) {
-                return true;
-            }
-        }
-
+        return $user->role_id == User::AC_LAND && $user->upa_zila_id == $khashJomi->upa_zila_id;
 
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user, $upa_zila_id)
-    {
 
-        if ($user->role_id == User::AC_LAND) {
-            if ($user->upa_zila_id == $upa_zila_id) {
-                return true;
-            }
-        }
-
-    }
 
 
     /**
@@ -68,12 +50,8 @@ class KhashJomiPolicy
     public function update(User $user, KhashJomi $khashJomi)
     {
 
-        if ($user->role_id == User::AC_LAND) {
-            if ($user->upa_zila_id == $khashJomi->upa_zila_id) {
-                return true;
-            }
-        }
 
+        return $user->role_id == User::AC_LAND && $user->upa_zila_id == $khashJomi->upa_zila_id;
 
     }
 
@@ -87,14 +65,8 @@ class KhashJomiPolicy
     public function delete(User $user, KhashJomi $khashJomi)
     {
 
-        if ($user->role_id == User::AC_LAND) {
-            if ($user->upa_zila_id == $khashJomi->upa_zila_id) {
-                return true;
-            }
-        }
-
+        return $user->role_id == User::AC_LAND && $user->upa_zila_id == $khashJomi->upa_zila_id;
     }
-
     /**
      * Determine whether the user can restore the model.
      *

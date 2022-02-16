@@ -1,17 +1,17 @@
 @extends('layouts.admin-app')
-@section('title', 'Mange User')
+@section('title', 'খাস জমি')
 @section('contents')
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Mange User</h1>
+              <h1 class="m-0">খাস জমি</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-user"><a href="#">Home</a></li>
-                <li class="breadcrumb-user active">Mange User</li>
+                <li class="breadcrumb-user"><a href="#">হোম</a></li>
+                <li class="breadcrumb-user active">খাস জমি</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -25,7 +25,7 @@
                 <ul class="nav nav-tabs pt-1 pl-2 bg-green">
                     @foreach ($unions as $item)
                         <li class="nav-item">
-                        <a class="nav-link {{ $tab == $item->id? 'active text-green' :'text-white'}}"  href="{{ route('khashjomi.index', ['tab' => $item->id]) }}"> {{ $item->name }}</a>
+                        <a class="nav-link {{ $tab == $item->id? 'active text-green' :'text-white'}}"  href="{{ route('khashJomi.index', ['tab' => $item->id]) }}"> {{ $item->name }}</a>
                       </li>
                     @endforeach
                   </ul>
@@ -34,7 +34,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 ">
-                        <a href="{{route('khashjomi.index',['tab'=> $tab, 'page'=> 'page'])}}" class="btn btn-success float-right">খাস জমি তৈরী করুন</a>
+                        <a href="{{route('khashJomi.index',['tab'=> $tab, 'page'=> 'page'])}}" class="btn btn-success float-right">খাস জমি তৈরী করুন</a>
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@ $(document).ready(function () {
     var tableBody = $('#tableBody')
                     var i = 1;
                     $('#add').on('click', function (e) {
-                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="dag_nos[][dag_nos]" class="form-control" type="number"></td><td ><input class="form-control" name="quantitys[][quantitys]" min="1" type="taxt" ></td><td><a id="delete" class="btn btn-sm btn-danger rounded" >-</a></td></tr>')
+                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input placeholder="দাগ নাম্বার" name="dag_nos[]" class="form-control" type="number"></td><td ><input placeholder="জায়গার পরিমান" class="form-control" name="quantitys[]" min="1" type="taxt" ></td><td class="text-center"><a id="delete" class="btn btn-sm btn-danger rounded" >-</a></td></tr>')
                     })
 
                     $(document).on('click', '#delete', function () {

@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KhashJomiRequest;
 use App\Models\KhashJomi;
+use App\Services\KhashJomiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KhashJomiController extends Controller
 {
     public function __construct() {
-        $this->authorizeResource(User::class,'user');
+
     }
     /**
      * Display a listing of the resource.
@@ -32,7 +33,7 @@ class KhashJomiController extends Controller
         }
         $upa_zila_id = $user->upa_zila_id;
         $unions = $user->upazila->unions;
-        $khashJomis = $user->upazila->khashJomis;
+        $khashJomis = $user->upazila->khash_jomis()->where('union_id', $tab)->get();
         return view('admin.contents.acland.khash_jomi.index', compact('khashJomis', 'unions','upa_zila_id','tab','page'));
     }
 
@@ -52,10 +53,12 @@ class KhashJomiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KhashJomiRequest $request)
+    public function store(KhashJomiRequest $request, KhashJomiService $khashJomiService)
     {
-        //
+        $khashJomiService->insertKhashJomi($request);
+        return redirect()->back()->with('success', 'জমি সফলভাবে যুক্ত করা হয়েছে');
     }
+
 
     /**
      * Display the specified resource.
@@ -99,6 +102,7 @@ class KhashJomiController extends Controller
      */
     public function destroy(KhashJomi $khashJomi)
     {
-        //
+        $khashJomi->delete();
+        return redirect()->back()->with('success', 'জমি সফলভাবে মুছে ফেলা হয়েছে');
     }
 }

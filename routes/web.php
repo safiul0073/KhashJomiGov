@@ -47,7 +47,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('ac-land-to-uno/{id}', [AcLandController::class, 'sendToUno'])->name('ac-land.to.uno');
     Route::put('send-to-nothi/{id}', [AcLandController::class, 'sendToNothi'])->name('ac-land.to.nothi');
     // ac land section for khash jomi here..
-    Route::resource('khashjomi', KhashJomiController::class)->middleware('can:isAcland');
+    Route::resource('khashJomi', KhashJomiController::class)->middleware('can:manage-khashjomi');
     // Towswhilder Section Here..
     Route::get('/towshilder', [TowshilderController::class, 'index'])->name('towshilder');
     Route::put('towshilder-to-acland/{id}', [TowshilderController::class, 'sendToAny'])->name('towshilder.to.AcLand');

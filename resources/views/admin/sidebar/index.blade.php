@@ -31,7 +31,7 @@
                       </p>
                     </a> --}}
                   {{-- </li> --}}
-                  @can('isAcland')
+                  @can('manage-khashjomi')
                   <li class="nav-item ">
                     <a href="{{ route('ac-land') }}" class="nav-link {{ request()->routeIs('ac-land') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -41,7 +41,7 @@
                     </a>
                   </li>
                   <li class="nav-item ">
-                    <a href="{{ route('khashjomi.index') }}" class="nav-link {{ request()->routeIs('khashjomi.*') ? 'active' : '' }}">
+                    <a href="{{ route('khashJomi.index') }}" class="nav-link {{ request()->routeIs('khashJomi.*') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-globe-asia"></i>
                       <p>
                         খাস জমি
