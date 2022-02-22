@@ -24,7 +24,8 @@ class ApplicationController extends Controller
 
         $upa_zila_id = $request->upozila;
         $union_id = $request->main_union;
-        $upa_zilas = UpaZila::all();
+
+
         return redirect()->route('application.index',['upa_zila_id' => $upa_zila_id, 'union_id' => $union_id]);
     }
 }

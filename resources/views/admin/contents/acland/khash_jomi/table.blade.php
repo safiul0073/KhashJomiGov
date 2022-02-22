@@ -5,7 +5,7 @@
                 <thead style="background-color:green" class="text-white">
                     <tr class="text-center">
                         <th>ক্রমিক</th>
-                        <th>মোজা নাম</th>
+                        <th>মৌজা নাম</th>
                         <th>জে এল নাম্বার</th>
                         <th>খতিয়ান নাম্বার</th>
                         <th>দাগ নাম্বার</th>
@@ -26,9 +26,7 @@
                         <td>
                            <div class="d-flex flex-column">
 
-                               <a href="javascript:void(0)"
-                                   data-toggle="modal"
-                                   data-target="#modal-default{{$khashJomi->id}}"
+                               <a href="{{route('khashJomi.index',['tab'=> $tab, 'page'=> 'edit', 'id'=> $khashJomi->id])}}"
                                    class="btn btn-sm btn-outline-info"><i class="far fa-edit"></i></a>
                                <button type="button" class="btn btn-outline-danger waves-effect" onclick="deleteCategory({{$khashJomi->id}})"><i class="fas fa-ban"></i></button>
                                    <form id="delete-form-{{$khashJomi->id}}" action="{{route('khashJomi.destroy',$khashJomi->id)}}" method="POST" style="display: none;" >

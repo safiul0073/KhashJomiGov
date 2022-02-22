@@ -19,6 +19,10 @@ class Union extends Model
         return $this->hasMany(BondobostoApp::class);
     }
 
+    public function khash_jomis () {
+        return $this->hasMany(KhashJomi::class);
+    }
+
     public static function generateUnions() {
         $unions = [
             [

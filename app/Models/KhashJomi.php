@@ -29,25 +29,18 @@ class KhashJomi extends Model
         return $this->belongsTo(Union::class);
     }
 
-    public function getDagNosAttribute($value)
+    public function dagWithQuantity()
     {
-        return json_decode($value);
-    }
+        foreach(explode(',', $this->dag_nos) as $key => $dag_no) {
 
-    public function setDagNosAttribute($value)
-    {
-        $this->attributes['dag_nos'] = json_encode($value);
-    }
+            $dag_with_quantity[$key] = [
+                'dag_no' => $dag_no,
+            ];
+        }
+        foreach(explode(',', $this->quantitys) as $key => $quantity) {
 
-    public function getQuantitysAttribute($value)
-    {
-        return json_decode($value);
+            $dag_with_quantity[$key]['quantity'] = $quantity;
+        }
+        return $dag_with_quantity;
     }
-
-    public function setQuantitysAttribute($value)
-    {
-        $this->attributes['quantitys'] = json_encode($value);
-    }
-
-    
 }

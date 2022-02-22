@@ -24,17 +24,21 @@ class KhashJomiController extends Controller
         $user = Auth::user();
         $tab = 1;
         $page = 'table';
+        $khashJomi = null;
         if ($request->tab) {
             $tab = $request->tab;
         }
 
         if ($request->page) {
             $page = $request->page;
+            if ($page == 'edit') {
+                $khashJomi = KhashJomi::find($request->id);
+            }
         }
         $upa_zila_id = $user->upa_zila_id;
         $unions = $user->upazila->unions;
         $khashJomis = $user->upazila->khash_jomis()->where('union_id', $tab)->get();
-        return view('admin.contents.acland.khash_jomi.index', compact('khashJomis', 'unions','upa_zila_id','tab','page'));
+        return view('admin.contents.acland.khash_jomi.index', compact('khashJomis', 'unions','upa_zila_id','tab','page', 'khashJomi'));
     }
 
     /**

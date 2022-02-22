@@ -10,8 +10,8 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-user"><a href="#">হোম</a></li>
-                <li class="breadcrumb-user active">খাস জমি</li>
+                <li class="breadcrumb-item"><a href="#">হোম</a></li>
+                <li class="breadcrumb-item active">খাস জমি</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -33,14 +33,19 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12 ">
-                        <a href="{{route('khashJomi.index',['tab'=> $tab, 'page'=> 'page'])}}" class="btn btn-success float-right">খাস জমি তৈরী করুন</a>
-                    </div>
+                    @if ($page === 'table')
+                        <div class="col-md-12 ">
+                            <a href="{{route('khashJomi.index',['tab'=> $tab, 'page'=> 'page'])}}" class="btn btn-success float-right">খাস জমি তৈরী করুন</a>
+                        </div>
+                    @endif
+
                 </div>
 
 
                 @if ($page === 'table')
                     @include('admin.contents.acland.khash_jomi.table')
+                @elseif ($page === 'edit')
+                    @include('admin.contents.acland.khash_jomi.edit')
                 @else
                     @include('admin.contents.acland.khash_jomi.create')
                 @endif
@@ -58,7 +63,7 @@ $(document).ready(function () {
     var tableBody = $('#tableBody')
                     var i = 1;
                     $('#add').on('click', function (e) {
-                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input placeholder="দাগ নাম্বার" name="dag_nos[]" class="form-control" type="number"></td><td ><input placeholder="জায়গার পরিমান" class="form-control" name="quantitys[]" min="1" type="taxt" ></td><td class="text-center"><a id="delete" class="btn btn-sm btn-danger rounded" >-</a></td></tr>')
+                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input placeholder="দাগ নাম্বার" name="dag_nos[]" class="form-control" type="number"></td><td ><input placeholder="জায়গার পরিমান" class="form-control" name="quantitys[]" min="1" type="taxt" ></td><td class="text-center"><a id="delete" class="btn btn-danger rounded" >-</a></td></tr>')
                     })
 
                     $(document).on('click', '#delete', function () {

@@ -447,45 +447,26 @@
                             <label for="">১১।  নদী ভাঙ্গা পরিবার হইলে কবে কোথায় নদী ভাঙিয়াছিল  এবং সেই জায়গার কোনো দলিল দস্তাবেজ থাকিলে উহার বিবরণ (প্রয়োজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                             <textarea name="dorkhastokarir_nodi_vangon_biborn"  class="form-control">{{$application->dorkhastokarir_nodi_vangon_biborn}}</textarea>
                         </div>
+
                         <div class="form-group">
-                            <label for="">১২। মৌজার নাম: </label>
-                            <textarea name="acland_mowja_name"  class="form-control">{{$application->acland_mowja_name}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৩। জি এল নং: </label>
-                            <textarea name="acland_jl_no"  class="form-control">{{$application->acland_jl_no}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৪। খতিয়ান নং: </label>
-                            <textarea name="acland_khotian_numbers"  class="form-control">{{$application->acland_khotian_numbers}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৫। দাগ নং সমুহ (যদি একাদিক দাগ থাকে তা হলে একটার পর একটা কমা দিয়ে লিখুন): </label>
-                            <textarea name="acland_dag_no"  class="form-control">{{$application->acland_dag_no}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৬। প্রতেক দাগের জায়গার পরিমান (যদি একাদিক দাগ থাকে তা হলে একটার পর একটা কমা দিয়ে জায়গার পরিমান লিখুন): </label>
-                            <textarea name="acland_jomit_size"  class="form-control">{{$application->acland_jomit_size}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৭।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
+                            <label for="">১২।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
                             <textarea name="dorkhastokarir_shohidorpongo_person_biboron"  class="form-control">{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="">১৮। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                            <label for="">১৩। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে|(প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                             <textarea name="dorkhastokarir_khash_jomir_biboron"  class="form-control">{{ $application->dorkhastokarir_khash_jomir_biboron }}</textarea>
                         </div>
                         <div class="form-group row">
-                            <label for="">১৯| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                            <label for="">১৪| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
                             <textarea name="khashjomipower_karon"  class="form-control">{{ $application->khashjomipower_karon }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="">২০| প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                            <label for="">১৫| প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
                             <textarea name="mowjar_name_somuho"  class="form-control">{{ $application->mowjar_name_somuho }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="">২১| দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                            <label for="">১৬| দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
                             <textarea name="duijon_baktir_nam_tikana"  class="form-control">{{ $application->duijon_baktir_nam_tikana }}</textarea>
                         </div>
                             <br>
@@ -532,7 +513,7 @@
 
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-10 col-lg-10 col-xl-10 mx-auto">
                                     <div class="form-group row">
                                         <div class="col-md-6">
@@ -567,10 +548,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
 
-                                <table class="form-group office_table">
+                                {{-- <table class="form-group office_table">
                                     <tr>
                                         <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
                                     </tr>
@@ -601,8 +582,8 @@
                                     </td>
 
                                     </tr>
-                                </table>
-                                <div class="form-group">
+                                </table> --}}
+                                {{-- <div class="form-group">
                                     <div class="d-flex">
                                         <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
                                         <img class="ml-3" id="vumi_sakkhor" src="{{'/'.$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;">
@@ -622,8 +603,8 @@
                                           @enderror
                                     </div>
                                     {{-- <img src="{{$application->vumi_rajossho_office_shakkor}}" style="width: 70px; height: 40px;" alt="tipshowi shonakto karir"> --}}
-                                </div>
-                                <div class="row">
+                                </div> --}}
+                                {{-- <div class="row">
                                     <div class="col-md-12">
                                         <div class="float-right">
                                             <div class="d-flex justify-content-center align-items-center">
@@ -651,7 +632,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                </div> --}}
                         <div class="form-group">
                             <button id="getValue" type="submit" class="btn btn-primary">Update</button>
                         </div>

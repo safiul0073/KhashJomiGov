@@ -37,7 +37,9 @@
                 <div class="card-body">
 
                         <div class="from-group my-2">
-                            <div class="">
+
+                            <div class="from-group my-2">
+
                                 <div class="row">
                                     <div class="col-md-8">
                                         <label class="" for=""> ১।(ক) দরখাস্তকারী কোন শ্রেণীর ভুমিহীন:</label>
@@ -49,11 +51,11 @@
                                 <div class="col-md-4">
                                     <div style="" class=" border-dark">
 
-                                        <img src="{{URL::to('/'.$application->avater)}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
+                                        <img src="{{'/'.$application->avater}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                             </div>
-                            </div>
+
 
                         </div>
 
@@ -65,19 +67,31 @@
                                     <div class="col-md-5">
                                         <p for="">যথাযথ কর্তৃপক্ষ কর্তৃক প্রদত্ত মুক্তিযুদ্দা সনদ:</p>
                                     </div>
-
+                                    @if ($application->vumihi_muktijudda_sonod)
+                                        <div class="col-md-6">
+                                            <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}" >File Open</a>
+                                        </div>
+                                    @else
                                     <div class="col-md-6">
-                                       <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}" >File Open</a>
+                                        <p class="text-warning">প্রদত্ত মুক্তিযুদ্দা সনদ প্রদান করেন নি।</p>
                                     </div>
+                                    @endif
 
                                 </div>
                                 <div class="form-check row">
                                     <div class="col-md-5">
                                         <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ:</p>
                                     </div>
+                                    @if ($application->vumihi_commission_sonod)
+                                        <div class="col-md-6">
+                                            <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_commission_sonod)}}" >File Open</a>
+                                        </div>
+                                    @else
                                     <div class="col-md-6">
-                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_commission_sonod)}}" >File Open</a>
+                                        <p class="text-warning">চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ প্রদান করেন নি।</p>
                                     </div>
+                                    @endif
+
 
                                 </div>
                                 <div class="form-check row">
@@ -85,9 +99,17 @@
                                         <p for="">অন্যান্যা:</p>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihin_others_sonod)}}" >File Open</a>
-                                    </div>
+                                    @if ($application->vumihin_others_sonod)
+                                        <div class="col-md-6">
+                                            @foreach (explode(',',$application->vumihin_others_sonod) as $file)
+                                            <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="col-md-6">
+                                            <p class="text-warning"> সনদ প্রদান করেন নি।</p>
+                                        </div>
+                                    @endif
 
                                 </div>
                             </div>
@@ -193,46 +215,73 @@
                         <div class="form-group">
                             <label for="">১১।  নদী ভাঙ্গা পরিবার হইলে কবে কোথায় নদী ভাঙিয়াছিল  এবং সেই জায়গার কোনো দলিল দস্তাবেজ থাকিলে উহার বিবরণ (প্রয়োজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                             <p>{{$application->dorkhastokarir_nodi_vangon_biborn}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১২। মৌজার নাম: </label>
-                            <p>{{$application->acland_mowja_name}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৩। জি এল নং: </label>
-                            <p>{{$application->acland_jl_no}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৪। খতিয়ান নং: </label>
-                            <p>{{$application->acland_khotian_numbers}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৫। দাগ নং সমুহ: </label>
-                            <p>{{$application->acland_dag_no}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৬। প্রতেক দাগের জায়গার পরিমান: </label>
-                            <p>{{$application->acland_jomit_size}}</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="">১৭।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
-                            <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
+                            @if ($application->metas() && $application->metas()->where('name', 'dorkhastokarir_nodi_vangon_biborn_files')->first())
+                                @foreach (explode(',', $application->metas()->where('name', 'dorkhastokarir_nodi_vangon_biborn_files')->first()->content) as $file)
+                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                                @endforeach
+                            @else
+                                <p class="text-warning">পৃথক কাগজ পত্র নেই।</p>
+                            @endif
                         </div>
 
                         <div class="form-group">
-                            <label for="">১৮। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে (প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                            <label for="">১2।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
+                            <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
+                            @if ($application->metas() && $application->metas()->where('name', 'dorkhastokarir_shohidorpongo_person_biboron_files')->first())
+                                @foreach (explode(',', $application->metas()->where('name', 'dorkhastokarir_shohidorpongo_person_biboron_files')->first()->content) as $file)
+                                    <a class="btn btn-sm btn-info mb-1" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                                @endforeach
+                            @else
+                                <p class="text-warning"> পৃথক প্রমাণ পত্র নেই।</p>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">১3। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে (প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                             <p>{{ $application->dorkhastokarir_khash_jomir_biboron }}</p>
+                            @if ($application->metas() && $application->metas()->where('name', 'dorkhastokarir_khash_jomir_biboron_files')->first())
+                                @foreach (explode(',', $application->metas()->where('name', 'dorkhastokarir_khash_jomir_biboron_files')->first()->content) as $file)
+                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                                @endforeach
+                            @else
+                                <p class="text-warning">পৃথক কাগজ পত্র নেই।</p>
+                            @endif
                         </div>
                         <div class="form-group">
-                                <label for="">১৯| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                                <label for="">১4| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
                                 <p>{{$application->khashjomipower_karon}}</p>
                         </div>
                         <div class="form-group">
-                                <label for="">২০|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
-                                <p>{{$application->mowjar_name_somuho}}</p>
+                                <label for="">15|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন (ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                                @if ($application->getKhashJomi())
+
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr class="text-success">
+                                                    <th>নাম</th>
+                                                    <th>খতিয়ান</th>
+                                                    <th>দাগ নাম্বার</th>
+                                                    <th>জায়গার পরিমান</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($application->getKhashJomi() as $khash)
+                                                <tr>
+                                                    <td>{{ $khash->mowja }}</td>
+                                                    <td>{{ $khash->khotian_no }}</td>
+                                                    <td>{{ $khash->dag_nos }}</td>
+                                                    <td>{{ $khash->quantitys }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+
+                                @else
+                                        <p class="text-warning">কোনো মৌজা বছাই করেন নি।</p>
+                                @endif
                         </div>
                         <div class="form-group">
-                                <label for="">২১|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                                <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
                                 <p>{{ $application->duijon_baktir_nam_tikana }}</p>
                         </div>
                             <br>

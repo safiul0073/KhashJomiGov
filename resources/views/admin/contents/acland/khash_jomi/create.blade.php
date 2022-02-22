@@ -12,10 +12,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="from-group">
-                                <label for="">খাস জমির মোজা নাম</label>
-                                <input type="text" name="mowja" placeholder="মোজা নাম"
+                                <label for="">খাস জমির মৌজা নাম</label>
+                                <input type="text" name="mowja" placeholder="মৌজা নাম"
                                        class="form-control @error('mowja') is-invalid @enderror"
-                                       autofocus value="{{old('')}}">
+                                       autofocus value="{{old('mowja')}}">
                                        @error('mowja')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -30,7 +30,7 @@
                                 <label for="">জে এল নাম্বার</label>
                                 <input type="text" placeholder="জে এল নাম্বার"
                                        class="form-control @error('j_l_no') is-invalid @enderror"
-                                       autofocus name="j_l_no" value="{{old('')}}">
+                                       autofocus name="j_l_no" value="{{old('j_l_no')}}">
                                 @error('j_l_no')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -43,7 +43,7 @@
                                 <label for="">খতিয়ান নাম্বার</label>
                                 <input type="text" placeholder="খতিয়ান নাম্বার"
                                        class="form-control @error('khotian_no') is-invalid @enderror"
-                                       autofocus name="khotian_no" value="{{old('')}}">
+                                       autofocus name="khotian_no" value="{{old('khotian_no')}}">
                                 @error('khotian_no')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -77,7 +77,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                <a id="delete" class="btn btn-sm btn-danger rounded" >-</a>
+                                                <a id="delete" class="btn btn-danger rounded" >-</a>
                                             </td>
                                         </tr>
 

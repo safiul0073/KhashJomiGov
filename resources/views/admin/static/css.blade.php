@@ -17,10 +17,10 @@
   <link rel="stylesheet"href="{{asset('')}}plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet"href="{{asset('')}}plugins/summernote/summernote-bs4.min.css">
-  <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
+  <link href="https://fonts.maateen.me/adorsho-lipi/font.css" rel="stylesheet">
   <style>
         body {
-            font-family: 'SolaimanLipi', Arial, sans-serif !important;
+            font-family: 'AdorshoLipi', Arial, sans-serif !important;
         }
   </style>
 @stack('css')

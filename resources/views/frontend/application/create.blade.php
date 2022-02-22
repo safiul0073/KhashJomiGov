@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         #app-input-field {
             outline: none;
@@ -35,6 +37,10 @@
 
         .is-invalid {
             border: 1px solid rgb(209, 40, 40);
+        }
+
+        .select2  {
+            width: 100% !important;
         }
 
     </style>
@@ -192,7 +198,7 @@
                                                 <div class="col-md-4">
                                                     <label for="">বয়স:</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <input type="number" class="form-control @error('main_age') is-invalid @enderror"
                                                             name="main_age" value="{{old('main_age')}}">
                                                     @error('main_age')
@@ -237,7 +243,7 @@
 
                                             <div class="from-group row">
                                                 <div class="col-md-5">
-                                                    <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">জেলাঃ</label>
+                                                    <label class="ml-md-5 ml-lg-5 ml-xl-5 float-right" for="">জেলাঃ</label>
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                                     <select name="main_zila" class="form-control ml-2" placeholder=""id="">
@@ -248,27 +254,25 @@
                                             </div>
                                             <div class="from-group row">
                                                 <div class="col-md-5">
-                                                    <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">উপজেলাঃ</label>
+                                                    <label class="ml-md-5 ml-lg-5 ml-xl-5 float-right" for="">উপজেলাঃ</label>
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                                     <input type="text" class="form-control ml-2" disabled value="{{$upa_zila->name}}" >
-                                                    <input type="hidden" name="main_upzila" value="{{$upa_zila->id}}" >
                                                 </div>
-
                                             </div>
                                             <div class="from-group row">
                                                 <div class="col-md-5">
-                                                    <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">ইউনিয়নঃ</label>
+                                                    <label class="ml-md-5 ml-lg-5 ml-xl-5 float-right" for="">ইউনিয়নঃ</label>
                                                 </div>
                                                 <div class="col-md-3 col-lg-3 col-xl-3 setUnion">
                                                         <input type="text" class="form-control ml-2" disabled value="{{$union->name}}" >
-                                                        <input type="hidden" name="main_union" value="{{$union->id}}" >
+
                                                 </div>
 
                                             </div>
                                                 <div class="from-group row">
                                                     <div class="col-md-5">
-                                                        <label class="ml-md-5 ml-lg-5 ml-xl-5" for="">গ্রামঃ</label>
+                                                        <label class="ml-md-5 ml-lg-5 ml-xl-5 float-right" for="">গ্রামঃ</label>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                                         <input  name="main_village" value="{{ old('main_village') }}" type="text" class="form-control ml-2" placeholder="">
@@ -294,7 +298,7 @@
                                                 <div class="col-md-4">
                                                     <label for="">বয়স*:</label>
                                                 </div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-4">
                                                     <input type="number" class="form-control @error('main_f_or_m_age') is-invalid @enderror"
                                                             name="main_f_or_m_age" value="{{old('main_f_or_m_age')}}">
                                                     @error('main_f_or_m_age')
@@ -303,11 +307,8 @@
                                                             </div>
                                                     @enderror
                                                 </div>
-
                                             </div>
-
                                         </div>
-
                                     </div>
                                     <div class="form-group ">
                                         <label for="">৬।  দরখাস্তকারীর পরিবারের সদস্যদের নাম*: </label>
@@ -321,7 +322,7 @@
                                                     <th class="text-center">সম্পর্ক</th>
                                                     <th class="text-center">কি করেন</th>
                                                     <th class="text-center">মন্তব্য</th>
-                                                    <th class="text-center"><a id="add" href="javascript:void(0)" class="btn btn-success">+</a></th>
+                                                    <th class="text-center"><a id="add" href="javascript:void(0)" class="btn btn-sm btn-success">+</a></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody">
@@ -344,8 +345,8 @@
                                                     <td>
                                                         <input name="comment[][comment]" class="form-control" type="text">
                                                     </td>
-                                                    <td>
-                                                        <a id="delete" class="btn btn-sm btn-danger rounded" >-</a>
+                                                    <td class="text-center">
+                                                        <a id="delete" class="btn btn-danger rounded " >-</a>
                                                     </td>
                                                 </tr>
 
@@ -354,7 +355,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">৭।  দরখাস্ত কারীর নিজের বসত বাড়ির বিবরণ*: </label>
+                                        <label for="">৭। দরখাস্ত কারীর নিজের বসত বাড়ির বিবরণ*: </label>
                                         <textarea name="dorkhastokarir_barir_biboron"
                                                     class="form-control @error('dorkhastokarir_barir_biboron') is-invalid @enderror">{!!old('dorkhastokarir_barir_biboron')!!}</textarea>
                                         @error('dorkhastokarir_barir_biboron')
@@ -364,7 +365,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="">৮।  নিজের বসতবাটি না থাকিলে পরিবার যেখানে বাস করে উহার বিবরণ (বর্তমান ঠিকানা)*: </label>
+                                        <label for="">৮। নিজের বসতবাটি না থাকিলে পরিবার যেখানে বাস করে উহার বিবরণ (বর্তমান ঠিকানা)*: </label>
                                         <textarea name="dorkhastokarir_present_biboron"
                                         class="form-control @error('dorkhastokarir_present_biboron') is-invalid @enderror">{!!old('dorkhastokarir_present_biboron')!!}</textarea>
                                         @error('dorkhastokarir_present_biboron')
@@ -384,6 +385,7 @@
                                     <div class="form-group">
                                         <label for="">১১।  নদী ভাঙ্গা পরিবার হইলে কবে কোথায় নদী ভাঙিয়াছিল  এবং সেই জায়গার কোনো দলিল দস্তাবেজ থাকিলে উহার বিবরণ (প্রয়োজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
                                         <textarea name="dorkhastokarir_nodi_vangon_biborn" class="form-control">{!!old('dorkhastokarir_nodi_vangon_biborn')!!}</textarea>
+                                        <input type="file" multiple name="dorkhastokarir_nodi_vangon_biborn_files[]" class="from-control">
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6">
@@ -391,16 +393,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <textarea name="dorkhastokarir_shohidorpongo_person_biboron" id="summernote1" class="form-control">{!!old('dorkhastokarir_shohidorpongo_person_biboron')!!}</textarea>
+                                            <input type="file" multiple="multiple" name="dorkhastokarir_shohidorpongo_person_biboron_files[]" class="from-control">
                                         </div>
                                     </div>
-
-
                                 </div>
                                 {{-- end of first content --}}
 
                             {{-- start of second content --}}
                             <div id="menu1" class="tab-pane fade">
-
                                 {{-- Rahman er  kaj start here --}}
                                 <div class="form-group row">
                                     <div class="col-md-6">
@@ -408,6 +408,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <textarea name="dorkhastokarir_khash_jomir_biboron" class="form-control">{{ old('dorkhastokarir_khash_jomir_biboron') }}</textarea>
+                                        <input type="file" multiple="multiple" name="dorkhastokarir_khash_jomir_biboron_files[]" class="from-control">
                                     </div>
                                 </div>
                                 <div class="form-group  row">
@@ -423,7 +424,12 @@
                                         <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
                                     </div>
                                     <div class="col-md-6">
-                                        <textarea name="mowjar_name_somuho" id="summernote1" class="form-control">{{ old('mowjar_name_somuho') }}</textarea>
+                                        <select name="mowjar_name_somuho[]" multiple="multiple" class="form-control w-100 select2" id="">
+                                            @foreach ($khashJomis as $item)
+                                                <option value="{{$item->id}}"> {{'মৌজা : '.$item->mowja. ', খতিয়ান : '. $item->khotian_no. ', দাগ : '. $item->dag_nos. ', জায়গার পরিমান : '. $item->quantitys}}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <textarea name="mowjar_name_somuho" id="summernote1" class="form-control">{{ old('mowjar_name_somuho') }}</textarea> --}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -482,7 +488,7 @@
                                             </div>
                                     </div>
 
-                                    <div style="width: 60%; margin-left: auto; margin-right: auto;">
+                                    {{-- <div style="width: 60%; margin-left: auto; margin-right: auto;">
                                         <div class="form-group row">
                                             <div class="col-md-6">
                                                 <label for="">দরখাস্ত ফরম পূরণকারীর নাম <span style="margin-left: 100px;">:</span> </label>
@@ -515,9 +521,9 @@
                                                 <textarea name="purun_karir_address" id="" class="form-control" >{{old('purun_karir_address')}}</textarea>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                        <table class="form-group office_table">
+                                        {{-- <table class="form-group office_table">
                                             <tr>
                                                 <th style="backgroud: white !impotent;">সংশ্লিষ্ট ভূমি রাজস্ব অফিস পুরোন করিবে</th>
                                             </tr>
@@ -547,17 +553,17 @@
                                             </td>
 
                                             </tr>
-                                        </table>
-                                        <div class="form-group d-flex">
+                                        </table> --}}
+                                        {{-- <div class="form-group d-flex">
                                             <label for="">ভূমি রাজস্ব অফিসের সহকারীর স্বাক্ষরঃ</label>
                                             <input name="vumi_rajossho_office_shakkor" disabled id="rajosho_input" value="{{ old('vumi_rajossho_office_shakkor') }}" class="form-control" type="file">
-                                        </div>
-                                        <div class="row">
+                                        </div> --}}
+                                        {{-- <div class="row">
                                             <div class="float-right">
                                                 <input type="file" name="rajossho_kormokorter_sakkhor" disabled value="{{ old('rajossho_kormokorter_sakkhor') }}" >
                                                 <label for="">রাজস্ব কর্মকর্তার স্বাক্ষরঃ</label>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                 {{-- end of Rahman er  kaj --}}
                                 {{-- form submit button --}}
@@ -584,9 +590,16 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{asset('custom/scripts/imageScripts.js')}}"></script>
     <script>
-
+    $(document).ready(function() {
+        $('.select2').select2({
+            theme: "classic",
+            placeholder: "মৌজার নাম নির্বাচন করুণ",
+            allowClear: true
+        });
+    });
         // useing summernote third party library
     //     $(document).ready(function () {
     //     $('#summernote1').summernote()
@@ -609,7 +622,7 @@
                     var tableBody = $('#tableBody')
                     var i = 1;
                     $('#add').on('click', function (e) {
-                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" class="form-control" type="text"></td><td ><input class="form-control" style="width: 60px;" name="age[][age]" min="1" type="number" ></td><td ><input class="form-control" style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input class="form-control" name="whatdo[][whatdo]" type="text" ></td> <td ><input class="form-control" name="comment[][comment]" type="text" ></td><td><a id="delete" class="btn btn-sm btn-danger rounded" >-</a></td></tr>')
+                    tableBody.append('<tr><td class="text-center" >'+ ++i+'</td><td ><input name="name[][name]" class="form-control" type="text"></td><td ><input class="form-control" style="width: 60px;" name="age[][age]" min="1" type="number" ></td><td ><input class="form-control" style="width: 100px;" name="relation[][relation]" type="text" ></td><td ><input class="form-control" name="whatdo[][whatdo]" type="text" ></td> <td ><input class="form-control" name="comment[][comment]" type="text" ></td><td class="text-center"><a id="delete" class="btn btn-danger rounded" >-</a></td></tr>')
                     })
 
                     $(document).on('click', '#delete', function () {

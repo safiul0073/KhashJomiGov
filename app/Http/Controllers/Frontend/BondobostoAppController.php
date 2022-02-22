@@ -8,6 +8,7 @@ use App\Models\BondobostoApp;
 use App\Models\Union;
 use App\Models\UpaZila;
 use App\Services\FileService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -24,8 +25,8 @@ class BondobostoAppController extends Controller
 
         $upa_zila = UpaZila::find($request->upa_zila_id);
         $union = Union::find($request->union_id);
-
-        return view('frontend.application.create', compact('upa_zila','union'));
+        $khashJomis = $union->khash_jomis ? $union->khash_jomis : [];
+        return view('frontend.application.create', compact('upa_zila','union', 'khashJomis'));
     }
 
     public function getUnion ($id) {
@@ -50,6 +51,8 @@ class BondobostoAppController extends Controller
      */
     public function store(BondobostoRequest $request, FileService $service)
     {
+        DB::beginTransaction();
+        try {
             $attributes = [
                 'upa_zila_id' => $request->upa_zila_id,
                 'union_id' => $request->union_id,
@@ -79,7 +82,7 @@ class BondobostoAppController extends Controller
                 'vumihin_others_sonod' => $request->hasFile('vumihin_others_sonod')? $service->fileExequtes($request->file('vumihin_others_sonod')): null,
                 'dorkhastokarir_khash_jomir_biboron' => $request->dorkhastokarir_khash_jomir_biboron,
                 'khashjomipower_karon' => $request->khashjomipower_karon,
-                'mowjar_name_somuho' => $request->mowjar_name_somuho,
+                'mowjar_name_somuho' => implode(',',$request->mowjar_name_somuho),
                 'duijon_baktir_nam_tikana' => $request->duijon_baktir_nam_tikana,
                 'shopoth_namar_baktir_name' => $request->shopoth_namar_baktir_name,
                 'shopoth_nama_parents_name' => $request->shopoth_nama_parents_name,
@@ -96,26 +99,37 @@ class BondobostoAppController extends Controller
                 'vumi_rajossho_office_shakkor' => $request->vumi_rajossho_office_shakkor,
                 'rajossho_kormokorter_sakkhor' => $request->rajossho_kormokorter_sakkhor,
             ];
+
             $b = BondobostoApp::create($attributes);
+
             if (!$b) return redirect()->back()->with('error','Unable to create!');
+            if ($request->dorkhastokarir_nodi_vangon_biborn_files) {
+
+                    $file_name = $service->fileExequtes($request->file('dorkhastokarir_nodi_vangon_biborn_files'));
+                    $b->metas()->create(['name' => 'dorkhastokarir_nodi_vangon_biborn_files',
+                                       'content' => $file_name]);
+                }
+            if ($request->dorkhastokarir_shohidorpongo_person_biboron_files) {
+                    $file_name = $service->fileExequtes($request->file('dorkhastokarir_shohidorpongo_person_biboron_files'));
+                    $b->metas()->create(['name' => 'dorkhastokarir_shohidorpongo_person_biboron_files',
+                                       'content' => $file_name]);
+                }
+            if ($request->dorkhastokarir_khash_jomir_biboron_files) {
+                    $file_name = $service->fileExequtes($request->file('dorkhastokarir_khash_jomir_biboron_files'));
+                    $b->metas()->create(['name' => 'dorkhastokarir_khash_jomir_biboron_files',
+                                       'content' => $file_name]);
+                }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+
         return redirect()->back()->with('success','Successfully Application created!');
     }
 
 
 
-
-    public function edit(BondobostoApp $bondobostoApp)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BondobostoApp  $bondobostoApp
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, BondobostoApp $application)
     {
 
@@ -197,7 +211,23 @@ class BondobostoAppController extends Controller
             'rajossho_kormokorter_sakkhor' => $rajossho_kormokorter_sakkhor,
         ];
         $b = $application->update($attributes);
-        if (!$b) return redirect()->back()->with('error','Unable to update!');
+        if (!$b) return throw new Exception('Error Processing Request', 500);
+    //     if ($request->dorkhastokarir_nodi_vangon_biborn_files) {
+
+    //         $file_name = $service->fileExequtes($request->file('dorkhastokarir_nodi_vangon_biborn_files'));
+    //         $application->metas()->where('name', 'dorkhastokarir_nodi_vangon_biborn_files')->update(['name' => 'dorkhastokarir_nodi_vangon_biborn_files',
+    //                            'content' => $file_name]);
+    //     }
+    // if ($request->dorkhastokarir_shohidorpongo_person_biboron_files) {
+    //         $file_name = $service->fileExequtes($request->file('dorkhastokarir_shohidorpongo_person_biboron_files'));
+    //         $application->metas()->create(['name' => 'dorkhastokarir_shohidorpongo_person_biboron_files',
+    //                            'content' => $file_name]);
+    //     }
+    // if ($request->dorkhastokarir_khash_jomir_biboron_files) {
+    //         $file_name = $service->fileExequtes($request->file('dorkhastokarir_khash_jomir_biboron_files'));
+    //         $application->metas()->create(['name' => 'dorkhastokarir_khash_jomir_biboron_files',
+    //                            'content' => $file_name]);
+    //     }
         DB::commit();
     } catch (\Exception $ex) {
         DB::rollback();
@@ -239,6 +269,35 @@ class BondobostoAppController extends Controller
         }
         if ($b->shonaktokarir_tipshoi && File::exists($b->shonaktokarir_tipshoi)) {
             File::delete($b->shonaktokarir_tipshoi);
+        }
+
+        if ($b->metas()) {
+            $meta = $b->metas()->get();
+            foreach ($meta as $m) {
+                if ($m->name == 'dorkhastokarir_nodi_vangon_biborn_files') {
+                    foreach(explode(',', $m->content) as $file) {
+                        if (File::exists($file)) {
+                            File::delete($file);
+                        }
+                    }
+                }
+                if ($m->name == 'dorkhastokarir_shohidorpongo_person_biboron_files') {
+                    foreach(explode(',', $m->content) as $file) {
+                        if (File::exists($file)) {
+                            File::delete($file);
+                        }
+                    }
+                }
+                if ($m->name == 'dorkhastokarir_khash_jomir_biboron_files') {
+                    foreach(explode(',', $m->content) as $file) {
+                        if (File::exists($file)) {
+                            File::delete($file);
+                        }
+                    }
+                }
+                $m->delete();
+            }
+
         }
 
         if ($b->app_sends()) {

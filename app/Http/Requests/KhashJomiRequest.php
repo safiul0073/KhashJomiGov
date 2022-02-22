@@ -17,7 +17,7 @@ class KhashJomiRequest extends FormRequest
     }
     public function messages () {
         return [
-            'mowja.required' => 'মোজা লিখুন',
+            'mowja.required' => 'মৌজা লিখুন',
             'j_l_no.required' => 'জে এল নাম্বার লিখুন',
             'khotian_no.required' => 'খতিয়ান নাম্বার লিখুন',
             'j_l_no.numeric' => 'জে এল নাম্বার লিখুন',

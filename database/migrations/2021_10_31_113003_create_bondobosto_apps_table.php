@@ -42,11 +42,6 @@ class CreateBondobostoAppsTable extends Migration
             $table->longText('dorkhastokarir_nodi_vangon_biborn')->nullable();
             $table->longText('dorkhastokarir_shohidorpongo_person_biboron')->nullable();
             $table->longText('dorkhastokarir_khash_jomir_biboron')->nullable();
-            $table->string('acland_mowja_name')->nullable();
-            $table->string('acland_jl_no')->nullable();
-            $table->string('acland_khotian_numbers')->nullable();
-            $table->string('acland_dag_no')->nullable();
-            $table->string('acland_jomit_size')->nullable();
             $table->longText('khashjomipower_karon')->nullable();
             $table->longText('mowjar_name_somuho')->nullable();
             $table->longText('duijon_baktir_nam_tikana')->nullable();

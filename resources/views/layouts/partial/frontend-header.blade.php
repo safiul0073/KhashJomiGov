@@ -7,7 +7,7 @@
                         <img src="./assets/log.png">
                     </div>
                     <div class="site_title col-md-6  col-sm-12 text" style="text-align:center;">
-                        <h2 class="text-center"> খাস কৃষি জমি বন্দোবস্ত, লালমনিরহাট </h>
+                        <h2 class="text-center"> খাস কৃষি জমি বন্দোবস্ত, লালমনিরহাট </h2>
                     </div>
             </div>
         </div>

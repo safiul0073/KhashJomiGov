@@ -20,6 +20,9 @@ class BondobostoApp extends Model
         return $this->belongsTo(UpaZila::class, 'upa_zila_id', 'id');
     }
 
+    public function metas() {
+        return $this->morphMany(Meta::class, 'holder');
+    }
     // BondobostoApp has many AppSend
     public function app_sends () {
         return $this->hasMany(AppSend::class, 'bondobosto_app_id', 'id');
@@ -30,6 +33,15 @@ class BondobostoApp extends Model
         return explode(',', $this->$attribute);
     }
 
+    public function getKhashJomi () {
+
+            $khash_jomi = KhashJomi::whereIn('id', explode(',', $this->mowjar_name_somuho))->get();
+            if (count($khash_jomi) > 0) {
+                return $khash_jomi;
+            }
+            return false;
+
+    }
     public function familyMembers() {
         $familys = array();
 

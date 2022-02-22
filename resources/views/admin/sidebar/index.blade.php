@@ -36,7 +36,7 @@
                     <a href="{{ route('ac-land') }}" class="nav-link {{ request()->routeIs('ac-land') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
-                        আবেদন ডাটা
+                        আবেদন পত্র
                       </p>
                     </a>
                   </li>
@@ -55,7 +55,7 @@
                     <a href="{{ route('towshilder') }}" class="nav-link {{ request()->routeIs('towshilder') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
-                        আবেদন ডাটা
+                        আবেদন পত্র
                       </p>
                     </a>
                   </li>
@@ -65,7 +65,7 @@
                     <a href="{{ route('uno') }}" class="nav-link {{ request()->routeIs('uno') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
-                        আবেদন ডাটা
+                        আবেদন পত্র
                       </p>
                     </a>
                   </li>
@@ -75,7 +75,7 @@
                     <a href="{{ route('dc') }}" class="nav-link {{ request()->routeIs('dc') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
-                        আবেদন ডাটা
+                        আবেদন পত্র
                       </p>
                     </a>
                   </li>
@@ -85,7 +85,7 @@
                     <a href="{{ route('adc') }}" class="nav-link {{ request()->routeIs('adc') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
-                        আবেদন ডাটা
+                        আবেদন পত্র
                       </p>
                     </a>
                   </li>
@@ -95,7 +95,7 @@
                     <a href="{{ route('adc-revinew') }}" class="nav-link {{ request()->routeIs('adc-revinew') ? 'active' : '' }}">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
-                        আবেদন ডাটা
+                        আবেদন পত্র
                       </p>
                     </a>
                   </li>

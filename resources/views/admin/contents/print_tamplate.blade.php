@@ -190,7 +190,31 @@
             </div>
             <div class="form-group">
                     <label for="">১৫|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন|(ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
-                    <p>{{$application->mowjar_name_somuho}}</p>
+                        @if ($application->getKhashJomi())
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="text-success">
+                                    <th>নাম</th>
+                                    <th>খতিয়ান</th>
+                                    <th>দাগ নাম্বার</th>
+                                    <th>জায়গার পরিমান</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($application->getKhashJomi() as $khash)
+                                <tr>
+                                    <td>{{ $khash->mowja }}</td>
+                                    <td>{{ $khash->khotian_no }}</td>
+                                    <td>{{ $khash->dag_nos }}</td>
+                                    <td>{{ $khash->quantitys }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                @endif
+
             </div>
             <div class="form-group">
                     <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
@@ -238,7 +262,7 @@
 
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-10 mx-auto">
                         <div class="form-group row">
                             <div class="col-6">
@@ -273,9 +297,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                    <div class="row">
+                    {{-- <div class="row">
 
                             <table class="col-10 mx-auto office_table">
                                 <tr>
@@ -325,7 +349,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
     </div>
     </div>
     <div class="row">
