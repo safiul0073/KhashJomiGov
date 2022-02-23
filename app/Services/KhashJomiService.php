@@ -22,6 +22,15 @@ class  KhashJomiService {
         $khashJomi->quantitys = $this->arrayString($request->quantitys);
         $khashJomi->save();
     }
+    public function updateKhashJomi (KhashJomi $khashJomi,KhashJomiRequest $request) {
+
+        $khashJomi->mowja = $request->mowja;
+        $khashJomi->j_l_no = $request->j_l_no;
+        $khashJomi->khotian_no = $request->khotian_no;
+        $khashJomi->dag_nos = $this->arrayString($request->dag_nos);
+        $khashJomi->quantitys = $this->arrayString($request->quantitys);
+        $khashJomi->save();
+    }
 
     private function arrayString ($array) {
         $array_values = [];

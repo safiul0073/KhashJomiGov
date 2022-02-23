@@ -8,6 +8,7 @@
             <div class="card-body">
                 <form method="post" action="{{route('khashJomi.update', $khashJomi->id)}}">
                     @csrf
+                    @method('put')
                     <input type="hidden" name="union_id" value="{{$tab}}">
                     <div class="row">
                         <div class="col-md-12">

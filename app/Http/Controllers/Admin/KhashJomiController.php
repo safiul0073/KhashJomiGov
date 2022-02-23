@@ -93,9 +93,10 @@ class KhashJomiController extends Controller
      * @param  \App\Models\KhashJomi  $khashJomi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KhashJomi $khashJomi)
+    public function update(KhashJomiRequest $request, KhashJomi $khashJomi,KhashJomiService $khashJomiService)
     {
-        //
+        $khashJomiService->updateKhashJomi($khashJomi, $request);
+        return redirect()->back()->with('success', 'জমি সফলভাবে পরিবর্তন করা হয়েছে');
     }
 
     /**

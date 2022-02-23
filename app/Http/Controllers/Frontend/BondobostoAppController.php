@@ -82,7 +82,7 @@ class BondobostoAppController extends Controller
                 'vumihin_others_sonod' => $request->hasFile('vumihin_others_sonod')? $service->fileExequtes($request->file('vumihin_others_sonod')): null,
                 'dorkhastokarir_khash_jomir_biboron' => $request->dorkhastokarir_khash_jomir_biboron,
                 'khashjomipower_karon' => $request->khashjomipower_karon,
-                'mowjar_name_somuho' => implode(',',$request->mowjar_name_somuho),
+                'mowjar_name_somuho' => $request->mowjar_name_somuho ? implode(',',$request->mowjar_name_somuho) : null,
                 'duijon_baktir_nam_tikana' => $request->duijon_baktir_nam_tikana,
                 'shopoth_namar_baktir_name' => $request->shopoth_namar_baktir_name,
                 'shopoth_nama_parents_name' => $request->shopoth_nama_parents_name,
