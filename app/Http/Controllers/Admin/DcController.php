@@ -22,7 +22,6 @@ class DcController extends Controller
         $tab = $request->tab;
         if ($tab == null) {
             $tab = 'apps';
-
         }
         $applications_count = BondobostoApp::count();
         $grohonData1 = $service->queryCount($user->role_id, [User::UNO,User::AC_LAND]);
