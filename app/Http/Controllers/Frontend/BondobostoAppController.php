@@ -210,8 +210,8 @@ class BondobostoAppController extends Controller
             'vumi_rajossho_office_shakkor' => $vumi_rajossho_office_shakkor,
             'rajossho_kormokorter_sakkhor' => $rajossho_kormokorter_sakkhor,
         ];
-        $b = $application->update($attributes);
-        if (!$b) return throw new Exception('Error Processing Request', 500);
+         $application->update($attributes);
+
     //     if ($request->dorkhastokarir_nodi_vangon_biborn_files) {
 
     //         $file_name = $service->fileExequtes($request->file('dorkhastokarir_nodi_vangon_biborn_files'));

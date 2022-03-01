@@ -1,5 +1,5 @@
 @extends('layouts.admin-app')
-@section('title', 'Applications')
+@section('title', 'আবেদন পত্র')
 @section('css')
 @endsection
 @section('contents')

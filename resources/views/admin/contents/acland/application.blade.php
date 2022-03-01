@@ -1,0 +1,484 @@
+@extends('layouts.admin-app')
+@section('title', 'Applications')
+@section('css')
+@endsection
+@section('contents')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-">আবেদন পত্র</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">হোম</a></li>
+                <li class="breadcrumb-item active">আবেদন পত্র</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+    <!-- /.content-header -->
+        <!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header border-bottom-info d-flex">
+                    <a href="{{url('/admin/adc')}}" class="btn btn-sm btn-primary">পূর্বের পেজ</a>
+                    <h3 class="text-center h5 font-weight-bold ml-4">
+                        উপজেলাঃ {{$application->upa_zila->name}}, ইউনিয়নঃ {{' '.$application->union->name .', গ্রামঃ '. $application->main_village }} এর একটি সম্পূর্ণ আবেদন পত্র।
+                    </h3>
+                </div>
+                @include('layouts.partial.flash-alert')
+                <div class="card-body">
+
+                    <div class="from-group my-2">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label class="" for=""> ১।(ক) দরখাস্তকারী কোন শ্রেণীর ভুমিহীন:</label>
+                                @foreach ($application->explodedData('app_class') as $key => $item)
+                                 <p>{{$key+1}}: {{$item}}</p>
+                                @endforeach
+                            </div>
+
+                        <div class="col-md-4">
+                            <div style="" class=" border-dark">
+
+                                <img src="{{'/'.$application->avater}}" style="height: 110px; width:100px;" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group my-2">
+                    <div class="">
+                        <label class="my-3" for="">(খ) ভুমিহীন শ্রেণীর স্বপক্ষে দাখিলকৃত কাগজপত্রঃ</label>*
+
+                        <div class="form-check row">
+                            <div class="col-md-5">
+                                <p for="">যথাযথ কর্তৃপক্ষ কর্তৃক প্রদত্ত মুক্তিযুদ্দা সনদ:</p>
+                            </div>
+                            @if ($application->vumihi_muktijudda_sonod)
+                                <div class="col-md-6">
+                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_muktijudda_sonod)}}" >File Open</a>
+                                </div>
+                            @else
+                            <div class="col-md-6">
+                                <p class="text-warning">প্রদত্ত মুক্তিযুদ্দা সনদ প্রদান করেন নি।</p>
+                            </div>
+                            @endif
+
+                        </div>
+                        <div class="form-check row">
+                            <div class="col-md-5">
+                                <p>ইউনিয়ন চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ:</p>
+                            </div>
+                            @if ($application->vumihi_commission_sonod)
+                                <div class="col-md-6">
+                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$application->vumihi_commission_sonod)}}" >File Open</a>
+                                </div>
+                            @else
+                            <div class="col-md-6">
+                                <p class="text-warning">চেয়ারম্যান/পৌর চেয়ারমেন/ওয়ার্ড কমিশনের সনদ প্রদান করেন নি।</p>
+                            </div>
+                            @endif
+
+
+                        </div>
+                        <div class="form-check row">
+                            <div class="col-md-5">
+                                <p for="">অন্যান্যা:</p>
+                            </div>
+
+                            @if ($application->vumihin_others_sonod)
+                                <div class="col-md-6">
+                                    @foreach (explode(',',$application->vumihin_others_sonod) as $file)
+                                    <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="col-md-6">
+                                    <p class="text-warning"> সনদ প্রদান করেন নি।</p>
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="">২।  দরখাস্তকারীর পরিবার প্রধানের : </label>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>নাম: {{$application->main_name}}</p>
+                        </div>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>বয়স: {{$application->main_age}}</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label  for="">৩।  দরখাস্তকারীর পিতা/স্বামীর: </label>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>নাম: {{$application->main_fathers_name}}</p>
+                        </div>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>{{$application->main_fathers_mortal}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="">৪।  দরখাস্তকারীর জন্মস্থান/ঠিকানা: </label>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>গ্রামঃ {{$application->main_village}}</p>
+                        </div>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>ইউনিয়নঃ {{$application->union->name}}</p>
+                        </div>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>উপজিলাঃ {{$application->upa_zila->name}}</p>
+                        </div>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>জিলাঃ {{$application->main_zila}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">৫।  পরিবার প্রধানের স্ত্রী/স্বামী: </label>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>নাম: {{$application->main_f_or_m_name}}</p>
+                        </div>
+                        <div class="ml-lg-4 ml-xl-4">
+                            <p>বয়স: {{$application->main_f_or_m_age}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+
+
+                </div>
+                <div class="form-group ">
+                    <label for="">৬।  দরখাস্তকারীর পরিবারের সদস্যদের নাম: </label>
+                    <div class="table-responsive">
+                    <table class=" table table-bordered">
+                        <thead >
+                            <tr >
+                                <th class="text-center">ক্রমিক নং</th>
+                                <th class="text-center">নাম</th>
+                                <th style="width: 20px;" class="text-center">বয়স</th>
+                                <th class="text-center">সম্পর্ক</th>
+                                <th class="text-center">কি করেন</th>
+                                <th class="text-center">মন্তব্য</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            @foreach ($application->familyMembers() as $key => $item)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$item['name']}}</td>
+                                    <td>{{$item['age']}}</td>
+                                    <td>{{$item['relation']}}</td>
+                                    <td>{{$item['whatdos']}}</td>
+                                    <td>{{$item['comment']}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">৭।  দরখাস্ত কারীর নিজের বসত বাড়ির বিবরণ: </label>
+                    <p>{{$application->dorkhastokarir_barir_biboron}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="">৮।  নিজের বসতবাটি না থাকিলে পরিবার যেখানে বাস করে উহার বিবরণ (বর্তমান ঠিকানা): </label>
+                    <p>{{$application->dorkhastokarir_present_biboron}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="">৯।  দরখাস্তকারী অথবা তাহার পিতা/মাতা/পর্বে কোনো খাস কৃষি জমি পাইয়া থাকিলে উহার বিবরণ: </label>
+                    <p>{{$application->dorkhastokarir_khas_jomir_biboron}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="">১০।  খাস জমির জন্য কোনো জায়গা দরখাস্ত দাখিল করিলে উহার বিবরণ: </label>
+                    <p>{{$application->dorkhastokarir_khas_dakhil_biboron}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="">১১।  নদী ভাঙ্গা পরিবার হইলে কবে কোথায় নদী ভাঙিয়াছিল  এবং সেই জায়গার কোনো দলিল দস্তাবেজ থাকিলে উহার বিবরণ (প্রয়োজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                    <p>{{$application->dorkhastokarir_nodi_vangon_biborn}}</p>
+                    @if ($application->metas() && $application->metas()->where('name', 'dorkhastokarir_nodi_vangon_biborn_files')->first())
+                        @foreach (explode(',', $application->metas()->where('name', 'dorkhastokarir_nodi_vangon_biborn_files')->first()->content) as $file)
+                            <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                        @endforeach
+                    @else
+                        <p class="text-warning">পৃথক কাগজ পত্র নেই।</p>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="">১2।  পরিবারের কেহ শহীদ বা পঙ্গু মুক্তিযোদ্দা হইলে তাহার বিস্তারিত পরিচয় ও শহীদ বা পঙ্গু হইবার বিবরণ ও প্রমাণ: </label>
+                    <p>{{$application->dorkhastokarir_shohidorpongo_person_biboron}}</p>
+                    @if ($application->metas() && $application->metas()->where('name', 'dorkhastokarir_shohidorpongo_person_biboron_files')->first())
+                        @foreach (explode(',', $application->metas()->where('name', 'dorkhastokarir_shohidorpongo_person_biboron_files')->first()->content) as $file)
+                            <a class="btn btn-sm btn-info mb-1" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                        @endforeach
+                    @else
+                        <p class="text-warning"> পৃথক প্রমাণ পত্র নেই।</p>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="">১3। দরখাস্তকারীর দখলে কোনো খাস জমি জায়গা থাকিলে ওহারর বিবরণ|কবে হইতে কিভাবে দখলে আছেন এবং জমির বর্তমান অবস্থা জানাইতে হইবে (প্রয়াজনে পৃথক কাগজ ব্যবহার করিতে হইবে): </label>
+                    <p>{{ $application->dorkhastokarir_khash_jomir_biboron }}</p>
+                    @if ($application->metas() && $application->metas()->where('name', 'dorkhastokarir_khash_jomir_biboron_files')->first())
+                        @foreach (explode(',', $application->metas()->where('name', 'dorkhastokarir_khash_jomir_biboron_files')->first()->content) as $file)
+                            <a class="btn btn-sm btn-info" href="{{url('/admin/doc-show?doc='.$file)}}" >File Open</a>
+                        @endforeach
+                    @else
+                        <p class="text-warning">পৃথক কাগজ পত্র নেই।</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                        <label for="">১4| দরখাস্তকারী কোনো বিশেষ খাস জমি পাইতে চাহিলে তাহার কারণ ও বিবরণ:
+                        <p>{{$application->khashjomipower_karon}}</p>
+                </div>
+                <div class="form-group">
+                        <label for="">15|প্রার্থিত জায়গা বন্দোবস্ত না হইলে অন্য কোনো এলাকা হইতে জমি চাহেন (ক্রমনসারে ২/৩ মৌজার নাম উল্লেখ করিতে হইবে):
+                        @if ($application->getKhashJomi())
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr class="text-success">
+                                            <th>নাম</th>
+                                            <th>খতিয়ান</th>
+                                            <th>দাগ নাম্বার</th>
+                                            <th>জায়গার পরিমান</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($application->getKhashJomi() as $khash)
+                                        <tr>
+                                            <td>{{ $khash->mowja }}</td>
+                                            <td>{{ $khash->khotian_no }}</td>
+                                            <td>{{ $khash->dag_nos }}</td>
+                                            <td>{{ $khash->quantitys }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                        @else
+                                <p class="text-warning">কোনো মৌজা বছাই করেন নি।</p>
+                        @endif
+                </div>
+                <div class="form-group">
+                        <label for="">16|দরখাস্তোকারির সম্পর্কে ভাল জানেন এমন দুই জন গন্যমান্য লোকের নাম ও ঠিকানা:
+                        <p>{{ $application->duijon_baktir_nam_tikana }}</p>
+                </div>
+            <br>
+
+            <h4 class="text-center">মন্তব্য সমূহ</h4>
+            <br>
+
+            <div class="row">
+                @foreach ($app_sends as $item)
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div style="background-color: #f3aeae;" class="card-header text-danger">
+                                {{-- <h5 class="text-center">{!!$item->onucched!!}</h5> --}}
+                            </div>
+
+                            <div class="card-body">
+
+                                {{-- <p>{!!$item->montobbo!!}</p> --}}
+                                {{-- <h4 style="style="font-size:14px;>{!! $item->adesh !!}</h4> --}}
+
+                            <div class="row">
+
+                                <div style="width: 170px; float: left;">
+                                    <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                        <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p>
+
+                                        <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; ">
+                                            {{$item->user->name}}
+                                            <br>
+                                            {{$item->role->name}}
+                                            <br>
+                                            <br>
+                                            {{$item->created_at->format('d M, Y H:i:s')}}</h4>
+                                </div>
+                                @if (count($previous_users) > 0)
+                                    @foreach ($previous_users as $user)
+
+                                        @if ($user->id == $item->user_id)
+                                        <div style="width: 150px; float: left;">
+                                            <p style="margin-left: 45px;margin-top: 0px;margin-bottom: 0px;">
+                                                {{-- <img src="{{$item->user->sign}}" alt="" style="width: 70px; height: 40px;"><br></p> --}}
+
+                                                <h4 style="text-align:center;font-size: 14px;margin-top: 0px;margin-bottom: 15px; font-weight: normal; text-decoration:line-through">
+                                                        {{$user->name}}
+
+                                                        <br>
+                                                        {{$user->role->name}}</h4>
+                                        </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
+
+                            <div class="row">
+                                @if ($item->file)
+                                    <div class="col-md-6">
+                                        <a class="btn btn-sm btn-outline-info" href="{{url('/admin/doc-show?doc='.$item->file)}}" >File View</a>
+                                    </div>
+                                @endif
+                                <div class="col-md-6">
+                                    <a class="btn btn-sm btn-outline-info" href="{{ route('app.sends', $item->id) }}">Details View</a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                @endforeach
+            </div>
+            <br>
+            <a onclick="printMemu()" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+            <div style="display:none;">
+                @include('admin.contents.print_tamplate', ['app_sends' => $app_sends, 'application' => $application])'])
+            </div>
+            <br>
+            @if ($application->status != 1)
+            @if (count($dc_to_aclnad))
+               <div class="row">
+                <div class="col-md-6 mx-auto my-5">
+                    <form method="post" action="{{route('ac-land.to.nothi',  $application->id)}}">
+                        @csrf
+                        @method('PUT')
+                        <button class="btn btn-success" type="submit" >Send To Nothi</button>
+                    </form>
+                </div>
+               </div>
+            @else
+                    <form action="{{route('ac-land.to.any', $application->id)}}" enctype="multipart/form-data" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                            @foreach (array_sort_for_role($roles) as $item)
+                                                @if ($item->id != auth()->user()->role_id)
+                                                <tr style="background-color: green;" class="text-white border-1">
+                                                    <th>
+                                                        <label for="">{{$item->name}}</label>
+                                                    </th>
+                                                    <th>
+                                                        <input value="{{$item->id}}" name="receive" type="radio">
+                                                    </th>
+                                                </tr>
+                                                @endif
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <select class="form-control @error('openion') is-invalid @enderror" name="openion" id="">
+                                            <option selected disabled value="">আপনার মতামত</option>
+                                            <option  value="জরুরি">জরুরি</option>
+                                            <option value="ব্যবস্থা নিন">ব্যবস্থা নিন</option>
+                                        </select>
+                                        @error('openion')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">মন্তব্য</label>
+                                        <textarea class="form-control" name="montobbo" id="summernote" >{{old('content')}}</textarea>
+                                        @error('montobbo')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" name="file">
+
+                                        @error('file')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">মন্তব্য দাখিল করুন</button>
+                                        <a href="{{url('/')}}"  class="btn btn-info">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            @endif
+
+            @endif
+
+        </div>
+    </div>
+    </div>
+</section>
+</div>
+@endsection
+
+@push('js')
+<script src="{{ asset('js/jquery-printme.js') }}"></script>
+<script>
+      $(document).ready(function () {
+        $('#summernote').summernote()
+      })
+
+      function printMemu() {
+
+        var contents = $("#montobbo_print").html();
+        var frame1 = $('<iframe />');
+        frame1[0].name = "frame1";
+        frame1.css({ "position": "absolute", "top": "-1000000px" });
+        $("body").append(frame1);
+        var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+        frameDoc.document.open();
+        //Create a new HTML document.
+        frameDoc.document.write('<html><head><title>প্রিন্ট</title>');
+        frameDoc.document.write('</head><body>');
+        //Append the external CSS file.
+        frameDoc.document.write('<link rel="stylesheet" href="{{asset('')}}dist/css/adminlte.min.css">');
+        //Append the DIV contents.
+        frameDoc.document.write(contents);
+        frameDoc.document.write('</body></html>');
+        frameDoc.document.close();
+        setTimeout(function () {
+            window.frames["frame1"].focus();
+            window.frames["frame1"].print();
+            frame1.remove();
+        }, 500);
+    }
+</script>
+@endpush
