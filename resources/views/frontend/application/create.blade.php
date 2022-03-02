@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h1>Applications</h1>
+                        <h1>আবেদন পত্র ফরম</h1>
                         @include('layouts.partial.flash-alert')
                     </div>
                     <div class="card-body">
